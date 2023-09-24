@@ -23,6 +23,7 @@
         margin: 0 2rem;
 
         .search-container {
+            position: relative;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -67,6 +68,17 @@
                     border-radius: .3rem;
                     padding-top: 2px;
                 }
+            }
+
+            .search-suggest {
+                position: absolute;
+                top: calc(100% + (1.5rem - 1.5px));
+                left: 0;
+                background-color: var(--color-bg-body);
+                width: 100%;
+                min-height: 250px;
+                border-radius: .5rem;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             }
         }
     }
@@ -186,9 +198,7 @@
     .header-content {
         .search-bar {
             .search-container {
-                .search-content {
-                    max-width: 800px;
-                }
+                .search-content {}
             }
         }
     }

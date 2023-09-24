@@ -28,7 +28,9 @@ export class HeaderComponent {
   isDropdown1Visible = false;
 
   inputSearchMobileValue: string = '';
+  inputSearchValue: string = '';
   toggleSuggestMobile = false;
+  toggleSuggest = false;
 
   showMenu() {
     this.isMenuVisible = true;
@@ -59,12 +61,21 @@ export class HeaderComponent {
     this.isDropdown1Visible = !this.isDropdown1Visible;
   }
 
-  onChangeInputSearch(event: Event) {
+  onChangeInputSearchMobile(event: Event) {
     this.inputSearchMobileValue = (event.target as HTMLInputElement).value;
     if (this.inputSearchMobileValue.trim() !== '') {
       this.toggleSuggestMobile = true;
     } else {
       this.toggleSuggestMobile = false;
+    }
+  }
+
+  onChangeInputSearch(event: Event) {
+    this.inputSearchValue = (event.target as HTMLInputElement).value;
+    if (this.inputSearchValue.trim() !== '') {
+      this.toggleSuggest = true;
+    } else {
+      this.toggleSuggest = false;
     }
   }
 
