@@ -1,0 +1,115 @@
+.header-content-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16.25rem;
+    height: 100vh;
+    background-color: var(--color-bg-body);
+    display: none;
+    padding-bottom: 2.5rem;
+    overflow-y: auto;
+
+    .brand-mobile {
+        padding-top: .5rem;
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin-bottom: 1.5rem;
+        background-color: var(--color-bg-body);
+
+        .brand-logo-mobile {
+            display: flex;
+            justify-content: center;
+
+            .brand-image-mobile {
+                width: 5rem;
+                height: 5rem;
+                object-fit: cover;
+            }
+        }
+    }
+
+    .menu-container-mobile {
+        margin-bottom: 2rem;
+        min-height: calc(100vh - 17.5rem);
+
+        .menu-item {
+            padding-left: 1.5rem;
+            display: block;
+            list-style: none;
+
+            .menu-link {
+                line-height: 2.5rem;
+                width: 100%;
+                display: block;
+                text-decoration: none;
+                color: var(--color-primary);
+                font-size: 18px;
+            }
+
+            .menu-dropdown {
+                display: none;
+                margin: 0;
+                padding: 0;
+
+                .menu-dropdown-item {
+                    list-style: none;
+                    padding-left: .75rem;
+
+                    .menu-dropdown-link {
+                        color: var(--color-primary);
+                        line-height: 2.5rem;
+                        width: 100%;
+                        display: block;
+                        text-decoration: none;
+                        font-size: 17px;
+
+                    }
+                }
+            }
+        }
+
+        .menu-item:hover {
+            background-color: rgb(245, 245, 245);
+        }
+    }
+
+    .control-mobile {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: .5rem;
+
+        .control-item {
+            grid-column: span 1;
+            list-style: none;
+            display: block;
+
+            .control-link {
+                line-height: 2.5rem;
+                width: 100%;
+                display: block;
+                text-align: center;
+                text-decoration: none;
+                color: var(--color-primary);
+                font-size: 18px;
+            }
+        }
+
+        .item-col {
+            grid-column: span 2;
+        }
+    }
+}
+
+@media(min-width:1200px) {}
+
+@media(min-width:1400px) {}
+
+@media(max-width:991.98px) {
+    .header-content-mobile {
+        display: block !important;
+        transform: translateX(0%);
+    }
+
+}

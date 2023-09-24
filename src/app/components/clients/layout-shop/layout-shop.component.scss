@@ -1,0 +1,31 @@
+.layout-wrapper {
+    width: 100%;
+
+    .layout-container {
+        width: 100%;
+
+        .content-wrapper {
+            width: 100%;
+
+            .content-container {
+                width: 100%;
+                margin: 0 auto;
+                margin-top: 10.75rem;
+
+            }
+        }
+    }
+
+}
+
+@media(min-width:1400px) {
+    .content-container {
+        max-width: 1440px;
+    }
+}
+
+@media(max-width:991.98px) {
+    .content-container {
+        margin-top: 5rem !important;
+    }
+}

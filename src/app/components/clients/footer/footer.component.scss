@@ -1,0 +1,166 @@
+.layout-footer {
+    margin-top: 4rem;
+    background-color: var(--color-primary);
+
+    .footer-wrapper {
+        width: 100%;
+        margin: 0 auto;
+        padding: 1.5rem 0;
+
+        .footer-container {
+            padding: 0 4rem;
+
+            .footer-content {
+                display: grid;
+                grid-template-columns: repeat(10, 1fr);
+                column-gap: 2rem;
+                color: var(--color-light);
+
+                .ft-content-left {
+                    grid-column: span 5;
+
+                    .ft-l-title {
+                        font-size: 18px;
+                        margin-top: 0;
+                        margin-bottom: 0.5rem;
+                    }
+
+                    .ft-l-link {
+                        color: var(--color-info);
+                        text-decoration: none;
+                        position: relative;
+                    }
+
+                    .ft-l-link::after {
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        height: 1.5px;
+                        background-color: var(--color-info);
+                        bottom: -1px;
+                        left: 0;
+                        transform: scaleX(0);
+                        transform-origin: left;
+                        transition: transform 0.3s ease;
+                    }
+
+                    .ft-l-link:hover::after {
+                        transform: scaleX(1);
+                    }
+
+                }
+
+                .ft-content-middle {
+                    grid-column: span 3;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    .ft-m-item {
+                        display: inline-block;
+
+                        .ft-m-link {
+                            display: block;
+                            text-decoration: none;
+                            color: var(--color-light);
+                            padding: .75rem 1rem;
+                            position: relative;
+
+                        }
+
+                        .ft-m-link::after {
+                            content: "";
+                            position: absolute;
+                            width: calc(100% - 2rem);
+                            height: 1.5px;
+                            background-color: var(--color-light);
+                            bottom: 0.6rem;
+                            left: 1rem;
+                            transform: scaleX(0);
+                            transform-origin: left;
+                            transition: transform 0.3s ease;
+                        }
+
+                        .ft-m-link:hover::after {
+                            transform: scaleX(1);
+                        }
+                    }
+
+                    .dots {
+                        font-size: 8px;
+                        margin: 0;
+                    }
+
+                }
+
+                .ft-content-right {
+                    grid-column: span 2;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    p {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width:1400px) {
+    .footer-wrapper {
+        max-width: 1440px;
+    }
+}
+
+@media(max-width:991.98px) {
+    .footer-wrapper {
+        padding: 1.5rem 0 2.5rem !important;
+    }
+
+    .ft-content-middle {
+        display: block !important;
+
+        .ft-m-item {
+            width: 100%;
+
+            .ft-m-link {
+                padding-top: 0px !important;
+                text-align: left !important;
+            }
+        }
+
+        .dots {
+            display: none;
+        }
+    }
+
+    .ft-content-right {
+        align-items: flex-start !important;
+    }
+}
+
+@media(max-width:767.98px) {
+    .footer-container {
+        padding: 0 1.5rem !important;
+    }
+}
+
+@media(max-width:575.98px) {
+    .footer-container {
+        column-gap: 0.5rem;
+
+        .ft-content-left {
+            grid-column: span 4 !important;
+        }
+
+        .ft-content-middle {
+            grid-column: span 3 !important;
+        }
+
+        .ft-content-right {
+            grid-column: span 3 !important;
+        }
+    }
+}

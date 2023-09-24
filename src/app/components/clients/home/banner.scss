@@ -1,0 +1,148 @@
+.banner-wrapper {
+    height: calc(100vh - 10.75rem);
+    max-height: 800px;
+    position: relative;
+
+    .banner-container {
+        height: 100%;
+
+        .banner-content {
+            height: 100%;
+
+            .banner-image {
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+
+    .banner-search {
+        width: 100%;
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-50%);
+
+        .bsearch-title {
+            margin-bottom: 2rem;
+
+            .stitle {
+                color: var(--color-primary);
+                text-transform: uppercase;
+                margin: 1rem 0;
+                text-align: center;
+            }
+
+            .slogan {
+                margin: 0.5rem 0;
+                text-align: center;
+                font-weight: 600;
+                font-size: 22px;
+            }
+        }
+
+        .bsearch-content {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+
+            .bsearch-quest-wrapper {
+                width: calc(60% - 1.14rem);
+                height: 2.25rem;
+                background-color: var(--color-light);
+                border-right: 2px solid var(--color-primary);
+                border-top-left-radius: .3rem !important;
+                border-bottom-left-radius: .3rem !important;
+
+                #bsearch-quest {
+                    width: 100%;
+                    height: 100%;
+                    border: 0;
+                    outline: none;
+                    color: var(--color-text-body);
+                    padding-left: 1.25rem;
+                }
+
+                #bsearch-quest::placeholder {
+                    color: var(--color-text-body);
+                }
+            }
+
+            .bsearch-locate-wrapper {
+                width: calc(40% - 1.14rem);
+                height: 2.25rem;
+                background-color: var(--color-light);
+                display: flex;
+                justify-content: center;
+
+                .locate-icon {
+                    height: 2.25rem;
+                    width: 2.25rem;
+                    color: var(--color-primary);
+                    font-size: 22px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-decoration: none;
+                }
+
+                #bsearch-locate {
+                    width: 100%;
+                    height: 100%;
+                    border: 0;
+                    outline: none;
+                    color: var(--color-text-body);
+                    padding-left: 0.25rem;
+                }
+
+                #bsearch-locate::placeholder {
+                    color: var(--color-text-body);
+                }
+            }
+
+            #bsearch-icon {
+                height: 2.28rem;
+                width: 2.28rem;
+                background-color: var(--color-primary);
+                border-top-right-radius: .3rem;
+                border-bottom-right-radius: .3rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
+                text-decoration: none;
+                color: var(--color-secondary);
+            }
+        }
+    }
+
+}
+
+@media(min-width:1200px) {
+    .banner-wrapper {
+        .banner-search {
+            .bsearch-content {
+                max-width: 600px;
+            }
+        }
+    }
+}
+
+@media(max-width:991.98px) {}
+
+@media(max-width:767.98px) {}
+
+@media(max-width:575.98px) {
+    .banner-wrapper {
+        .banner-search {
+            .bsearch-title {
+                .slogan {
+                    padding-left: 10%;
+                    padding-right: 10%;
+                }
+            }
+        }
+    }
+}

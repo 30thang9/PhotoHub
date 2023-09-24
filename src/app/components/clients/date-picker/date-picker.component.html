@@ -1,0 +1,32 @@
+<input type="text" [(ngModel)]="selectedDate" (click)="toggleCalendar()">
+<div class="calendar" *ngIf="isCalendarVisible">
+    <div class="calendar-header">
+        <span class="month-picker" (click)="toggleMonthList()">{{ monthNames[currMonth] }}</span>
+        <div class="year-picker">
+            <span class="year-change" (click)="prevYear()">&lt;</span>
+            <span id="year">{{ currYear }}</span>
+            <span class="year-change" (click)="nextYear()">&gt;</span>
+        </div>
+    </div>
+    <div class="calendar-body">
+        <div class="calendar-week-day">
+            <div>CN</div>
+            <div>T2</div>
+            <div>T3</div>
+            <div>T4</div>
+            <div>T5</div>
+            <div>T6</div>
+            <div>T7</div>
+        </div>
+        <div class="calendar-days">
+            <div *ngFor="let day of calendarDays" [class.calendar-day-hover]="day !==null"
+                [class.selected-date]="day === selectedDay" [class.curr-date]="isCurrentDate(day)"
+                (click)="selectDate(day)">
+                {{ day }}
+            </div>
+        </div>
+    </div>
+    <div class="month-list" [class.show]="isMonthListVisible">
+        <div *ngFor="let month of monthNames; let i = index" (click)="selectMonth(i)">{{ month }}</div>
+    </div>
+</div>

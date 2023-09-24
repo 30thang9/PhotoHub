@@ -1,0 +1,35 @@
+@import url(./header-content.scss);
+@import url(./header-content-mobile.scss);
+
+.layout-header {
+    height: 5.75rem;
+    background-color: var(--color-bg-body);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    z-index: 1024;
+
+    .header-container {
+        width: 100%;
+        margin: 0 auto;
+
+    }
+}
+
+@media(min-width:1200px) {}
+
+@media(min-width:1400px) {
+    .layout-header {
+        .header-container {
+            max-width: 1440px;
+        }
+    }
+}
+
+@media(max-width:991.98px) {
+    .layout-header {
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .075) !important;
+    }
+}

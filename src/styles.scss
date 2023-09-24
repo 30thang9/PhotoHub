@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~boxicons/css/boxicons.min.css';
+
+
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Nunito Sans';
+    src: url(./assets/fonts/Nunito_Sans/NunitoSans-VariableFont.ttf);
+    // font-weight: normal;
+    // font-style: normal;
+}
+
+:root {
+    --font-family-body: 'Nunito Sans', sans-serif;
+    --color-text-body: #586574;
+    --color-bg-body: #ffffff;
+    --color-primary: #032654;
+    --color-secondary: #dee2e6;
+    --color-warning: #dbb42c;
+    --color-info: #457b9d;
+    --color-light: #ffffff;
+    --color-error: #d5573b;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+h2 {
+    font: size 32px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+
+body {
+    font-family: var(--font-family-body);
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--color-text-body);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}

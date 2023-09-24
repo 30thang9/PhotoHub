@@ -1,0 +1,159 @@
+.description-wrapper {
+    .des-title {
+        color: var(--color-primary);
+        margin-bottom: 2rem;
+
+        span {
+            display: block;
+            color: var(--color-warning);
+        }
+    }
+
+    .des-content-wrapper {
+        .des-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 3rem;
+
+            .des-left {
+                .des-attention {
+                    margin-bottom: 2rem;
+
+                    .des-atten-title {
+                        font-size: 19px;
+                        margin: 0;
+                        margin-bottom: 1rem;
+                        display: flex;
+                        align-items: center;
+                        color: var(--color-primary);
+                        font-weight: 600;
+
+                        i {
+                            font-size: 25px;
+                            margin-right: 1rem;
+                        }
+                    }
+
+                    .des-atten-text {
+                        padding-left: 2.5rem;
+                    }
+                }
+            }
+
+            .des-right {
+                max-height: 600px;
+                display: flex;
+                flex-direction: column;
+                row-gap: 0.5rem;
+
+                .right-picture-first {
+                    height: calc(60% - .25rem);
+                    width: 100%;
+                    display: flex;
+                    column-gap: 0.5rem;
+
+                    .rf-left {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        row-gap: 0.5rem;
+
+                        .rf-left-first {
+                            width: 100%;
+                            height: calc(70% - .25rem);
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+
+                        .rf-left-second {
+                            width: 100%;
+                            height: calc(30% - .25rem);
+                            display: grid;
+                            grid-template-columns: repeat(2, 1fr);
+                            grid-auto-rows: 1fr;
+                            column-gap: 0.5rem;
+
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: cover;
+                            }
+                        }
+                    }
+
+                    .rf-right {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        row-gap: 0.5rem;
+
+                        .rf-right-img1 {
+                            height: calc(35% - .25rem);
+                            width: 100%;
+                        }
+
+                        .rf-right-img2 {
+                            height: calc(65% - .25rem);
+                            width: 100%;
+                        }
+
+                        img: {
+                            object-fit: cover;
+                        }
+
+                    }
+                }
+
+                .right-picture-second {
+                    height: calc(40% - .25rem);
+                    width: 100%;
+                    display: flex;
+                    column-gap: 0.5rem;
+
+                    img {
+                        width: calc(100%/3 - (.25rem + 1px));
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+
+@media(min-width:1200px) {}
+
+@media(max-width:991.98px) {
+
+    .description-wrapper {
+        .des-content-wrapper {
+            .des-content {
+                grid-template-columns: repeat(1, 1fr) !important;
+            }
+        }
+    }
+
+}
+
+@media(max-width:767.98px) {
+    .description-wrapper {
+        margin-top: 1.5rem !important;
+    }
+}
+
+@media(max-width:575.98px) {
+    .description-wrapper {
+        .des-title {
+            span {
+                display: inline !important;
+            }
+        }
+    }
+
+}
