@@ -1,0 +1,37 @@
+<div class="send-ct-wrapper">
+    <div class="send-ct-container">
+        <div class="send-ct-header">
+            <div class="brand">
+                <a routerLink="/home" class="brand-link">
+                    <img class="brand-image" src="./assets/images/logo2.png" alt="logo">
+                </a>
+            </div>
+            <h3 class="send-ct-title">
+                Vui lòng để lại thông tin liên hệ.
+            </h3>
+        </div>
+        <div class="send-ct-content">
+            <form>
+                <div class="form-group">
+                    <label for="fullname">Họ và tên</label>
+                    <input type="text" id="fullname" name="fullname" required>
+                    <!-- Thông báo validate -->
+                    <span class="validate-message">Vui lòng nhập tên.</span>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" id="phone" name="phone" required>
+                    <!-- Thông báo validate -->
+                    <span class="validate-message">Vui lòng nhập số điện thoại hợp lệ.</span>
+                </div>
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="text" id="username" name="username" required>
+                    <!-- Thông báo validate -->
+                    <span class="validate-message">Vui lòng nhập email hợp lệ.</span>
+                </div>
+                <button type="submit">Gửi</button>
+            </form>
+        </div>
+    </div>
+</div>

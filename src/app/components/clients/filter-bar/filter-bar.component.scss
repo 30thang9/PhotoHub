@@ -14,6 +14,64 @@
             .filter-left {
                 // background-color: aqua;
                 grid-column: span 9;
+
+                .filter-param {
+                    display: flex;
+                    justify-content: flex-start;
+                    column-gap: .5rem;
+
+                    .filter-tl {
+                        #thoi-lg {
+                            position: absolute;
+                            transform: translate(-50%, -50%);
+                            top: 50%;
+                            left: 50%;
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            appearance: none;
+                            width: 100px;
+                            padding: 10px 20px;
+                            font-weight: 600;
+                            font-size: 20px;
+                            letter-spacing: 0.5px;
+                            cursor: pointer;
+                            background-color: var(--color-bg-body);
+                            color: var(--color-primary);
+                            border: 2px solid var(--color-primary);
+                            border-radius: 5px;
+                            outline: none;
+
+                            option {
+                                color: #333;
+                                border: none;
+                                padding: 5px 10px;
+                                font-size: 14px;
+                            }
+
+                            option:hover {
+                                background-color: rgb(246, 246, 246);
+                            }
+                        }
+
+                        select::-ms-expand {
+                            display: none;
+                        }
+
+                        select:hover {
+                            border: 6px solid #ff66a3;
+                        }
+
+                        #thoi-lg::-webkit-scrollbar {
+                            width: .2rem;
+                        }
+
+                        #thoi-lg::-webkit-scrollbar-thumb {
+                            background-color: rgb(240, 240, 240);
+                            border-radius: 5px;
+                        }
+
+                    }
+                }
             }
 
             .filter-right {

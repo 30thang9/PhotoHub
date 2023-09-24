@@ -1,0 +1,19 @@
+<div class="custom-select">
+    <!-- Ẩn select box -->
+    <select [(ngModel)]="selectedOption" (change)="onSelectChange()" style="display: none;">
+        <ng-content select="[custom-option]"></ng-content>
+    </select>
+
+    <!-- Dropdown button -->
+    <div class="select-button" (click)="toggleDropdown()">
+        <span>{{ selectedOption || 'Chọn một option' }}</span>
+        <i class="arrow-down"></i>
+    </div>
+
+    <!-- Dropdown menu -->
+    <ul class="select-options" [ngClass]="{'active': isDropdownOpen}">
+        <li *ngFor="let option of options" (click)="selectOption(option)">
+            {{ option }}
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,62 @@
+/* CSS cho custom-select container */
+.custom-select {
+    position: relative;
+    width: 200px;
+}
+
+/* CSS cho select box */
+.custom-select select {
+    display: none;
+}
+
+/* CSS cho dropdown button */
+.custom-select .select-button {
+    cursor: pointer;
+    user-select: none;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* CSS cho dropdown icon */
+.custom-select .arrow-down::after {
+    content: '\25BE';
+    margin-left: 8px;
+}
+
+/* CSS cho dropdown menu */
+.custom-select .select-options {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 1;
+}
+
+/* CSS cho các mục trong dropdown menu */
+.custom-select .select-options li {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+/* Hover effect cho các mục trong dropdown menu */
+.custom-select .select-options li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Hiển thị dropdown menu khi được mở */
+.custom-select .select-options.active {
+    display: block;
+}

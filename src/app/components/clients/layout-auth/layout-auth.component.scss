@@ -1,0 +1,14 @@
+.layout-auth {
+    width: 100vw;
+    height: 100vh;
+
+    .auth-wrapper {
+        width: 100%;
+        min-height: 100%;
+        background-image: url('/assets/images/banner.jpg');
+        background-size: cover;
+        background-repeat: repeat;
+        background-position: center;
+        position: relative;
+    }
+}

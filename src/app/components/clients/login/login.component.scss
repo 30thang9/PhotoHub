@@ -1,0 +1,214 @@
+.login-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 700px;
+    min-height: 700px;
+    max-height: 1100px;
+    height: 100vh;
+    padding: 0.5rem 0.2rem;
+
+    .login-container {
+        padding: 2rem;
+        border-radius: .5rem;
+        width: 80%;
+        margin: 0 auto;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.26);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+        .login-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+
+            .login-title {
+                text-align: center;
+                color: var(--color-primary);
+                font-size: 32px;
+                font-weight: bold;
+            }
+
+            .brand {
+                display: flex;
+                justify-content: center;
+
+                .brand-link {
+                    .brand-image {
+                        width: 5rem;
+                        height: 5rem;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+
+        .login-content {
+            form {
+                width: 100%;
+
+                .form-group {
+                    position: relative;
+                    margin-bottom: 15px;
+
+                    label {
+                        display: block;
+                        margin-bottom: 5px;
+                        color: gray;
+                        font-weight: 600;
+                        font-size: 18px;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding: 15px 10px;
+                        border: 2px solid gray;
+                        border-radius: 5px;
+                        background-color: transparent;
+                        outline: none;
+
+                        &:focus {
+                            border-color: var(--color-primary);
+                        }
+                    }
+
+                    .password-wrapper {
+                        position: relative;
+
+                        #hidePassword,
+                        #showPassword {
+                            position: absolute;
+                            right: 10px;
+                            top: calc(50% + 3px);
+                            transform: translateY(-50%);
+                            text-decoration: none;
+                            font-size: 20px;
+                            color: var(--color-primary);
+
+                            i {}
+
+                        }
+                    }
+
+                    .validate-message {
+                        width: 100%;
+                        font-size: 14px;
+                        color: rgb(255, 24, 24);
+                    }
+
+                    .forgot-password {
+                        position: absolute;
+                        right: 4px;
+                        color: var(--color-primary);
+                        bottom: -17px;
+                    }
+                }
+
+                button {
+                    margin-top: 3rem;
+                    display: block;
+                    width: 100%;
+                    padding: 15px 10px;
+                    background-color: var(--color-primary);
+                    color: #fff;
+                    border: none;
+                    border-radius: 5px;
+                    font-size: 20px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: #0056b3;
+                    }
+                }
+            }
+        }
+
+        .wall-login {
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+
+            .line-left,
+            .line-right {
+                flex-grow: 1;
+                height: 2px;
+                background-color: var(--color-primary);
+            }
+
+            span {
+                margin: 0 10px;
+                /* Add horizontal spacing around the text */
+                white-space: nowrap;
+                /* Prevent the text from wrapping */
+            }
+        }
+
+        .login-footer {
+            .login-option {
+                margin-bottom: 1rem;
+                display: flex;
+                justify-content: center;
+                column-gap: 1.5rem;
+
+                .login-option-icon {
+                    font-size: 42px;
+                    color: var(--color-primary);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:767.98px) {
+    .login-wrapper {
+        width: 90%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        .login-container {
+            width: 100%;
+            padding: 0.5rem 2rem;
+
+            .login-content {
+                form {
+                    .form-group {
+                        input {
+                            width: 100%;
+                            padding: 10px;
+                        }
+
+                        .validate-message {
+                            font-size: 12px;
+                        }
+                    }
+
+                    button {
+                        margin-top: 2rem;
+                        padding: 10px;
+                        font-size: 17px;
+                    }
+                }
+            }
+
+            .wall-login {
+                margin: 1rem 0;
+            }
+
+            .login-footer {
+                .login-option {
+                    margin-bottom: 1rem;
+                    display: flex;
+                    justify-content: center;
+                    column-gap: 1.5rem;
+
+                    .login-option-icon {
+                        font-size: 26px;
+                        color: var(--color-primary);
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}

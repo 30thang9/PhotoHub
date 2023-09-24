@@ -1,0 +1,60 @@
+<div class="login-wrapper">
+    <div class="login-container">
+        <div class="login-header">
+            <h3 class="login-title">
+                Đăng nhập
+            </h3>
+            <div class="brand">
+                <a routerLink="/home" class="brand-link">
+                    <img class="brand-image" src="./assets/images/logo2.png" alt="logo">
+                </a>
+            </div>
+        </div>
+        <div class="login-content">
+            <form>
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="text" id="username" name="username" required>
+                    <!-- Thông báo validate -->
+                    <span class="validate-message">Vui lòng nhập email hợp lệ.</span>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" required>
+                        <a id="showPassword" href="javascript:void(0)"><i class='bx bx-show'></i></a>
+                        <a id="hidePassword" href="javascript:void(0)"><i class='bx bx-hide'></i></a>
+                    </div>
+                    <!-- Thông báo validate -->
+                    <span class="validate-message">Mật khẩu phải có ít nhất 6 ký tự.</span>
+                    <!-- Nút "Quên mật khẩu" -->
+                    <a routerLink="" class="forgot-password">Quên mật khẩu?</a>
+                </div>
+                <button type="submit">Đăng nhập</button>
+            </form>
+        </div>
+
+        <div class="wall-login">
+            <div class="line-left"></div>
+            <span>Hoặc đăng nhập bằng</span>
+            <div class="line-right"></div>
+        </div>
+
+        <div class="login-footer">
+            <div class="login-option">
+                <a class="login-option-icon" href="javascript:void(0)">
+                    <i class='bx bxl-google'></i>
+                </a>
+                <a class="login-option-icon" href="javascript:void(0)">
+                    <i class='bx bxl-facebook'></i>
+                </a>
+                <a class="login-option-icon" href="javascript:void(0)">
+                    <i class='bx bxl-instagram-alt'></i>
+                </a>
+            </div>
+            <div class="sign-in">
+                <a routerLink="">Bạn chưa có tài khoản? Đăng ký</a>
+            </div>
+        </div>
+    </div>
+</div>

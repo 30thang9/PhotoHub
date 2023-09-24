@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./filter-bar.component.scss']
 })
 export class FilterBarComponent {
-
+  selectedOption: string = '';
 }

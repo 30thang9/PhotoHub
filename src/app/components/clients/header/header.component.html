@@ -22,27 +22,28 @@
                 </div>
             </div>
             <div class="header-content-right">
-                <li class="cright-item"><a class="cright-link" routerLink="">Cách hoạt động</a></li>
+                <li class="cright-item"><a class="cright-link" routerLink="/collection">Cách hoạt động</a></li>
                 <li class="cright-item"><a class="cright-link" routerLink="/auth/login">Đăng nhập</a></li>
                 <li class="cright-item"><a class="cright-link" routerLink="/auth/register">Đăng ký</a></li>
             </div>
             <div class="icon-toggle-bar">
-                <a href="javascript:void(0)" class="toggle-search">
+                <a href="javascript:void(0)" class="toggle-search" (click)="showSearchMobile()">
                     <i class="bx bx-search"></i>
                 </a>
-                <a href="javascript:void(0)" class="toggle-menu">
+                <a href="javascript:void(0)" class="toggle-menu" #iconToggle (click)="showMenu()">
                     <i class="bx bx-menu"></i>
                 </a>
             </div>
-            <div class="search-mobile">
+            <div class="search-mobile" [ngClass]="{'show' : isSearchMobileVisible}">
                 <div class="search-bar-mobile">
                     <input class="search-input-mobile" type="text" name="" id=""
-                        placeholder="Dịch vụ bạn đang tìm kiếm ?">
-                    <a class="search-iconClose-mobile" href="javascript:void(0)">
+                        placeholder="Dịch vụ bạn đang tìm kiếm ?" #inputSearchMobile
+                        [(ngModel)]="inputSearchMobileValue" (input)="onChangeInputSearch($event)">
+                    <a class="search-iconClose-mobile" (click)="hideSearchMobile()" href="javascript:void(0)">
                         <i class="bx bx-x"></i>
                     </a>
                 </div>
-                <div class="search-suggest-mobile">
+                <div *ngIf="toggleSuggestMobile" class="search-suggest-mobile">
                     <p>hi</p>
                     <p>hi</p>
                     <p>hi</p>
@@ -51,7 +52,7 @@
                 </div>
             </div>
         </div>
-        <div class="header-content-mobile">
+        <div class="header-content-mobile" #headerContentMobile [ngClass]="{'show': isMenuVisible}">
             <div class="brand-mobile">
                 <div class="brand-logo-mobile">
                     <a routerLink="/home">
@@ -60,9 +61,9 @@
                 </div>
             </div>
             <div class="menu-container-mobile">
-                <li class="menu-item">
-                    <a routerLink="" class="menu-link">Du lịch</a>
-                    <ul class="menu-dropdown">
+                <li class="menu-item" #itemDropdown>
+                    <a href="javascript:void(0)" class="menu-link" (click)="toggleDropdown()">Du lịch</a>
+                    <ul class="menu-dropdown" #menuDropdown [ngClass]="{'show': isDropdownVisible}">
                         <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Chân dung</a></li>
                         <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Phong cảnh</a></li>
                         <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Đường phố</a></li>
@@ -70,9 +71,9 @@
                         <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Kỷ yếu</a></li>
                     </ul>
                 </li>
-                <li class="menu-item">
-                    <a routerLink="" class="menu-link">Booking</a>
-                    <ul class="menu-dropdown">
+                <li class="menu-item" #itemDropdown1>
+                    <a href="javascript:void(0)" class="menu-link" (click)="toggleDropdown1()">Booking</a>
+                    <ul class="menu-dropdown" #menuDropdown1 [ngClass]="{'show': isDropdown1Visible}">
                         <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Thời trang</a></li>
                         <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Phụ kiện</a></li>
                         <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Mỹ phẩm</a></li>
@@ -87,7 +88,9 @@
                 <li class="control-item"><a class="control-link" routerLink="/auth/login">Đăng nhập</a></li>
                 <li class="control-item"><a class="control-link" routerLink="/auth/register">Đăng ký</a></li>
             </div>
+            <a class="close-menu-icon" (click)="hideMenu()" href="javascript:void(0)"><i
+                    class='bx bx-chevron-left'></i></a>
         </div>
     </div>
-    <div class="header-overlay"></div>
+    <div class="header-overlay" [ngClass]="{'show': isMenuVisible}"></div>
 </div>

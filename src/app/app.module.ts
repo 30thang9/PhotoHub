@@ -13,6 +13,11 @@ import { ShopComponent } from './components/clients/shop/shop.component';
 import { FilterBarComponent } from './components/clients/filter-bar/filter-bar.component';
 import { DatePickerComponent } from './components/clients/date-picker/date-picker.component';
 import { FormsModule } from '@angular/forms';
+import { LayoutAuthComponent } from './components/clients/layout-auth/layout-auth.component';
+import { LoginComponent } from './components/clients/login/login.component';
+import { RegisterComponent } from './components/clients/register/register.component';
+import { SendContactComponent } from './components/clients/send-contact/send-contact.component';
+import { CustomSelectComponent } from './components/clients/custom-select/custom-select.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import { FormsModule } from '@angular/forms';
     LayoutShopComponent,
     ShopComponent,
     FilterBarComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    LayoutAuthComponent,
+    LoginComponent,
+    RegisterComponent,
+    SendContactComponent,
+    CustomSelectComponent
   ],
   imports: [
     BrowserModule,

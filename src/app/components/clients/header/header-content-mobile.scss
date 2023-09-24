@@ -8,6 +8,7 @@
     display: none;
     padding-bottom: 2.5rem;
     overflow-y: auto;
+    z-index: 1080;
 
     .brand-mobile {
         padding-top: .5rem;
@@ -68,6 +69,10 @@
                     }
                 }
             }
+
+            .menu-dropdown.show {
+                display: block !important;
+            }
         }
 
         .menu-item:hover {
@@ -100,6 +105,22 @@
             grid-column: span 2;
         }
     }
+
+    .close-menu-icon {
+        position: absolute;
+        width: 2.25rem;
+        height: 2.25rem;
+        top: 4rem;
+        right: -1.1rem;
+        padding-top: 2px;
+        background-color: var(--color-primary);
+        border-radius: 50%;
+        color: var(--color-light);
+        text-decoration: none;
+        font-size: 28px;
+        text-align: left;
+
+    }
 }
 
 @media(min-width:1200px) {}
@@ -109,7 +130,11 @@
 @media(max-width:991.98px) {
     .header-content-mobile {
         display: block !important;
-        transform: translateX(0%);
+        transform: translateX(-200%);
+    }
+
+    .header-content-mobile.show {
+        transform: translateX(0%) !important;
     }
 
 }
