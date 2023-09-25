@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, Input } from '@angular/core';
 
 @Component({
   selector: 'app-date-picker',
@@ -6,6 +6,7 @@ import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
   styleUrls: ['./date-picker.component.scss']
 })
 export class DatePickerComponent implements OnInit {
+  @Input() textDefault: string = 'DD-MM-YYYY';
 
   selectedDate: string = ''; // Biến lưu trữ ngày được chọn
   isCalendarVisible: boolean = false;
@@ -102,7 +103,6 @@ export class DatePickerComponent implements OnInit {
     if (!this.el.nativeElement.contains(event.target) && this.isCalendarVisible) {
       this.isCalendarVisible = false;
       this.isMonthListVisible = false;
-
     }
   }
 }

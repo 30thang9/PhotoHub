@@ -14,21 +14,18 @@
             <form>
                 <div class="form-group">
                     <label for="fullname">Họ và tên</label>
-                    <input type="text" id="fullname" name="fullname" required>
-                    <!-- Thông báo validate -->
-                    <span class="validate-message">Vui lòng nhập tên.</span>
+                    <input type="text" id="fullname" name="fullname" required (input)="onChangeName($event)">
+                    <span *ngIf="invalidName" class="validate-message">Vui lòng nhập tên.</span>
                 </div>
                 <div class="form-group">
                     <label for="phone">Số điện thoại</label>
-                    <input type="text" id="phone" name="phone" required>
-                    <!-- Thông báo validate -->
-                    <span class="validate-message">Vui lòng nhập số điện thoại hợp lệ.</span>
+                    <input type="text" id="phone" name="phone" required (input)="onChangePhone($event)">
+                    <span *ngIf="invalidPhone" class="validate-message">Vui lòng nhập số điện thoại hợp lệ.</span>
                 </div>
                 <div class="form-group">
                     <label for="username">Email</label>
-                    <input type="text" id="username" name="username" required>
-                    <!-- Thông báo validate -->
-                    <span class="validate-message">Vui lòng nhập email hợp lệ.</span>
+                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)">
+                    <span *ngIf="invalidEmail" class="validate-message">Vui lòng nhập email hợp lệ.</span>
                 </div>
                 <button type="submit">Gửi</button>
             </form>

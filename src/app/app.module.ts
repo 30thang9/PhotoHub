@@ -18,6 +18,9 @@ import { LoginComponent } from './components/clients/login/login.component';
 import { RegisterComponent } from './components/clients/register/register.component';
 import { SendContactComponent } from './components/clients/send-contact/send-contact.component';
 import { CustomSelectComponent } from './components/clients/custom-select/custom-select.component';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { ProfileComponent } from './components/clients/profile/profile.component';
+import { LayoutProfileComponent } from './components/clients/layout-profile/layout-profile.component';
 
 @NgModule({
   declarations: [
@@ -35,14 +38,16 @@ import { CustomSelectComponent } from './components/clients/custom-select/custom
     LoginComponent,
     RegisterComponent,
     SendContactComponent,
-    CustomSelectComponent
+    CustomSelectComponent,
+    ProfileComponent,
+    LayoutProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

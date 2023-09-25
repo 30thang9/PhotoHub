@@ -1,62 +1,82 @@
-/* CSS cho custom-select container */
 .custom-select {
     position: relative;
-    width: 200px;
-}
+    min-width: 150px;
+    width: 100%;
 
-/* CSS cho select box */
-.custom-select select {
-    display: none;
-}
+    select {
+        display: none;
+    }
 
-/* CSS cho dropdown button */
-.custom-select .select-button {
-    cursor: pointer;
-    user-select: none;
-    padding: 8px 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    .select-button {
+        cursor: pointer;
+        user-select: none;
+        padding: 8px 12px;
+        border: 1px solid var(--color-primary);
+        border-radius: 4px;
+        background-color: var(--color-light);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        column-gap: .75rem;
+        color: var(--color-primary);
+    }
 
-/* CSS cho dropdown icon */
-.custom-select .arrow-down::after {
-    content: '\25BE';
-    margin-left: 8px;
-}
+    .select-options {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        top: calc(100% + .3rem);
+        left: 0;
+        background-color: var(--color-light);
+        border-top: none;
+        border-radius: .3rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        display: none;
+        z-index: 1;
+        min-width: 150px;
+        max-height: 200px;
+        overflow-y: auto;
 
-/* CSS cho dropdown menu */
-.custom-select .select-options {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-top: none;
-    border-radius: 0 0 4px 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: none;
-    z-index: 1;
-}
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-primary) var(--color-light);
 
-/* CSS cho các mục trong dropdown menu */
-.custom-select .select-options li {
-    padding: 8px 12px;
-    cursor: pointer;
-}
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
 
-/* Hover effect cho các mục trong dropdown menu */
-.custom-select .select-options li:hover {
-    background-color: #f0f0f0;
-}
+        &::-webkit-scrollbar-track {
+            background: var(--color-light);
+        }
 
-/* Hiển thị dropdown menu khi được mở */
-.custom-select .select-options.active {
-    display: block;
+        &::-webkit-scrollbar-thumb {
+            background-color: rgb(246, 246, 246);
+            border-radius: 4px;
+            border: 2px solid var(--color-light);
+        }
+    }
+
+    .select-options li {
+        padding: 8px 12px;
+        cursor: pointer;
+        color: var(--color-primary);
+    }
+
+    .select-options li:first-of-type {
+        border-top-right-radius: .3rem;
+        border-top-left-radius: .3rem;
+    }
+
+    .select-options li:last-of-type {
+        border-bottom-right-radius: .3rem;
+        border-bottom-left-radius: .3rem;
+    }
+
+    .select-options li:hover {
+        background-color: rgb(246, 246, 246);
+    }
+
+    .select-options.active {
+        display: block;
+    }
 }

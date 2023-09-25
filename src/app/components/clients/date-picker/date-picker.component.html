@@ -1,6 +1,8 @@
 <div class="calendar-wrapper">
-    <input type="text" [(ngModel)]="selectedDate" (click)="toggleCalendar()" class="dateInput" placeholder="Ngày"
-        readonly>
+    <div #selectButton class="select-button" (click)="toggleCalendar()">
+        <span>{{ selectedDate || textDefault }}</span>
+        <i class='bx bx-calendar'></i>
+    </div>
     <div class="calendar" *ngIf="isCalendarVisible">
         <div class="calendar-header">
             <span class="month-picker" (click)="toggleMonthList()">{{ monthNames[currMonth] }}</span>
@@ -32,4 +34,5 @@
             <div *ngFor="let month of monthNames; let i = index" (click)="selectMonth(i)">{{ month }}</div>
         </div>
     </div>
+    <input type="text" [(ngModel)]="selectedDate" (click)="toggleCalendar()" style="display: none;">
 </div>

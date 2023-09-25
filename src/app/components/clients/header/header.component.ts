@@ -79,10 +79,10 @@ export class HeaderComponent {
     }
   }
 
-  @HostListener('document:click', ['$event'])
+  @HostListener('document:mousedown', ['$event'])
   closeDropdown(event: Event): void {
-    if (!this.headerContentMobile.nativeElement.contains(event.target) &&
-      !this.iconToggle.nativeElement.contains(event.target)) {
+    if (!this.headerContentMobile.nativeElement.contains(event.target as Node) &&
+      !this.iconToggle.nativeElement.contains(event.target as Node)) {
       if (this.isMenuVisible) {
         this.isMenuVisible = false;
       }

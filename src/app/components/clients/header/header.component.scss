@@ -32,9 +32,6 @@
         z-index: 999;
     }
 
-    .header-overlay.show {
-        display: block !important;
-    }
 }
 
 @media(min-width:1200px) {}
@@ -50,5 +47,9 @@
 @media(max-width:991.98px) {
     .layout-header {
         box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .075) !important;
+
+        .header-overlay.show {
+            display: block !important;
+        }
     }
 }

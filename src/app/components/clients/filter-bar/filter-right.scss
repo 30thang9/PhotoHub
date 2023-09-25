@@ -1,0 +1,120 @@
+.filter-right {
+    min-width: 350px;
+
+    .filter-sort {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 8px;
+
+        .sort-tilte {
+            text-wrap: nowrap;
+            margin-right: 1rem;
+            color: var(--color-primary);
+        }
+
+        .sort-content {
+            position: relative;
+
+            .sort-text {
+                min-width: 200px;
+                font-weight: bold;
+                color: var(--color-primary);
+                cursor: pointer;
+
+                span {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                span::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -.25rem;
+                    width: 100%;
+                    height: 2px;
+                    background-color: #000;
+                    transition: all 0.3s ease;
+                }
+
+                span.active::after {
+                    width: 0;
+                }
+            }
+
+
+            .sort-menu {
+                position: absolute;
+                top: calc(100% + .3rem);
+                right: 10%;
+                min-width: 13rem;
+                background-color: var(--color-bg-body);
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                border-radius: .3rem;
+                padding: .5rem 0;
+                z-index: 1;
+                display: none;
+
+                .sort-item {
+                    list-style: none;
+                    display: block;
+                    padding-left: 1rem;
+
+                    .sort-link {
+                        color: var(--color-primary);
+                        display: block;
+                        text-decoration: none;
+                        text-align: center;
+                        line-height: 2.5rem;
+                        display: flex;
+                        flex-wrap: nowrap;
+                        align-items: center;
+
+                        .sort-icon-checked {
+                            margin-bottom: 3px;
+                            margin-right: .5rem;
+                            // display: none;
+                        }
+
+                        .sort-icon-unchecked {
+                            margin-bottom: 3px;
+                            margin-right: .5rem;
+                        }
+                    }
+
+                    // .sort-default {
+                    //     .sort-icon-checked {
+                    //         display: block;
+                    //     }
+
+                    //     .sort-icon-unchecked {
+                    //         display: none;
+                    //     }
+                    // }
+                }
+
+                .sort-item:hover {
+                    background-color: rgb(246, 246, 246);
+                }
+            }
+
+            .sort-menu.show {
+                display: block !important;
+            }
+        }
+    }
+}
+
+
+@media(max-width:991.98px) {
+    .filter-right {
+        order: 1;
+        min-width: auto;
+        width: 100%;
+        margin-bottom: 2rem;
+
+        .filter-sort {
+            justify-content: flex-start;
+        }
+    }
+}

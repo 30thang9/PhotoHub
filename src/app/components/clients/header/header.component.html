@@ -54,43 +54,68 @@
             </div>
         </div>
         <div class="header-content-mobile" #headerContentMobile [ngClass]="{'show': isMenuVisible}">
-            <div class="brand-mobile">
-                <div class="brand-logo-mobile">
-                    <a routerLink="/home">
-                        <img class="brand-image-mobile" src="./assets/images/logoo.png" alt="">
-                    </a>
+            <div class="header-mobile-inner">
+                <div class="brand-mobile">
+                    <div class="brand-logo-mobile">
+                        <a routerLink="/home">
+                            <img class="brand-image-mobile" src="./assets/images/logoo.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="menu-container-mobile">
+                    <li class="menu-item" [ngClass]="{'active': isDropdownVisible}" #itemDropdown>
+                        <a href="javascript:void(0)" class="menu-link" (click)="toggleDropdown()">Du lịch
+                            <i *ngIf="!isDropdownVisible" class='bx bx-collapse-vertical'></i>
+                            <i *ngIf="isDropdownVisible" class='bx bx-expand-vertical'></i>
+                        </a>
+                        <ul class="menu-dropdown" #menuDropdown [ngClass]="{'show': isDropdownVisible}">
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Chân dung</a>
+                            </li>
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Phong cảnh</a>
+                            </li>
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Đường phố</a>
+                            </li>
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Thể thao</a></li>
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Kỷ yếu</a></li>
+                        </ul>
+                    </li>
+                    <li class="menu-item" [ngClass]="{'active': isDropdown1Visible}" #itemDropdown1>
+                        <a href="javascript:void(0)" class="menu-link" (click)="toggleDropdown1()">Booking
+                            <i *ngIf="!isDropdown1Visible" class='bx bx-collapse-vertical'></i>
+                            <i *ngIf="isDropdown1Visible" class='bx bx-expand-vertical'></i>
+                        </a>
+                        <ul class="menu-dropdown" #menuDropdown1 [ngClass]="{'show': isDropdown1Visible}">
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Thời trang</a>
+                            </li>
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Phụ kiện</a></li>
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Mỹ phẩm</a></li>
+                            <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Thực phẩm</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu-item"><a routerLink="" class="menu-link">Catalogue</a></li>
+                    <li class="menu-item"><a routerLink="" class="menu-link">Khác</a></li>
+                </div>
+                <div class="control-mobile">
+                    <li class="control-item item-col"><a class="control-link" routerLink="">Cách hoạt động</a></li>
+                    <li class="control-item">
+                        <a class="control-link" routerLink="/auth/login">
+                            Đăng nhập
+                            <!-- <i class='bx bx-log-in-circle'></i> -->
+                        </a>
+                    </li>
+                    <li class="control-item">
+                        <a class="control-link" routerLink="/auth/register">
+                            Đăng ký
+                            <!-- <i class='bx bx-registered'></i> -->
+                        </a>
+                    </li>
+                </div>
+                <div class="close-menu">
+                    <a class="close-menu-icon" (click)="hideMenu()" href="javascript:void(0)"><i
+                            class='bx bx-x'></i></a>
                 </div>
             </div>
-            <div class="menu-container-mobile">
-                <li class="menu-item" #itemDropdown>
-                    <a href="javascript:void(0)" class="menu-link" (click)="toggleDropdown()">Du lịch</a>
-                    <ul class="menu-dropdown" #menuDropdown [ngClass]="{'show': isDropdownVisible}">
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Chân dung</a></li>
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Phong cảnh</a></li>
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Đường phố</a></li>
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Thể thao</a></li>
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Kỷ yếu</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item" #itemDropdown1>
-                    <a href="javascript:void(0)" class="menu-link" (click)="toggleDropdown1()">Booking</a>
-                    <ul class="menu-dropdown" #menuDropdown1 [ngClass]="{'show': isDropdown1Visible}">
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Thời trang</a></li>
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Phụ kiện</a></li>
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Mỹ phẩm</a></li>
-                        <li class="menu-dropdown-item"><a routerLink="" class="menu-dropdown-link">Thực phẩm</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item"><a routerLink="" class="menu-link">Catalogue</a></li>
-                <li class="menu-item"><a routerLink="" class="menu-link">Khác</a></li>
-            </div>
-            <div class="control-mobile">
-                <li class="control-item item-col"><a class="control-link" routerLink="">Cách hoạt động</a></li>
-                <li class="control-item"><a class="control-link" routerLink="/auth/login">Đăng nhập</a></li>
-                <li class="control-item"><a class="control-link" routerLink="/auth/register">Đăng ký</a></li>
-            </div>
-            <a class="close-menu-icon" (click)="hideMenu()" href="javascript:void(0)"><i
-                    class='bx bx-chevron-left'></i></a>
         </div>
     </div>
     <div class="header-overlay" [ngClass]="{'show': isMenuVisible}"></div>

@@ -4,23 +4,115 @@
             <div class="filter-left">
                 <div class="filter-param">
                     <div class="filter-date-picker">
-                        <app-date-picker></app-date-picker>
+                        <app-date-picker [textDefault]="'Ngày'"></app-date-picker>
                     </div>
                     <div class="filter-tl">
-                        <app-custom-select [(selectedOption)]="selectedOption">
-                            <option custom-option value="Option 1">Option 1</option>
-                            <option custom-option value="Option 2">Option 2</option>
-                            <option custom-option value="Option 3">Option 3</option>
+                        <app-custom-select [(selectedOption)]="selectedOptionTL" [textDefault]="'Thời lượng'">
+                            <option custom-option value="1">1 giờ</option>
+                            <option custom-option value="2">2 giờ</option>
+                            <option custom-option value="3">3 giờ</option>
+                            <option custom-option value="4">4 giờ</option>
+                            <option custom-option value="5">5 giờ</option>
+                            <option custom-option value="6">6 giờ</option>
+                            <option custom-option value="7">7 giờ</option>
+                            <option custom-option value="8">8 giờ</option>
                         </app-custom-select>
                     </div>
                     <div class="filter-time">
-
+                        <app-custom-select [(selectedOption)]="selectedOptionTime" [textDefault]="'Thời gian'">
+                            <option custom-option value="12.30am">12:30 am</option>
+                            <option custom-option value="1.00am">1:00 am</option>
+                            <option custom-option value="1.30am">1:30 am</option>
+                            <option custom-option value="2.00am">2:00 am</option>
+                            <option custom-option value="2.30am">2:30 am</option>
+                            <option custom-option value="3.00am">3:00 am</option>
+                            <option custom-option value="3.30am">3:30 am</option>
+                            <option custom-option value="...">...</option>
+                            <option custom-option value="11.30pm">11:30 pm</option>
+                        </app-custom-select>
                     </div>
-                    <div class="filter address">
+
+                    <div class="filter-address">
+                        <div class="filter-address-content">
+                            <div #addressButton class="address-button" (click)="toggleAddress()">
+                                <i class='bx bxs-navigation'></i>
+                                <span>{{addressValue ||'Địa điểm chụp ảnh'}}</span>
+                            </div>
+                            <div #addressBar [ngClass]="{'show' : isShowAddressBar}" class="address-bar">
+                                <div class="address-form">
+                                    <div class="address-form-first">
+                                        <input type="text" [(ngModel)]="addressValue" class="address-input">
+                                        <i class="bx bx-x" id="clearAddress" (click)="clearAddress()"></i>
+                                        <i class='bx bxs-navigation' id="iconAddress"></i>
+                                    </div>
+                                    <div class="address-form-second">
+                                        <i class='bx bx-time-five'></i>
+                                        Hồ Tây, Hà Nội
+                                    </div>
+                                </div>
+                                <div class="horizontal-line"></div>
+                                <div class="address-suggest">
+                                    <p class="suggest-text">
+                                        <i class='bx bxs-navigation'></i>
+                                        Công viên Yên Sở, Hoàng Mai, Hà Nội
+                                    </p>
+                                    <p class="suggest-text">
+                                        <i class='bx bxs-navigation'></i>
+                                        Công viên Thống Nhất, Hà Nội
+                                    </p>
+                                    <p class="suggest-text">
+                                        <i class='bx bxs-navigation'></i>
+                                        Phố đi bộ Nguyễn Huệ, Hồ Chí Minh
+                                    </p>
+                                    <p class="suggest-text">
+                                        <i class='bx bxs-navigation'></i>
+                                        Hồ Hòa Trung, Đà Nẵng
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
                     </div>
                     <div class="filter-price">
-
+                        <div class="filter-price-content">
+                            <div #priceButton class="price-button" (click)="togglePrice()">
+                                <span>{{priceValue ||'Giá'}}</span>
+                            </div>
+                            <div #priceBar [ngClass]="{'show' : isShowPriceBar}" class="price-bar">
+                                <div class="price-title">
+                                    <h4>Nhập khoảng giá để tìm nhiếp ảnh gia trong phạm vi ngân sách</h4>
+                                </div>
+                                <div class="price-form">
+                                    <div class="price-form-first">
+                                        <div class="form-first form-first-left">
+                                            <input type="text" [(ngModel)]="priceValueMin" class="price-input"
+                                                (keypress)="restrictToNumbers($event)">
+                                            <!-- <i class="bx bx-x" id="clearPrice" (click)="clearPrice()"></i>
+                                            <i class='bx bxs-navigation' id="iconPrice"></i> -->
+                                            <span class="text-sub">Ít nhất</span>
+                                        </div>
+                                        <div class="form-first form-first-right">
+                                            <input type="text" [(ngModel)]="priceValueMax" class="price-input"
+                                                (keypress)="restrictToNumbers($event)">
+                                            <!-- <i class="bx bx-x" id="clearPrice" (click)="clearPrice()"></i>
+                                            <i class='bx bxs-navigation' id="iconPrice"></i> -->
+                                            <span class="text-sub">Nhiều nhất</span>
+                                        </div>
+                                    </div>
+                                    <span *ngIf="invalidPrice" class="text-message">Nhập đầy đủ giá.</span>
+                                    <div class="price-form-second">
+                                        <a href="javascript:void(0)" class="apply-price" (click)="applyPrice()">
+                                            Áp dụng
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filter-reset">
+                        <a href="javascript:void(0)" id="filter-icon-reset">
+                            Cài lại
+                        </a>
                     </div>
                 </div>
             </div>
@@ -30,43 +122,53 @@
                         <span>Sắp xếp theo</span>
                     </div>
                     <div class="sort-content">
-                        <div class="sort-text">
-                            <span>Đánh giá : Thấp - Cao</span>
+                        <div #sortSelectButton class="sort-text" (click)="toggleSort()">
+                            <span>{{checkedSortText ||'Mặc định'}}</span>
                         </div>
-                        <div class="sort-menu">
-                            <li class="sort-item">
+                        <div #sortSelectOptions [ngClass]="{'show' : isShowSortMenu}" class="sort-menu">
+                            <li class="sort-item" (click)="checked(0,'Mặc định')">
                                 <a href="javascript:void(0)" class="sort-link sort-default">
-                                    <i class='bx bxs-check-circle sort-icon-checked'></i>
-                                    <i class='bx bx-circle sort-icon-unchecked'></i>
+                                    <i *ngIf="!checkedSortValue || checkedSortValue === 0"
+                                        class='bx bxs-check-circle sort-icon-checked'></i>
+                                    <i *ngIf="checkedSortValue && checkedSortValue !== 0"
+                                        class='bx bx-circle sort-icon-unchecked'></i>
                                     Mặc định
                                 </a>
                             </li>
-                            <li class="sort-item">
+                            <li class="sort-item" (click)="checked(1,'Giá : Thấp - Cao')">
                                 <a href="javascript:void(0)" class="sort-link">
-                                    <i class='bx bxs-check-circle sort-icon-checked'></i>
-                                    <i class='bx bx-circle sort-icon-unchecked'></i>
+                                    <i *ngIf="checkedSortValue && checkedSortValue === 1"
+                                        class='bx bxs-check-circle sort-icon-checked'></i>
+                                    <i *ngIf="!checkedSortValue || checkedSortValue !== 1"
+                                        class='bx bx-circle sort-icon-unchecked'></i>
                                     Giá : Thấp - Cao
                                 </a>
                             </li>
-                            <li class="sort-item">
+                            <li class="sort-item" (click)="checked(2,'Giá: Cao - Thấp')">
                                 <a href="javascript:void(0)" class="sort-link">
-                                    <i class='bx bxs-check-circle sort-icon-checked'></i>
-                                    <i class='bx bx-circle sort-icon-unchecked'></i>
+                                    <i *ngIf="checkedSortValue && checkedSortValue === 2"
+                                        class='bx bxs-check-circle sort-icon-checked'></i>
+                                    <i *ngIf="!checkedSortValue || checkedSortValue !== 2"
+                                        class='bx bx-circle sort-icon-unchecked'></i>
                                     Giá: Cao - Thấp
                                 </a>
                             </li>
-                            <li class="sort-item">
+                            <li class="sort-item" (click)="checked(3,'Đánh giá : Thấp - Cao')">
                                 <a href="javascript:void(0)" class="sort-link">
-                                    <i class='bx bxs-check-circle sort-icon-checked'></i>
-                                    <i class='bx bx-circle sort-icon-unchecked'></i>
+                                    <i *ngIf="checkedSortValue && checkedSortValue === 3"
+                                        class='bx bxs-check-circle sort-icon-checked'></i>
+                                    <i *ngIf="!checkedSortValue || checkedSortValue !== 3"
+                                        class='bx bx-circle sort-icon-unchecked'></i>
                                     Đánh giá : Thấp - Cao
                                 </a>
                             </li>
-                            <li class="sort-item">
+                            <li class="sort-item" (click)="checked(4,'Đánh giá : Cao - Thấp')">
                                 <a href="javascript:void(0)" class="sort-link">
-                                    <i class='bx bxs-check-circle sort-icon-checked'></i>
-                                    <i class='bx bx-circle sort-icon-unchecked'></i>
-                                    Đánh giá: Cao - Thấp
+                                    <i *ngIf="checkedSortValue && checkedSortValue === 4"
+                                        class='bx bxs-check-circle sort-icon-checked'></i>
+                                    <i *ngIf="!checkedSortValue || checkedSortValue !== 4"
+                                        class='bx bx-circle sort-icon-unchecked'></i>
+                                    Đánh giá : Cao - Thấp
                                 </a>
                             </li>
                         </div>
