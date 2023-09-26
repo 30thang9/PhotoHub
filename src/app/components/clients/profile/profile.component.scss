@@ -7,7 +7,6 @@
             display: grid;
             grid-template-columns: repeat(9, 1fr);
             column-gap: .3rem;
-            background-color: rgb(253, 247, 240);
             height: 500px;
 
             .wall1,
@@ -15,15 +14,21 @@
             .wall3,
             .wall4 {
                 grid-column: span 2;
-                background-color: rgb(224, 255, 255);
+                height: 500px;
             }
 
-            .wall5 {
-                grid-column: span 1;
+            .wall2,
+            .wall4 {
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
             }
 
             .wall1,
-            .wall3 {
+            .wall3,
+            .wall5 {
                 display: flex;
                 flex-direction: column;
                 row-gap: .3rem;
@@ -33,9 +38,13 @@
 
                 .wall1-1,
                 .wall1-2 {
-                    height: calc(100% - .3rem);
-                    background-color: rgb(222, 247, 239);
+                    height: calc(500px/2 - .15rem);
 
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
                 }
             }
 
@@ -43,9 +52,27 @@
 
                 .wall3-1,
                 .wall3-2 {
-                    height: calc(100% - .3rem);
-                    background-color: aquamarine;
+                    height: calc(500px/2 - .15rem);
 
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            .wall5 {
+
+                .wall5-1,
+                .wall5-2 {
+                    height: calc(500px/2 - .15rem);
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
                 }
             }
         }
@@ -445,47 +472,56 @@
     .order-wrapper {
         margin: 0 auto;
         padding: 20px;
+
+        div {
+            display: flex;
+            flex-direction: column;
+
+            /* Định dạng cho tiêu đề */
+            h2 {
+                text-align: center;
+                color: #333;
+            }
+
+            /* Định dạng cho các label */
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+
+            /* Định dạng cho các input và select */
+            input[type="date"],
+            input[type="number"],
+            input[type="time"],
+            select {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            /* Định dạng cho nút Đặt lịch */
+            a {
+                background-color: #007bff;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 4px;
+                text-decoration: none;
+                margin-top: 1rem;
+                text-align: center;
+            }
+
+            /* Định dạng khi hover vào nút Đặt lịch */
+            a:hover {
+                background-color: #0056b3;
+            }
+        }
     }
 
-    /* Định dạng cho tiêu đề */
-    h2 {
-        text-align: center;
-        color: #333;
-    }
 
-    /* Định dạng cho các label */
-    label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-    }
-
-    /* Định dạng cho các input và select */
-    input[type="date"],
-    input[type="number"],
-    input[type="time"],
-    select {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-
-    /* Định dạng cho nút Đặt lịch */
-    input[type="submit"] {
-        background-color: #007bff;
-        color: white;
-        padding: 10px 15px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    /* Định dạng khi hover vào nút Đặt lịch */
-    input[type="submit"]:hover {
-        background-color: #0056b3;
-    }
 }
 
 @media(min-width:1200px) {}
