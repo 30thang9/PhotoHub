@@ -259,6 +259,26 @@
 
     </div>
     <div class="order-wrapper">
+        <div class="order-wrapper">
+            <h2>Đặt lịch chụp</h2>
+            <div>
+                <label for="ngay-chup">Ngày chụp:</label>
+                <input type="date" id="ngay-chup" name="ngay-chup" required>
 
+                <label for="thoi-luong">Thời lượng (giờ):</label>
+                <input type="number" id="thoi-luong" name="thoi-luong" min="1" required>
+
+                <label for="gio-hen">Giờ hẹn:</label>
+                <input type="time" id="gio-hen" name="gio-hen" required>
+
+                <label for="loai-chup">Loại chụp:</label>
+                <select id="loai-chup" name="loai-chup" required>
+                    <option value="chup-san-pham">Chụp sản phẩm</option>
+                    <option value="chup-portrait">Chụp portrait</option>
+                    <option value="chup-canh">Chụp cảnh</option>
+                </select>
+
+                <a routerLink="/contact">Đặt lịch</a>
+            </div>
+        </div>
     </div>
-</div>

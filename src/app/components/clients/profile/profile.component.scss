@@ -438,7 +438,53 @@
         border-radius: .3rem;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         z-index: 999;
-        display: none;
+        // display: none;
+    }
+
+    /* Định dạng cho phần tử div.order-wrapper */
+    .order-wrapper {
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Định dạng cho tiêu đề */
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    /* Định dạng cho các label */
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    /* Định dạng cho các input và select */
+    input[type="date"],
+    input[type="number"],
+    input[type="time"],
+    select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    /* Định dạng cho nút Đặt lịch */
+    input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    /* Định dạng khi hover vào nút Đặt lịch */
+    input[type="submit"]:hover {
+        background-color: #0056b3;
     }
 }
 
