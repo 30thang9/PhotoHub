@@ -10,8 +10,9 @@
                 </a>
             </div>
         </div>
+        <div class="login-message">{{ loginMessage }}</div>
         <div class="login-content">
-            <form>
+            <form (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="username">Email</label>
                     <input type="text" id="username" name="username" required (input)="onChangeEmail($event)">
@@ -57,7 +58,7 @@
                 </a>
             </div>
             <div class="sign-in">
-                <a routerLink="">Bạn chưa có tài khoản? Đăng ký</a>
+                <a routerLink="/auth/register">Bạn chưa có tài khoản? Đăng ký</a>
             </div>
         </div>
     </div>

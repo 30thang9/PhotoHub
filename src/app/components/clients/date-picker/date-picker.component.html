@@ -24,15 +24,16 @@
             </div>
             <div class="calendar-days">
                 <div *ngFor="let day of calendarDays" [class.calendar-day-hover]="day !==null"
-                    [class.selected-date]="day === selectedDay" [class.curr-date]="isCurrentDate(day)"
+                    [class.selected-date]="day !==null && day === selectedDay" [class.curr-date]="isCurrentDate(day)"
                     (click)="selectDate(day)">
                     {{ day }}
                 </div>
             </div>
         </div>
         <div class="month-list" [class.show]="isMonthListVisible">
-            <div *ngFor="let month of monthNames; let i = index" (click)="selectMonth(i)">{{ month }}</div>
+            <div class="month-item" *ngFor="let month of monthNames; let i = index" (click)="selectMonth(i)">{{ month }}
+            </div>
         </div>
     </div>
-    <input type="text" [(ngModel)]="selectedDate" (click)="toggleCalendar()" style="display: none;">
+    <input type="text" [(ngModel)]="selectedDate" style="display: none;">
 </div>

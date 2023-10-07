@@ -1,14 +1,18 @@
-import { Component, OnInit, ElementRef, HostListener, Input } from '@angular/core';
+import { Component, OnInit, ElementRef, HostListener, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.scss']
 })
-export class DatePickerComponent implements OnInit {
-  @Input() textDefault: string = 'DD-MM-YYYY';
+export class DatePickerComponent implements OnInit, AfterViewInit {
 
-  selectedDate: string = ''; // Biến lưu trữ ngày được chọn
+  @Input() textDefault: string = 'DD-MM-YYYY';
+  @Input() selectedDate: string = '';
+  @Output() selectedDateChange: EventEmitter<string> = new EventEmitter<string>();
+
+
+  // selectedDate: string = ''; // Biến lưu trữ ngày được chọn
   isCalendarVisible: boolean = false;
   currMonth!: number;
   currYear!: number;
@@ -19,12 +23,20 @@ export class DatePickerComponent implements OnInit {
   selectedDay: number | null = null;
 
   constructor(private el: ElementRef) { }
+  ngAfterViewInit(): void {
+  }
 
   ngOnInit(): void {
     const currentDate = new Date();
     this.currMonth = currentDate.getMonth();
     this.currYear = currentDate.getFullYear();
     this.generateCalendar(this.currMonth, this.currYear);
+    this.selectedDateChange.subscribe((newSelectedDate: string) => {
+      const currentDate = new Date();
+      this.currMonth = currentDate.getMonth();
+      this.currYear = currentDate.getFullYear();
+      this.generateCalendar(this.currMonth, this.currYear);
+    });
   }
 
   toggleCalendar(): void {
@@ -37,11 +49,13 @@ export class DatePickerComponent implements OnInit {
   prevYear(): void {
     this.currYear--;
     this.generateCalendar(this.currMonth, this.currYear);
+    this.selectedDay = null;
   }
 
   nextYear(): void {
     this.currYear++;
     this.generateCalendar(this.currMonth, this.currYear);
+    this.selectedDay = null;
   }
 
   toggleMonthList(): void {
@@ -52,6 +66,7 @@ export class DatePickerComponent implements OnInit {
     this.isMonthListVisible = false;
     this.currMonth = month;
     this.generateCalendar(this.currMonth, this.currYear);
+    this.selectedDay = null;
   }
 
   isLeapYear(year: number): boolean {
@@ -84,6 +99,7 @@ export class DatePickerComponent implements OnInit {
       this.selectedDate = date.toLocaleDateString(); // Gán ngày được chọn vào biến selectedDate
       this.isCalendarVisible = false; // Ẩn calendar sau khi chọn ngày
     }
+    this.selectedDateChange.emit(this.selectedDate);
   }
 
   isCurrentDate(day: number | null): boolean {
@@ -103,6 +119,12 @@ export class DatePickerComponent implements OnInit {
     if (!this.el.nativeElement.contains(event.target) && this.isCalendarVisible) {
       this.isCalendarVisible = false;
       this.isMonthListVisible = false;
+      this.selectedDateChange.subscribe((newSelectedDate: string) => {
+        const currentDate = new Date();
+        this.currMonth = currentDate.getMonth();
+        this.currYear = currentDate.getFullYear();
+        this.generateCalendar(this.currMonth, this.currYear);
+      });
     }
   }
 }

@@ -1,7 +1,7 @@
 .custom-select {
     position: relative;
     min-width: 150px;
-    width: 100%;
+    // width: 100%;
 
     select {
         display: none;
@@ -19,6 +19,7 @@
         align-items: center;
         column-gap: .75rem;
         color: var(--color-primary);
+        text-wrap: nowrap;
     }
 
     .select-options {
@@ -33,7 +34,7 @@
         border-radius: .3rem;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         display: none;
-        z-index: 1;
+        z-index: 2;
         min-width: 150px;
         max-height: 200px;
         overflow-y: auto;
@@ -60,6 +61,7 @@
         padding: 8px 12px;
         cursor: pointer;
         color: var(--color-primary);
+        text-wrap: nowrap;
     }
 
     .select-options li:first-of-type {

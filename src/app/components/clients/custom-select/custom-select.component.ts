@@ -39,26 +39,26 @@ export class CustomSelectComponent implements OnInit, AfterViewInit {
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
 
-    // Nếu dropdown mở, tính toán vị trí
-    if (this.isDropdownOpen) {
-      const selectButton = this.selectButton.nativeElement;
-      const selectOptions = this.selectOptions.nativeElement;
-      const rect = selectButton.getBoundingClientRect();
-      const spaceBelow = window.innerHeight - rect.bottom;
-      const spaceAbove = rect.top;
+    // // Nếu dropdown mở, tính toán vị trí
+    // if (this.isDropdownOpen) {
+    //   const selectButton = this.selectButton.nativeElement;
+    //   const selectOptions = this.selectOptions.nativeElement;
+    //   const rect = selectButton.getBoundingClientRect();
+    //   const spaceBelow = window.innerHeight - rect.bottom;
+    //   const spaceAbove = rect.top;
 
-      // Tùy thuộc vào không gian trống, đặt vị trí cho dropdown
-      if (spaceBelow >= selectOptions.clientHeight) {
-        this.dropdownPosition.top = '100%';
-        this.dropdownPosition.left = '0';
-      } else if (spaceAbove >= selectOptions.clientHeight) {
-        this.dropdownPosition.top = 'auto';
-        this.dropdownPosition.left = '0';
-      } else {
-        this.dropdownPosition.top = 'auto';
-        this.dropdownPosition.left = '100%';
-      }
-    }
+    //   // Tùy thuộc vào không gian trống, đặt vị trí cho dropdown
+    //   if (spaceBelow >= selectOptions.clientHeight) {
+    //     this.dropdownPosition.top = '100%';
+    //     this.dropdownPosition.left = '0';
+    //   } else if (spaceAbove >= selectOptions.clientHeight) {
+    //     this.dropdownPosition.top = 'auto';
+    //     this.dropdownPosition.left = '0';
+    //   } else {
+    //     this.dropdownPosition.top = 'auto';
+    //     this.dropdownPosition.left = '100%';
+    //   }
+    // }
   }
 
   selectOption(option: string) {

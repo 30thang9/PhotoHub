@@ -4,7 +4,7 @@
             <div class="filter-left">
                 <div class="filter-param">
                     <div class="filter-date-picker">
-                        <app-date-picker [textDefault]="'Ngày'"></app-date-picker>
+                        <app-date-picker [(selectedDate)]="selectedDateY" [textDefault]="'Ngày'"></app-date-picker>
                     </div>
                     <div class="filter-tl">
                         <app-custom-select [(selectedOption)]="selectedOptionTL" [textDefault]="'Thời lượng'">
@@ -31,7 +31,6 @@
                             <option custom-option value="11.30pm">11:30 pm</option>
                         </app-custom-select>
                     </div>
-
                     <div class="filter-address">
                         <div class="filter-address-content">
                             <div #addressButton class="address-button" (click)="toggleAddress()">
@@ -74,43 +73,16 @@
 
                     </div>
                     <div class="filter-price">
-                        <div class="filter-price-content">
-                            <div #priceButton class="price-button" (click)="togglePrice()">
-                                <span>{{priceValue ||'Giá'}}</span>
-                            </div>
-                            <div #priceBar [ngClass]="{'show' : isShowPriceBar}" class="price-bar">
-                                <div class="price-title">
-                                    <h4>Nhập khoảng giá để tìm nhiếp ảnh gia trong phạm vi ngân sách</h4>
-                                </div>
-                                <div class="price-form">
-                                    <div class="price-form-first">
-                                        <div class="form-first form-first-left">
-                                            <input type="text" [(ngModel)]="priceValueMin" class="price-input"
-                                                (keypress)="restrictToNumbers($event)">
-                                            <!-- <i class="bx bx-x" id="clearPrice" (click)="clearPrice()"></i>
-                                            <i class='bx bxs-navigation' id="iconPrice"></i> -->
-                                            <span class="text-sub">Ít nhất</span>
-                                        </div>
-                                        <div class="form-first form-first-right">
-                                            <input type="text" [(ngModel)]="priceValueMax" class="price-input"
-                                                (keypress)="restrictToNumbers($event)">
-                                            <!-- <i class="bx bx-x" id="clearPrice" (click)="clearPrice()"></i>
-                                            <i class='bx bxs-navigation' id="iconPrice"></i> -->
-                                            <span class="text-sub">Nhiều nhất</span>
-                                        </div>
-                                    </div>
-                                    <span *ngIf="invalidPrice" class="text-message">Nhập đầy đủ giá.</span>
-                                    <div class="price-form-second">
-                                        <a href="javascript:void(0)" class="apply-price" (click)="applyPrice()">
-                                            Áp dụng
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <app-custom-select [(selectedOption)]="selectedOptionPrice" [textDefault]="'Giá'">
+                            <option custom-option value="1">Dưới 300.000 VNĐ</option>
+                            <option custom-option value="2">300.000 - 500.000 VNĐ</option>
+                            <option custom-option value="3">500.000 - 800.000 VNĐ</option>
+                            <option custom-option value="4">800.000 - 1200.000 VNĐ</option>
+                            <option custom-option value="5">Trên 1200.000 VNĐ</option>
+                        </app-custom-select>
                     </div>
                     <div class="filter-reset">
-                        <a href="javascript:void(0)" id="filter-icon-reset">
+                        <a href="javascript:void(0)" id="filter-icon-reset" (click)="resetFilter()">
                             Cài lại
                         </a>
                     </div>

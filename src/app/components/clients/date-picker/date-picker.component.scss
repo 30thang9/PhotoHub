@@ -31,150 +31,146 @@
         padding: .5rem;
         overflow: hidden;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        z-index: 1;
-    }
+        z-index: 2;
 
-    .calendar-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 17px;
-        font-weight: bold;
-        padding: 10px 0;
-
-        .month-picker {
-            color: var(--color-primary);
-            padding: 5px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .month-picker:hover {
-            background-color: var(--color-secondary);
-        }
-
-        .year-picker {
+        .calendar-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            color: var(--color-primary);
+            font-size: 17px;
+            font-weight: bold;
+            padding: 10px 0;
 
-            .year-change {
-                height: 30px;
-                width: 30px;
-                border-radius: 50%;
-                display: grid;
-                place-items: center;
-                margin: 0 10px;
-                cursor: pointer;
+            .month-picker {
                 color: var(--color-primary);
+                padding: 5px 10px;
+                border-radius: 10px;
+                cursor: pointer;
             }
 
-            .year-change:hover {
+            .month-picker:hover {
+                background-color: var(--color-secondary);
+            }
+
+            .year-picker {
+                display: flex;
+                align-items: center;
+                color: var(--color-primary);
+
+                .year-change {
+                    height: 30px;
+                    width: 30px;
+                    border-radius: 50%;
+                    display: grid;
+                    place-items: center;
+                    margin: 0 10px;
+                    cursor: pointer;
+                    color: var(--color-primary);
+                }
+
+                .year-change:hover {
+                    background-color: var(--color-secondary);
+                }
+            }
+        }
+
+        .calendar-body {
+            padding: 10px;
+
+            .calendar-week-day {
+                height: 30px;
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                font-weight: 600;
+
+                div {
+                    display: grid;
+                    place-items: center;
+                    color: var(--color-dark);
+                }
+            }
+
+            .calendar-days {
+                display: grid;
+                grid-template-columns: repeat(7, 1fr);
+                gap: 2px;
+                color: #151426;
+
+                div {
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 5px;
+                    position: relative;
+                    animation: to-top 1s forwards;
+                }
+
+                div.calendar-day-hover {
+                    cursor: pointer;
+                    border-radius: 50%;
+                }
+
+                div.calendar-day-hover:hover {
+                    background-color: var(--color-secondary);
+                    color: var(--color-primary);
+                    font-weight: 600;
+                }
+
+                div.curr-date,
+                div.curr-date:hover {
+                    background-color: var(--color-primary);
+                    color: #fff;
+                }
+
+                div.selected-date,
+                div.selected-date:hover {
+                    background-color: var(--color-info) !important;
+                    color: #fff;
+                }
+            }
+        }
+
+        .month-list {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: var(--color-bg-body);
+            padding: .5rem;
+            grid-template-columns: repeat(3, auto);
+            gap: 7px;
+            display: grid;
+            transform: scale(1.5);
+            visibility: hidden;
+            pointer-events: none;
+
+            >div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                place-items: center;
+                width: 100%;
+                border-radius: 10px;
+                cursor: pointer;
+                color: var(--color-primary);
+                font-weight: bold;
+            }
+
+            >div:hover {
                 background-color: var(--color-secondary);
             }
         }
-    }
 
-    .calendar-body {
-        padding: 10px;
-    }
-
-    .calendar-week-day {
-        height: 30px;
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        font-weight: 600;
-
-        div {
-            display: grid;
-            place-items: center;
-            color: var(--color-dark);
+        .month-list.show {
+            transform: scale(1);
+            visibility: visible;
+            pointer-events: visible;
+            transition: all 0.2s ease-in-out;
         }
     }
-
-    .calendar-days {
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        gap: 2px;
-        color: #151426;
-
-        div {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 5px;
-            position: relative;
-            animation: to-top 1s forwards;
-        }
-
-        div.calendar-day-hover {
-            cursor: pointer;
-            border-radius: 50%;
-        }
-
-        div.calendar-day-hover:hover {
-            background-color: var(--color-secondary);
-            color: var(--color-primary);
-            font-weight: 600;
-        }
-
-        div.curr-date,
-        div.curr-date:hover {
-            background-color: var(--color-primary);
-            color: #fff;
-        }
-
-        div.selected-date,
-        div.selected-date:hover {
-            background-color: var(--color-info) !important;
-            color: #fff;
-        }
-    }
-
-
-
-
-    .month-list {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-color: var(--color-bg-body);
-        padding: .5rem;
-        grid-template-columns: repeat(3, auto);
-        gap: 7px;
-        display: grid;
-        transform: scale(1.5);
-        visibility: hidden;
-        pointer-events: none;
-
-        .month-list>div {
-            display: grid;
-            place-items: center;
-            width: 100%;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            color: var(--color-primary);
-            font-weight: bold;
-        }
-
-        .month-list>div:hover {
-            background-color: var(--color-secondary);
-        }
-    }
-
-    .month-list.show {
-        transform: scale(1);
-        visibility: visible;
-        pointer-events: visible;
-        transition: all 0.2s ease-in-out;
-    }
-
-
 }
 
 @keyframes to-top {

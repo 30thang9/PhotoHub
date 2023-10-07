@@ -3,9 +3,8 @@
     left: 0;
     top: 0;
     width: 700px;
-    min-height: 700px;
+    min-height: 100vh;
     max-height: 1100px;
-    height: 100vh;
     padding: 0.5rem 0.2rem;
 
     .login-container {
@@ -41,6 +40,11 @@
                     }
                 }
             }
+        }
+
+        .login-message {
+            color: red;
+            margin-bottom: 1.5rem;
         }
 
         .login-content {

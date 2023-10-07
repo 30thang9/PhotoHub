@@ -21,6 +21,8 @@ import { CustomSelectComponent } from './components/clients/custom-select/custom
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ProfileComponent } from './components/clients/profile/profile.component';
 import { LayoutProfileComponent } from './components/clients/layout-profile/layout-profile.component';
+import { UserListComponent } from './components/clients/user-list/user-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,12 +42,14 @@ import { LayoutProfileComponent } from './components/clients/layout-profile/layo
     SendContactComponent,
     CustomSelectComponent,
     ProfileComponent,
-    LayoutProfileComponent
+    LayoutProfileComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }],
   bootstrap: [AppComponent]

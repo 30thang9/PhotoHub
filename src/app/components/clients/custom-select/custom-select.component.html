@@ -5,7 +5,7 @@
         <i *ngIf="isDropdownOpen" class='bx bx-expand-vertical'></i>
     </div>
     <ul #selectOptions class="select-options" [ngClass]="{'active': isDropdownOpen}">
-        <li *ngFor="let option of options" (click)="selectOption(option.value)">
+        <li *ngFor="let option of options" (click)="selectOption(option.textContent)">
             {{ option.textContent }}
         </li>
     </ul>
