@@ -1,8 +1,14 @@
 <div class="register-wrapper">
     <div class="register-container">
         <div class="register-header">
+            <div class="go-home">
+                <a routerLink="/home" class="go-home-link">
+                    <i class='bx bxs-chevron-left'></i>
+                    Trang chủ
+                </a>
+            </div>
             <h3 class="register-title">
-                Đăng nhập
+                Đăng ký
             </h3>
             <div class="brand">
                 <a routerLink="/home" class="brand-link">
@@ -15,12 +21,14 @@
             <form (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="username">Email</label>
-                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)">
+                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)"
+                        placeholder="quang@gmail.com">
                     <span *ngIf="invalidEmail" class="validate-message">Vui lòng nhập email hợp lệ.</span>
                 </div>
                 <div class="form-group">
                     <label for="fullName">Họ tên</label>
-                    <input type="text" id="fullName" name="fullName" required (input)="onChangeFullName($event)">
+                    <input type="text" id="fullName" name="fullName" required (input)="onChangeFullName($event)"
+                        placeholder="Nguyen Quang Nam">
                     <span *ngIf="invalidFullName" class="validate-message">Vui lòng nhập họ tên.</span>
                 </div>
                 <div class="form-group">
@@ -78,8 +86,11 @@
                     <i class='bx bxl-instagram-alt'></i>
                 </a>
             </div>
-            <div class="sign-in">
-                <a routerLink="/auth/login">Bạn đã có tài khoản? Đăng nhập</a>
+            <div class="login">
+                <div>
+                    Bạn đã có tài khoản?
+                    <a routerLink="/auth/login"> Đăng nhập</a>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,46 @@
+<div class="send-ct-wrapper">
+    <div class="send-ct-container">
+        <div class="send-ct-header">
+            <div class="go-home">
+                <a routerLink="/home" class="go-home-link">
+                    <i class='bx bxs-chevron-left'></i>
+                    Trang chủ
+                </a>
+            </div>
+            <div class="brand">
+                <a routerLink="/home" class="brand-link">
+                    <img class="brand-image" src="./assets/images/logo2.png" alt="logo">
+                </a>
+            </div>
+            <h3 class="send-ct-title">
+                Vui lòng điền thông tin của bạn.
+            </h3>
+        </div>
+        <div class="send-ct-content">
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" id="phone" name="phone" required (input)="onChangePhone($event)"
+                        placeholder="0123456789" appOnlyNumbers>
+                    <span *ngIf="invalidPhone" class="validate-message">Vui lòng nhập số điện thoại hợp lệ.</span>
+                </div>
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)"
+                        placeholder="quang@gmail.com">
+                    <span *ngIf="invalidEmail" class="validate-message">Vui lòng nhập email hợp lệ.</span>
+                </div>
+                <button type="submit">Gửi</button>
+            </form>
+        </div>
+        <div *ngIf="isError" class="error">
+            <div class="icon-error-wr">
+                <i class='bx bx-error-circle icon-error'></i>
+                Bạn không có ảnh trả.
+            </div>
+            <a href="javascript:void(0)" class="close-error" (click)="closeError()">
+                Thử lại
+            </a>
+        </div>
+    </div>
+</div>

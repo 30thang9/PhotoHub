@@ -100,4 +100,20 @@ export class HeaderComponent {
     }
 
   }
+
+
+  loggedIn = false;  // Biến kiểm tra trạng thái đăng nhập
+  showDropdown = false;  // Biến kiểm tra hiển thị dropdown menu
+
+  // Phương thức để hiển thị hoặc ẩn dropdown menu
+  toggleDropdownLo() {
+    this.showDropdown = !this.showDropdown;
+  }
+
+  // Phương thức để đăng xuất người dùng
+  logout() {
+    // Thực hiện đăng xuất, ví dụ: xóa token hoặc thông tin người dùng từ local storage
+    // Đồng thời, cập nhật biến loggedIn
+    this.loggedIn = false;
+  }
 }

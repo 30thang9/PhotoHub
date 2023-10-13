@@ -284,26 +284,63 @@
 
     </div>
     <div class="order-wrapper">
-        <div class="order-wrapper">
-            <h2>Đặt lịch chụp</h2>
-            <div>
-                <label for="ngay-chup">Ngày chụp:</label>
-                <input type="date" id="ngay-chup" name="ngay-chup" required>
+        <div class="order-container">
+            <h4>Đặt lịch chụp tự động</h4>
+            <div class="mess-valid" *ngIf="isError">
+                {{ errorMessage }}
+            </div>
+            <div class="order-content">
+                <div class="filter-date-picker">
+                    <label for="ngay-chup">Ngày chụp:</label>
+                    <app-date-picker (selectedDateChange)="onDateChange($event)" [(selectedDate)]="selectedDateU"
+                        [textDefault]="'Ngày'"></app-date-picker>
+                </div>
+                <div class="filter-tl">
+                    <label for="thoi-luong">Thời lượng (giờ):</label>
+                    <app-custom-select (selectedOptionChange)="onOptionTLChange($event)"
+                        [(selectedOption)]="selectedOptionTL" [textDefault]="'Thời lượng'">
+                        <option custom-option value="1">1 giờ</option>
+                        <option custom-option value="2">2 giờ</option>
+                        <option custom-option value="3">3 giờ</option>
+                        <option custom-option value="4">4 giờ</option>
+                        <option custom-option value="5">5 giờ</option>
+                        <option custom-option value="6">6 giờ</option>
+                        <option custom-option value="7">7 giờ</option>
+                        <option custom-option value="8">8 giờ</option>
+                    </app-custom-select>
+                </div>
+                <div class="set-time">
+                    <label for="gio-hen">Giờ hẹn:</label>
+                    <input [(ngModel)]="setTimeVal" type="time" id="gio-hen" name="gio-hen" required>
+                </div>
 
-                <label for="thoi-luong">Thời lượng (giờ):</label>
-                <input type="number" id="thoi-luong" name="thoi-luong" min="1" required>
+                <div class="filter-type">
+                    <label for="thoi-luong">Loại chụp</label>
+                    <app-custom-select (selectedOptionChange)="onOptionTypeChange($event)"
+                        [(selectedOption)]="selectedOptionType" [textDefault]="'Chọn loại chụp'">
+                        <option custom-option value="chup-san-pham">Chụp sản phẩm</option>
+                        <option custom-option value="chup-chan-dung">Chụp chân dung</option>
+                        <option custom-option value="chup-canh">Chụp cảnh</option>
+                    </app-custom-select>
+                </div>
 
-                <label for="gio-hen">Giờ hẹn:</label>
-                <input type="time" id="gio-hen" name="gio-hen" required>
-
-                <label for="loai-chup">Loại chụp:</label>
-                <select id="loai-chup" name="loai-chup" required>
-                    <option value="chup-san-pham">Chụp sản phẩm</option>
-                    <option value="chup-portrait">Chụp portrait</option>
-                    <option value="chup-canh">Chụp cảnh</option>
-                </select>
-
-                <a routerLink="/contact">Đặt lịch</a>
+                <a href="javascript:void(0)" (click)="onSubmit()">Đặt lịch</a>
+                <div class="deliver-line"></div>
+                <p class="p-footer">300.000 <span>1 tiếng</span></p>
+                <div class="deliver-line"></div>
+                <span class="sug-foot">
+                    <i class='bx bx-check'></i>
+                    15 ảnh có độ phân giải cao ở định dạng JPEG
+                </span>
+                <span class="sug-foot">
+                    <i class='bx bx-check'></i>
+                    Đã chỉnh sửa và chỉnh màu
+                </span>
+                <span class="sug-foot">
+                    <i class='bx bx-check'></i>
+                    Giao hàng sau 2 ngày làm việc
+                </span>
             </div>
         </div>
     </div>
+</div>

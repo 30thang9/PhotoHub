@@ -7,6 +7,8 @@ import { LayoutAuthComponent } from './components/clients/layout-auth/layout-aut
 import { SendContactComponent } from './components/clients/send-contact/send-contact.component';
 import { ProfileComponent } from './components/clients/profile/profile.component';
 import { LayoutProfileComponent } from './components/clients/layout-profile/layout-profile.component';
+import { RefundPictureComponent } from './components/clients/refund-picture/refund-picture.component';
+import { PagePictureRefundComponent } from './components/clients/page-picture-refund/page-picture-refund.component';
 
 const routes: Routes = [
   {
@@ -34,7 +36,13 @@ const routes: Routes = [
   }
   ,
   {
-    path: 'profile',
+    path: 'refund-picture',
+    component: LayoutAuthComponent,
+    children: [{ path: "", component: RefundPictureComponent, title: "Refund pictures" }]
+  }
+  ,
+  {
+    path: 'profile/:id',
     component: LayoutProfileComponent,
     children: [{ path: "", component: ProfileComponent, title: "Profile" }]
   }
@@ -43,6 +51,11 @@ const routes: Routes = [
     path: 'user',
     component: LayoutShopComponent,
     children: RouteUser
+  }
+  ,
+  {
+    path: 'refund-pc',
+    component: PagePictureRefundComponent,
   }
 ];
 

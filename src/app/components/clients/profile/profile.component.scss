@@ -456,71 +456,123 @@
     }
 
     .order-wrapper {
-        width: 250px;
-        height: 500px;
         background-color: var(--color-bg-body);
         position: fixed;
         top: 200px;
         right: 50px;
-        border-radius: .3rem;
+        border-radius: 0.3rem;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         z-index: 999;
-        // display: none;
-    }
 
-    /* Định dạng cho phần tử div.order-wrapper */
-    .order-wrapper {
-        margin: 0 auto;
-        padding: 20px;
+        .order-container {
+            width: 250px;
+            height: 500px;
+            // margin: 0 auto;
+            padding: 20px;
+            overflow-y: auto;
 
-        div {
-            display: flex;
-            flex-direction: column;
+            &::-webkit-scrollbar {
+                width: 6px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: var(--color-light);
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: rgb(246, 246, 246);
+                border-radius: 4px;
+                border: 2px solid var(--color-light);
+            }
 
             /* Định dạng cho tiêu đề */
-            h2 {
+            h4 {
                 text-align: center;
                 color: #333;
+                font-size: 20px;
             }
 
-            /* Định dạng cho các label */
-            label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: bold;
+            .mess-valid {
+                font-size: 14px;
+                color: red;
             }
 
-            /* Định dạng cho các input và select */
-            input[type="date"],
-            input[type="number"],
-            input[type="time"],
-            select {
-                width: 100%;
-                padding: 8px;
-                margin-bottom: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
+            .order-content {
+                display: flex;
+                flex-direction: column;
 
-            /* Định dạng cho nút Đặt lịch */
-            a {
-                background-color: #007bff;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                text-decoration: none;
-                margin-top: 1rem;
-                text-align: center;
-            }
+                .filter-date-picker {
+                    z-index: 999;
+                }
 
-            /* Định dạng khi hover vào nút Đặt lịch */
-            a:hover {
-                background-color: #0056b3;
+                /* Định dạng cho các label */
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                    margin-top: .5rem;
+                }
+
+                /* Định dạng cho các input và select */
+                input[type="date"],
+                input[type="number"],
+                input[type="time"],
+                select {
+                    width: 100%;
+                    padding: 8px;
+                    // margin-bottom: 10px;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                }
+
+                /* Định dạng cho nút Đặt lịch */
+                a {
+                    background-color: #007bff;
+                    color: white;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 4px;
+                    text-decoration: none;
+                    margin-top: 1rem;
+                    text-align: center;
+                }
+
+                /* Định dạng khi hover vào nút Đặt lịch */
+                a:hover {
+                    background-color: #0056b3;
+                }
+
+                .deliver-line {
+                    height: 2px;
+                    width: 100%;
+                    margin: 1rem 0;
+                    background-color: var(--color-secondary);
+                }
+
+                .p-footer {
+                    color: var(--color-warning);
+                    font-weight: bold;
+                    margin: 0;
+                    padding-left: 0.5rem;
+                    /* Đổi .5rem thành 0.5rem */
+
+                    span {
+                        color: var(--color-text-body);
+                    }
+                }
+
+                .sug-foot {
+
+                    font-size: 13px;
+
+                    i {
+                        color: var(--color-warning);
+                        font-size: 18px;
+                    }
+                }
             }
         }
     }
-
 
 }
 

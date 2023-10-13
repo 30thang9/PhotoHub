@@ -1,6 +1,12 @@
 <div class="login-wrapper">
     <div class="login-container">
         <div class="login-header">
+            <div class="go-home">
+                <a routerLink="/home" class="go-home-link">
+                    <i class='bx bxs-chevron-left'></i>
+                    Trang chủ
+                </a>
+            </div>
             <h3 class="login-title">
                 Đăng nhập
             </h3>
@@ -15,7 +21,8 @@
             <form (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="username">Email</label>
-                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)">
+                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)"
+                        placeholder="quang@gmail.com">
                     <span *ngIf="invalidEmail" class="validate-message">Vui lòng nhập email hợp lệ.</span>
                 </div>
                 <div class="form-group">
@@ -58,7 +65,7 @@
                 </a>
             </div>
             <div class="sign-in">
-                <a routerLink="/auth/register">Bạn chưa có tài khoản? Đăng ký</a>
+                <div>Bạn chưa có tài khoản?<a routerLink="/auth/register"> Đăng ký</a></div>
             </div>
         </div>
     </div>

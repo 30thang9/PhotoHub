@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-send-contact',
@@ -6,7 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./send-contact.component.scss']
 })
 export class SendContactComponent {
-  isShowPassword: boolean = false;
   invalidEmail: boolean = false;
   invalidPhone: boolean = false;
   invalidName: boolean = false;
@@ -14,34 +14,82 @@ export class SendContactComponent {
   email: string = '';
   phone: string = '';
   name: string = '';
+  messageText: string = '';
+  isSuccess: boolean = true;
+
+  constructor(private orderService: OrderService) { }
 
   onChangeName(event: Event) {
     this.name = (event.target as HTMLInputElement).value;
-    if (this.name.length < 6) {
-      this.invalidName = true;
-    } else {
-      this.invalidName = false;
-    }
+    this.validateName();
   }
 
   onChangePhone(event: Event) {
     this.phone = (event.target as HTMLInputElement).value;
-    if (this.phone.length < 6) {
-      this.invalidPhone = true;
-    } else {
-      this.invalidPhone = false;
-    }
+    this.validatePhone();
   }
 
   onChangeEmail(event: Event) {
     this.email = (event.target as HTMLInputElement).value;
+    this.validateEmail();
+  }
+
+  onSubmit() {
+    if (this.validateName() && this.validatePhone() && this.validateEmail()) {
+      const order_idStr = localStorage.getItem('order_id');
+      if (order_idStr) {
+        const order_id = parseInt(order_idStr, 10);
+        this.orderService.getOrderById(order_id).subscribe(order => {
+          if (order) {
+            order.cust_name = this.name;
+            order.cust_email = this.email;
+            order.cust_phone = this.phone;
+            this.orderService.updateOrder(order).subscribe(updatedOrder => {
+              if (updatedOrder) {
+                // Xử lý khi đơn hàng được cập nhật thành công
+                localStorage.removeItem('order_id');
+                this.isSuccess = true;
+                this.messageText = "Thành công.";
+              } else {
+                // Xử lý khi có lỗi trong quá trình cập nhật đơn hàng
+                this.messageText = "Thất bại."
+                this.isSuccess = false;
+              }
+            });
+          } else {
+            this.messageText = "Thất bại."
+            this.isSuccess = false;
+          }
+        });
+      } else {
+        this.messageText = "Thất bại."
+        this.isSuccess = false;
+      }
+    } else {
+      this.validateName();
+      this.validatePhone();
+      this.validateEmail()
+    }
+  }
+
+  private validateName(): boolean {
+    this.invalidName = this.name.length < 1;
+    return !this.invalidName;
+  }
+
+  private validatePhone(): boolean {
+    // Sử dụng biểu thức chính quy để kiểm tra xem 'phone' bắt đầu bằng số 0 và có từ 10 đến 11 chữ số
+    const phonePattern = /^0[0-9]{9,10}$/;
+    const isValidPhone = phonePattern.test(this.phone);
+
+    this.invalidPhone = !isValidPhone;
+    return isValidPhone;
+  }
+
+  private validateEmail(): boolean {
     const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const isValidEmail = emailPattern.test(this.email);
-    if (!isValidEmail) {
-      this.invalidEmail = true;
-    } else {
-      this.invalidEmail = false;
-
-    }
+    this.invalidEmail = !isValidEmail;
+    return isValidEmail;
   }
 }

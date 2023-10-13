@@ -1,6 +1,12 @@
 <div class="send-ct-wrapper">
     <div class="send-ct-container">
         <div class="send-ct-header">
+            <div class="go-home">
+                <a routerLink="/home" class="go-home-link">
+                    <i class='bx bxs-chevron-left'></i>
+                    Trang chủ
+                </a>
+            </div>
             <div class="brand">
                 <a routerLink="/home" class="brand-link">
                     <img class="brand-image" src="./assets/images/logo2.png" alt="logo">
@@ -10,21 +16,27 @@
                 Vui lòng để lại thông tin liên hệ.
             </h3>
         </div>
+        <div class="message" [ngClass]="isSuccess?'success':'error'">
+            {{ messageText }}
+        </div>
         <div class="send-ct-content">
-            <form>
+            <form (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="fullname">Họ và tên</label>
-                    <input type="text" id="fullname" name="fullname" required (input)="onChangeName($event)">
+                    <input type="text" id="fullname" name="fullname" required (input)="onChangeName($event)"
+                        placeholder="Nguyen Quang Nam">
                     <span *ngIf="invalidName" class="validate-message">Vui lòng nhập tên.</span>
                 </div>
                 <div class="form-group">
                     <label for="phone">Số điện thoại</label>
-                    <input type="text" id="phone" name="phone" required (input)="onChangePhone($event)">
+                    <input type="text" id="phone" name="phone" required (input)="onChangePhone($event)"
+                        placeholder="0123456789" appOnlyNumbers>
                     <span *ngIf="invalidPhone" class="validate-message">Vui lòng nhập số điện thoại hợp lệ.</span>
                 </div>
                 <div class="form-group">
                     <label for="username">Email</label>
-                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)">
+                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)"
+                        placeholder="quang@gmail.com">
                     <span *ngIf="invalidEmail" class="validate-message">Vui lòng nhập email hợp lệ.</span>
                 </div>
                 <button type="submit">Gửi</button>

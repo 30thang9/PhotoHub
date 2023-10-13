@@ -20,15 +20,7 @@
                     </div>
                     <div class="filter-time">
                         <app-custom-select [(selectedOption)]="selectedOptionTime" [textDefault]="'Thời gian'">
-                            <option custom-option value="12.30am">12:30 am</option>
-                            <option custom-option value="1.00am">1:00 am</option>
-                            <option custom-option value="1.30am">1:30 am</option>
-                            <option custom-option value="2.00am">2:00 am</option>
-                            <option custom-option value="2.30am">2:30 am</option>
-                            <option custom-option value="3.00am">3:00 am</option>
-                            <option custom-option value="3.30am">3:30 am</option>
-                            <option custom-option value="...">...</option>
-                            <option custom-option value="11.30pm">11:30 pm</option>
+                            <option custom-option *ngFor="let time of timeOptions" [value]="time">{{ time }}</option>
                         </app-custom-select>
                     </div>
                     <div class="filter-address">

@@ -26,10 +26,26 @@
                 </div>
             </div>
             <div class="header-content-right">
-                <li class="cright-item"><a class="cright-link" routerLink="/collection">Cách hoạt động</a></li>
-                <li class="cright-item"><a class="cright-link" routerLink="/auth/login">Đăng nhập</a></li>
-                <li class="cright-item"><a class="cright-link" routerLink="/auth/register">Đăng ký</a></li>
+                <ng-container *ngIf="loggedIn; else notLoggedInBlock">
+                    <!-- Hiển thị biểu tượng avatar và dropdown menu khi đã đăng nhập -->
+                    <li class="cright-item" (click)="toggleDropdownLo()">
+                        <div class="avatar">
+                            <img src="link_to_user_image.jpg" alt="Avatar">
+                        </div>
+                        <div class="dropdown-menu" *ngIf="showDropdown">
+                            <a class="dropdown-item">Profile</a>
+                            <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
+                        </div>
+                    </li>
+                </ng-container>
+                <ng-template #notLoggedInBlock>
+                    <!-- Hiển thị nút "Đăng nhập" và "Đăng ký" khi chưa đăng nhập -->
+                    <li class="cright-item"><a class="cright-link" routerLink="/refund-picture">Ảnh của tôi</a></li>
+                    <li class="cright-item"><a class="cright-link" routerLink="/auth/login">Đăng nhập</a></li>
+                    <li class="cright-item"><a class="cright-link" routerLink="/auth/register">Đăng ký</a></li>
+                </ng-template>
             </div>
+
             <div class="icon-toggle-bar">
                 <a href="javascript:void(0)" class="toggle-search" (click)="showSearchMobile()">
                     <i class="bx bx-search"></i>
@@ -108,7 +124,8 @@
                     <li class="menu-item"><a routerLink="/collection" class="menu-link">Khác</a></li>
                 </div>
                 <div class="control-mobile">
-                    <li class="control-item item-col"><a class="control-link" routerLink="">Cách hoạt động</a></li>
+                    <li class="control-item item-col"><a class="control-link" routerLink="/refund-picture">Ảnh của
+                            tôi</a></li>
                     <li class="control-item">
                         <a class="control-link" routerLink="/auth/login">
                             Đăng nhập

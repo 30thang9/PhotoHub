@@ -18,11 +18,13 @@ import { LoginComponent } from './components/clients/login/login.component';
 import { RegisterComponent } from './components/clients/register/register.component';
 import { SendContactComponent } from './components/clients/send-contact/send-contact.component';
 import { CustomSelectComponent } from './components/clients/custom-select/custom-select.component';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ProfileComponent } from './components/clients/profile/profile.component';
 import { LayoutProfileComponent } from './components/clients/layout-profile/layout-profile.component';
 import { UserListComponent } from './components/clients/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { RefundPictureComponent } from './components/clients/refund-picture/refund-picture.component';
+import { OnlyNumbersDirective } from './common/only-numbers.directive';
+import { PagePictureRefundComponent } from './components/clients/page-picture-refund/page-picture-refund.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,10 @@ import { HttpClientModule } from '@angular/common/http';
     CustomSelectComponent,
     ProfileComponent,
     LayoutProfileComponent,
-    UserListComponent
+    UserListComponent,
+    RefundPictureComponent,
+    OnlyNumbersDirective,
+    PagePictureRefundComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
   ],
-  providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

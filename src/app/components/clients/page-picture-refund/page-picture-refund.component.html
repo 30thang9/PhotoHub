@@ -1,0 +1,160 @@
+<div class="page-pr-wrapper">
+    <div class="page-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h2>Bộ sưu tập ảnh</h2>
+                <p>Hãy cùng thưởng thức bức hình tuyệt vời của bạn!</p>
+            </div>
+            <div class="header-right">
+                <a routerLink="/home">Trang chủ</a>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="btn-control-wrapper">
+            <a href="javascript:void(0)" class="btn-control active">23/09/2023</a>
+            <a href="javascript:void(0)" class="btn-control">15/09/2023</a>
+        </div>
+        <div class="picture-wrapper">
+            <div class="picture-content">
+                <div class="picture-item">
+                    <img src="./assets/images/user/Hy vuông 2.jpg" alt="">
+                </div>
+                <div class="picture-item">
+                    <img src="./assets/images/user/Thanh Bình 3.jpg" alt="">
+                </div>
+                <div class="picture-item">
+                    <img src="./assets/images/user/Hy vuông 2.jpg" alt="">
+                </div>
+                <div class="picture-item">
+                    <img src="./assets/images/user/Thanh Bình 3.jpg" alt="">
+                </div>
+                <div class="picture-item">
+                    <img src="./assets/images/user/Hy vuông 2.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="link-dow-wrapper">
+            <div class="link-dow-content">
+                <a href="javascript:void(0)" class="btn-get-link">
+                    Link Download
+                </a>
+                <span>File ảnh có định dang JPEG</span>
+            </div>
+            <div class="link-dow-footer">
+                <a href="javascript:void(0)" (click)="toggleAsk()">Yêu cầu sửa ảnh</a>
+            </div>
+        </div>
+        <div class="review-wrapper">
+            <div class="review-title">
+                <p>
+                    Đánh giá của bạn
+                </p>
+            </div>
+            <div class="review-content">
+                <div class="review-content-first">
+                    <div class="rating">
+                        <span>Chất lượng: </span>
+                        <a href="javascript:void(0)" (click)="toggleDropdown()">
+                            <i class='bx bx-star'></i>
+                            <i class='bx bx-star'></i>
+                            <i class='bx bx-star'></i>
+                            <i class='bx bx-star'></i>
+                            <i class='bx bx-star'></i>
+                        </a>
+                        <div *ngIf="isDropdownOpen" class="dropdownRate">
+                            <li>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bx-star'></i>
+                                <i class='bx bx-star'></i>
+                                <i class='bx bx-star'></i>
+                                <i class='bx bx-star'></i>
+                            </li>
+                            <li>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bx-star'></i>
+                                <i class='bx bx-star'></i>
+                                <i class='bx bx-star'></i>
+                            </li>
+                            <li>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bx-star'></i>
+                                <i class='bx bx-star'></i>
+                            </li>
+                            <li>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bx-star'></i>
+                            </li>
+                            <li>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                                <i class='bx bxs-star'></i>
+                            </li>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <p>Viết đánh giá</p>
+                        <textarea name="comment" id="" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="sub-t">
+                        <span>Tối đa 450 chữ</span>
+                    </div>
+                </div>
+                <div class="review-content-second">
+                    <a href="javascript:void(0)" class="btn btn-hide-inf">
+                        Ẩn danh
+                        <i class='bx bx-toggle-left'></i>
+                    </a>
+                    <a href="javascript:void(0)" class="btn btn-submit">Đăng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ask-repair-wrapper" [ngClass]="isShowAskRepair ? 'active' : '' ">
+        <div class="ask-repair-container">
+            <div class="ask-repair-content">
+                <div class="repair-header">
+                    <h2><i class='bx bx-chevron-left'></i>Yêu cầu sửa ảnh</h2>
+                </div>
+                <div class="repair-content">
+                    <div class="enter-code-picture">
+                        <p class="ecp-title">Nhập mã ảnh</p>
+                        <div class="ecp-content">
+                            <textarea name="" id="ecp-code" cols="30" rows="10"></textarea>
+                        </div>
+                    </div>
+                    <div class="repair-police">
+                        <p class="po-title">
+                            Chính sách yêu cầu sửa ảnh
+                        </p>
+                        <div class="po-content-wr">
+                            <div class="po-content">
+                                <li>Khách hàng điền mã ảnh đối với những bức ảnh mà mình muốn chỉnh sửa</li>
+                                <li>Số lượng bức ảnh được sửa phụ thuộc vào gói chụp ảnh đã thỏa thuận với nhiếp ảnh gia
+                                    trước đó</li>
+                                <li>Truy cập lại file nhận ảnh để những bức ảnh đã được chỉnh sửa sau 2-3 ngày</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="repair-submit">
+                    <div class="rs-left"></div>
+                    <div class="rs-right">
+                        <a href="javascript:void(0)" class="btn-submit-repair">Gửi yêu cầu</a>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" (click)="closeAsk()" class="btn-close-ask">
+                    <i class='bx bx-x'></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

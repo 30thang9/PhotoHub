@@ -1,24 +1,45 @@
 .send-ct-wrapper {
-    width: 60%;
+    width: 100%;
     margin: 0 auto;
     min-height: 500px;
-    height: 100vh;
-    max-height: 1000px;
-    padding: 0.5rem 0.2rem;
+    min-height: 100vh;
+    padding: 2rem;
+    background-image: url('/assets/images/banner.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 
     .send-ct-container {
         padding: 2rem;
         border-radius: .5rem;
-        width: 80%;
-        margin: 0 auto;
+        width: 700px;
+        margin: auto;
+        min-height: calc(100vh - 4rem);
         height: 100%;
-        background-color: var(--color-bg-body);
+        background-color: rgba(255, 255, 255, 0.66);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
         .send-ct-header {
             display: flex;
             flex-direction: column;
             margin-bottom: 1rem;
+            position: relative;
+
+            .go-home {
+                position: absolute;
+                top: 0rem;
+                left: 0rem;
+
+                .go-home-link {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    text-decoration: none;
+                    color: var(--color-primary);
+                    font-weight: bold;
+                    position: relative;
+                }
+            }
 
             .send-ct-title {
                 text-align: center;
@@ -39,6 +60,19 @@
                     }
                 }
             }
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .message.error {
+            color: red;
+        }
+
+        .message.success {
+            color: green;
         }
 
         .send-ct-content {
@@ -102,15 +136,33 @@
 
 @media(max-width:767.98px) {
     .send-ct-wrapper {
-        width: 90% !important;
+        width: 100% !important;
+        padding: 1rem;
 
         .send-ct-container {
             width: 100%;
-            padding: 1rem 2rem;
+            // padding: 2rem;
+            min-height: calc(100vh - 2rem);
 
-            .send-ct-title {
-                font-size: 26px !important;
+
+            .send-ct-header {
+                .go-home {
+                    position: absolute;
+                    top: -.5rem;
+                    left: -1rem;
+
+                    .go-home-link {}
+                }
+
+                .send-ct-title {
+                    font-size: 26px !important;
+                }
+
+                .brand {
+                    padding-top: 1rem;
+                }
             }
+
 
             .send-ct-content {
                 form {
