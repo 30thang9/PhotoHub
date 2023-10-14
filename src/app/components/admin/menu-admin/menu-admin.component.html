@@ -1,0 +1,80 @@
+<div class="layout-menu">
+    <div class="brand-wrapper">
+        <a routerLink="/admin/home" class="brand-link">
+            <img src="./assets/images/logo2.png" alt="logo" class="brand-img">
+            <span class="brand-text">PhotoHub</span>
+        </a>
+        <a class="btn-close-menu" href="javascript:void(0)" (click)="hideMenu()">
+            <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+    </div>
+    <div class="menu-container">
+        <div class="menu-content">
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <a routerLink="/admin/home" class="menu-link">
+                        <i class='menu-icon bx bx-home-circle'></i>
+                        <div class="text-truncate">Trang chủ</div>
+                    </a>
+                </li>
+                <li class="menu-item menu-dropdown" [ngClass]="isShow ? 'show' : '' " (click)="toggleMenuDropdown()">
+                    <a routerLink="/admin/order" class="menu-link">
+                        <i class='menu-icon bx bx-list-ul'></i>
+                        <div class="text-truncate">Quản lý booking</div>
+                    </a>
+                    <ul class="menu-dropdown-list">
+                        <li class="menu-dropdown-item">
+                            <a routerLink="/admin/order" class="menu-dropdown-link">
+                                <i class='menu-icon bx bxs-circle'></i>
+                                <div class="text-truncate">Danh sách booking</div>
+                            </a>
+                        </li>
+                        <li class="menu-dropdown-item">
+                            <a routerLink="/admin/order-accept" class="menu-dropdown-link">
+                                <i class='menu-icon bx bxs-circle'></i>
+                                <div class="text-truncate">Duyệt booking</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="menu-item menu-dropdown">
+                    <a routerLink="" class="menu-link">
+                        <i class='menu-icon bx bxl-product-hunt'></i>
+                        <div class="text-truncate">Products</div>
+                    </a>
+                    <ul class="menu-dropdown-list">
+                        <li class="menu-dropdown-item menu-dropdown">
+                            <a routerLink="" class="menu-dropdown-link">
+                                <i class='menu-icon bx bxs-circle'></i>
+                                <div class="text-truncate">Add</div>
+                            </a>
+                            <ul class="menu-dropdown-list">
+                                <li class="menu-dropdown-item">
+                                    <a routerLink="" class="menu-dropdown-link">
+                                        <i class='menu-icon bx bxs-circle'></i>
+                                        <div class="text-truncate">Add</div>
+                                    </a>
+                                </li>
+                                <li class="menu-dropdown-item">
+                                    <a routerLink="" class="menu-dropdown-link">
+                                        <i class='menu-icon bx bxs-circle'></i>
+                                        <div class="text-truncate">List</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu-dropdown-item">
+                            <a routerLink="" class="menu-dropdown-link">
+                                <i class='menu-icon bx bxs-circle'></i>
+                                <div class="text-truncate">List</div>
+                            </a>
+                        </li>
+                    </ul>
+                </li> -->
+                <li class="menu-item"><a routerLink="" class="menu-link"></a></li>
+                <li class="menu-item"><a routerLink="" class="menu-link"></a></li>
+                <li class="menu-item"><a routerLink="" class="menu-link"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

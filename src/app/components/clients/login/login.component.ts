@@ -44,7 +44,11 @@ export class LoginComponent {
             const userRole = roles.find(role => role.id === user.role_id);
             if (userRole) {
               this.loginMessage = `Đăng nhập thành công với vai trò: ${userRole.name}`;
-              this.router.navigate(['/home']);
+              if (user.role_id === 1) {
+                this.router.navigate(['/admin/home']);
+              } else {
+                this.router.navigate(['/home']);
+              }
             } else {
               this.loginMessage = 'Vai trò không hợp lệ';
             }

@@ -71,7 +71,8 @@ export class ProfileComponent {
           cust_name: "",
           cust_email: "",
           cust_phone: "",
-          session_id: ""
+          session_id: "",
+          status: 'cho_duyet'
         };
 
         this.orderService.addOrder(order).subscribe((addedOrder) => {

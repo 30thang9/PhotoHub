@@ -25,6 +25,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { RefundPictureComponent } from './components/clients/refund-picture/refund-picture.component';
 import { OnlyNumbersDirective } from './common/only-numbers.directive';
 import { PagePictureRefundComponent } from './components/clients/page-picture-refund/page-picture-refund.component';
+import { LayoutAdminComponent } from './components/admin/layout-admin/layout-admin.component';
+import { FooterAdminComponent } from './components/admin/footer-admin/footer-admin.component';
+import { MenuAdminComponent } from './components/admin/menu-admin/menu-admin.component';
+import { NavbarAdminComponent } from './components/admin/navbar-admin/navbar-admin.component';
+import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
+import { OrderListAdminComponent } from './components/admin/order-list-admin/order-list-admin.component';
+import { OrderAcceptAdminComponent } from './components/admin/order-accept-admin/order-accept-admin.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +56,13 @@ import { PagePictureRefundComponent } from './components/clients/page-picture-re
     RefundPictureComponent,
     OnlyNumbersDirective,
     PagePictureRefundComponent,
+    LayoutAdminComponent,
+    FooterAdminComponent,
+    MenuAdminComponent,
+    NavbarAdminComponent,
+    HomeAdminComponent,
+    OrderListAdminComponent,
+    OrderAcceptAdminComponent,
   ],
   imports: [
     BrowserModule,

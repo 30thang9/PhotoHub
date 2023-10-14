@@ -1,0 +1,48 @@
+<div class="layout-list-booking">
+    <div class="list-booking-wrapper">
+        <div class="list-booking-container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a routerLink="/admin/home">Trang chu</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Danh sach booking</li>
+                </ol>
+            </nav>
+            <div class="list-booking-content">
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead>
+                            <tr class="col-header">
+                                <th class="row-header">#</th>
+                                <th class="row-header">Tên khách</th>
+                                <th class="row-header">SDT khách</th>
+                                <th class="row-header">Email khách</th>
+                                <th class="row-header">Ngày</th>
+                                <th class="row-header">Thời gian</th>
+                                <th class="row-header">Thời lượng</th>
+                                <th class="row-header">Loại chụp</th>
+                                <th class="row-header">Người chụp</th>
+                                <th class="row-header">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="col-content" *ngFor="let o of orderData; let i = index">
+                                <td class="row-content">{{i + 1}}</td>
+                                <td class="row-content">{{o.order.cust_name}}</td>
+                                <td class="row-content">{{o.order.cust_phone}}</td>
+                                <td class="row-content">{{o.order.cust_email}}</td>
+                                <td class="row-content">{{o.order.order_date}}</td>
+                                <td class="row-content">{{o.order.appoi_time}}</td>
+                                <td class="row-content">{{o.order.time}}</td>
+                                <td class="row-content">{{o.order.shooting_type}}</td>
+                                <td class="row-content">{{o.user.full_name}}</td>
+                                <td class="row-content">{{o.order.status==='cho_duyet'?'Chờ duyệt':
+                                    o.order.status==='da_duyet' ? 'Đã duyệt' : o.order.status==='huy' ? 'Hủy' : ''}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

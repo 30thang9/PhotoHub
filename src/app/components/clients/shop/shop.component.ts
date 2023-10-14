@@ -11,7 +11,7 @@ import { UserInfoDTOService } from 'src/app/services/user-info-dto.service';
 })
 export class ShopComponent implements OnInit {
   userInfoData: UserInfoDTO[] = [];
-
+  userCount: number = 0;
   constructor(private userInfoDTOService: UserInfoDTOService) { }
 
   ngOnInit() {
@@ -19,9 +19,10 @@ export class ShopComponent implements OnInit {
   }
 
   loadUserInfoData() {
-    this.userInfoDTOService.getUserInfoDTOs().subscribe(
+    this.userInfoDTOService.getUserInfoDTOsByRole(2).subscribe(
       (data: UserInfoDTO[]) => {
         this.userInfoData = data;
+        this.userCount = this.userInfoData.length;
       },
       (error) => {
         console.error('Error fetching user information: ', error);

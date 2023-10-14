@@ -1,0 +1,25 @@
+<div class="layout-wrapper">
+    <div class="layout-container">
+        <div #layoutMenu class="layout-menu" [ngClass]="{'layout-menu-toggle': isShowMenu}">
+            <app-menu-admin></app-menu-admin>
+        </div>
+        <div class="layout-page">
+            <div class="layout-navbar">
+                <app-navbar-admin></app-navbar-admin>
+            </div>
+            <div class="content-wrapper">
+                <div class="content-container">
+                    <router-outlet></router-outlet>
+                </div>
+                <div class="layout-footer">
+                    <app-footer-admin></app-footer-admin>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layout-overlay" [ngClass]="{
+       'layout-overlay-toggle': isShowOverlay,
+       'layout-overlay-increase-zindex': isShowMenu
+     }">
+    </div>
+</div>

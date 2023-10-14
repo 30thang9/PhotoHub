@@ -1,7 +1,7 @@
 <div class="shop-content">
     <div class="content-wrapper">
         <div class="photo-popular-wrapper">
-            <h2 class="ppopular-title">100 nhiếp ảnh gia</h2>
+            <h2 class="ppopular-title">{{userCount}} nhiếp ảnh gia</h2>
             <div class="ppopular-wrapper">
                 <div class="ppopular-item" *ngFor="let userdto of userInfoData">
                     <a [routerLink]="'/profile/' + userdto.user.id" class="ppopular-link">
@@ -44,11 +44,6 @@
                         </div>
                     </a>
                 </div>
-            </div>
-            <div class="ppopular-detail">
-                <a class="ppopular-detail-link" routerLink="">Xem tất cả
-                    <i class='bx bx-chevron-right'></i>
-                </a>
             </div>
         </div>
     </div>

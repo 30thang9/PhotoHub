@@ -8,5 +8,6 @@ export interface Order {
     cust_name: string | null;
     cust_email: string | null;
     cust_phone: string | null;
+    status: string;
     session_id: string;
 }
