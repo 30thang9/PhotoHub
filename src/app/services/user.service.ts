@@ -77,6 +77,30 @@ export class UserService {
         ) as Observable<User | null>;
     }
 
+    updateUser(user: User): Observable<User | null> {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+        return this.http.put<User>(`${this.apiUrl}/${user.id}`, user, { headers }).pipe(
+            catchError((error) => {
+                console.error('Error updating user:', error);
+                return of(null);
+            }),
+            tap(updatedUser => {
+                if (updatedUser) {
+                    if (this.cachedUsers) {
+                        const index = this.cachedUsers.findIndex(u => u.id === updatedUser.id);
+                        if (index !== -1) {
+                            this.cachedUsers[index] = updatedUser;
+                        }
+                    }
+                } else {
+                    console.error('User update failed');
+                }
+            })
+        );
+    }
+
+
     private incrementUserId(): number {
         const maxId = this.cachedUsers
             ? Math.max(...this.cachedUsers.map(user => user.id), 0)

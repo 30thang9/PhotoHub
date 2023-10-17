@@ -47,4 +47,28 @@ export class UserInfoService {
       })
     );
   }
+
+  updateUserInfo(userInfo: UserInfo): Observable<UserInfo | null> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.put<UserInfo>(`${this.apiUrl}/${userInfo.id}`, userInfo, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error updating user information:', error);
+        return of(null);
+      }),
+      tap(updatedUserInfo => {
+        if (updatedUserInfo) {
+          if (this.cachedUserInfo) {
+            const index = this.cachedUserInfo.findIndex(info => info.id === updatedUserInfo.id);
+            if (index !== -1) {
+              this.cachedUserInfo[index] = updatedUserInfo;
+            }
+          }
+        } else {
+          console.error('User information update failed');
+        }
+      })
+    );
+  }
+
 }

@@ -1,14 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/models/order.model';
+import { TypeOfPhoto } from 'src/app/models/typeOfPhoto.model';
+import { UserInfoDTO } from 'src/app/models/userInfoDTO.model';
 import { OrderService } from 'src/app/services/order.service';
+import { UserInfoDTOService } from 'src/app/services/user-info-dto.service';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
+
+  userData: UserInfoDTO | null = null;
+
+
   selectedDateU: string = '';
   selectedOptionTL: string = '';
   selectedOptionType: string = '';
@@ -21,8 +28,13 @@ export class ProfileComponent {
 
   partnerId: number = 0;
 
+  isShowOrder: boolean = false;
 
-  constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService) {
+  typeOfPhoto: TypeOfPhoto[] = [];
+  costPreview: number = 300000;
+
+
+  constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private userInfoDTOService: UserInfoDTOService) {
     this.route.params.subscribe(params => {
       const id = params['id'];
 
@@ -33,6 +45,32 @@ export class ProfileComponent {
       }
     });
   }
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        const user_id = parseInt(id, 10);
+        this.loadUserInfoData(user_id);
+      } else {
+        console.error('ID not found in URL');
+      }
+    });
+  }
+
+  loadUserInfoData(user_id: number) {
+    this.userInfoDTOService.getUserInfoDTOsById(user_id).subscribe(
+      (userData) => {
+        this.userData = userData;
+        console.log(userData);
+        this.typeOfPhoto = this.userData?.userInfo.typeOfPhoto || [];
+        console.log(this.typeOfPhoto);
+
+      },
+      (error) => {
+        console.error('Error loading user info:', error);
+      }
+    );
+  }
 
   onDateChange(date: string) {
     this.dateVal = date;
@@ -41,8 +79,14 @@ export class ProfileComponent {
   onOptionTLChange(optionValue: string) {
     this.selectedOptionTLVal = optionValue;
   }
+
   onOptionTypeChange(optionValue: string) {
     this.selectedOptionTypeVal = optionValue;
+    const optionId = parseInt(optionValue.trim(), 10);
+    const selectedType = this.typeOfPhoto.find(t => t.id === optionId);
+    if (selectedType) {
+      this.costPreview = parseInt(selectedType.cost);
+    }
   }
 
   onSubmit() {
@@ -61,18 +105,22 @@ export class ProfileComponent {
 
       if (this.partnerId !== 0) {
         console.log("true");
+        const price = parseInt(this.selectedOptionTLVal, 10) * this.costPreview;
+        const selectedOptionTypeText = this.typeOfPhoto.find(t => t.id == parseInt(this.selectedOptionTLVal))?.name;
         const order: Order = {
           id: 0,
           order_date: this.dateVal,
           time: this.selectedOptionTLVal,
           appoi_time: this.setTimeVal,
-          shooting_type: this.selectedOptionTypeVal,
+          shooting_type: selectedOptionTypeText || "",
           partner_id: this.partnerId,
           cust_name: "",
           cust_email: "",
           cust_phone: "",
-          session_id: "",
-          status: 'cho_duyet'
+          code: "",
+          status: 'cho_duyet',
+          address: "",
+          price: price.toString()
         };
 
         this.orderService.addOrder(order).subscribe((addedOrder) => {
@@ -85,6 +133,15 @@ export class ProfileComponent {
         });
       };
     }
+  }
+
+
+  showOrder() {
+    this.isShowOrder = true;
+  }
+
+  hideOrder() {
+    this.isShowOrder = false;
   }
 }
 

@@ -10,10 +10,12 @@ export class SendContactComponent {
   invalidEmail: boolean = false;
   invalidPhone: boolean = false;
   invalidName: boolean = false;
+  invalidAddress: boolean = false;
 
   email: string = '';
   phone: string = '';
   name: string = '';
+  address: string = '';
   messageText: string = '';
   isSuccess: boolean = true;
 
@@ -33,9 +35,13 @@ export class SendContactComponent {
     this.email = (event.target as HTMLInputElement).value;
     this.validateEmail();
   }
+  onChangeAddress(event: Event) {
+    this.address = (event.target as HTMLInputElement).value;
+    this.validateAddress();
+  }
 
   onSubmit() {
-    if (this.validateName() && this.validatePhone() && this.validateEmail()) {
+    if (this.validateName() && this.validatePhone() && this.validateEmail() && this.validateAddress()) {
       const order_idStr = localStorage.getItem('order_id');
       if (order_idStr) {
         const order_id = parseInt(order_idStr, 10);
@@ -44,6 +50,15 @@ export class SendContactComponent {
             order.cust_name = this.name;
             order.cust_email = this.email;
             order.cust_phone = this.phone;
+            order.address = this.address;
+            this.orderService.generateUniqueOrderCode().subscribe(
+              (uniqueCode: string) => {
+                order.code = uniqueCode;
+              },
+              (error) => {
+                console.error('Error generating unique order code:', error);
+              }
+            );
             this.orderService.updateOrder(order).subscribe(updatedOrder => {
               if (updatedOrder) {
                 // Xử lý khi đơn hàng được cập nhật thành công
@@ -69,12 +84,17 @@ export class SendContactComponent {
       this.validateName();
       this.validatePhone();
       this.validateEmail()
+      this.validateAddress();
     }
   }
 
   private validateName(): boolean {
     this.invalidName = this.name.length < 1;
     return !this.invalidName;
+  }
+  private validateAddress(): boolean {
+    this.invalidAddress = this.address.length < 1;
+    return !this.invalidAddress;
   }
 
   private validatePhone(): boolean {

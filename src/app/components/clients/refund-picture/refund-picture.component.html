@@ -30,6 +30,12 @@
                         placeholder="quang@gmail.com">
                     <span *ngIf="invalidEmail" class="validate-message">Vui lòng nhập email hợp lệ.</span>
                 </div>
+                <div class="form-group">
+                    <label for="code">Mã</label>
+                    <input type="text" id="code" name="code" required (input)="onChangeCode($event)"
+                        placeholder="xxxxxx">
+                    <span *ngIf="invalidCode" class="validate-message">Vui lòng nhập 6 ký tự.</span>
+                </div>
                 <button type="submit">Gửi</button>
             </form>
         </div>

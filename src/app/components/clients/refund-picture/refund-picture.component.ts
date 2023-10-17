@@ -8,10 +8,12 @@ import { Component } from '@angular/core';
 export class RefundPictureComponent {
   invalidEmail: boolean = false;
   invalidPhone: boolean = false;
+  invalidCode: boolean = false;
   isError: boolean = false;
 
   email: string = '';
   phone: string = '';
+  code: string = '';
 
   onChangePhone(event: Event) {
     let inputPhone = (event.target as HTMLInputElement).value;
@@ -24,15 +26,20 @@ export class RefundPictureComponent {
     this.email = (event.target as HTMLInputElement).value;
     this.validateEmail();
   }
+  onChangeCode(event: Event) {
+    this.code = (event.target as HTMLInputElement).value;
+    this.validateCode();
+  }
 
   onSubmit() {
-    if (this.validateEmail() && this.validatePhone()) {
+    if (this.validateEmail() && this.validatePhone() && this.validateCode()) {
       // Thực hiện xử lý gửi dữ liệu khi cả email và số điện thoại hợp lệ
       // Ví dụ: this.refundService.submitRefund(this.name, this.email, this.phone);
       this.isError = true;
     } else {
       this.validateEmail();
       this.validatePhone();
+      this.validateCode();
     }
   }
 
@@ -50,6 +57,12 @@ export class RefundPictureComponent {
 
     this.invalidPhone = !isValidPhone;
     return isValidPhone;
+  }
+  private validateCode(): boolean {
+    const isValidCode = this.code.length === 6;
+
+    this.invalidCode = !isValidCode;
+    return isValidCode;
   }
 
 

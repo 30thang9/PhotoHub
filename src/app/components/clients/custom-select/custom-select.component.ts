@@ -18,6 +18,7 @@ export class CustomSelectComponent implements OnInit, AfterViewInit {
   @Input() selectedOption: string = '';
   @Output() selectedOptionChange = new EventEmitter<string>();
 
+  selectedOptionText: string = '';
   options: { value: string, textContent: string }[] = [];
 
   isDropdownOpen: boolean = false;
@@ -42,6 +43,8 @@ export class CustomSelectComponent implements OnInit, AfterViewInit {
 
   selectOption(option: string) {
     this.selectedOption = option;
+
+    this.selectedOptionText = this.options.find(o => o.value === this.selectedOption)?.textContent || '';
     this.selectedOptionChange.emit(this.selectedOption);
     this.isDropdownOpen = false;
   }

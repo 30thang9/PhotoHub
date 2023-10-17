@@ -32,6 +32,7 @@ import { NavbarAdminComponent } from './components/admin/navbar-admin/navbar-adm
 import { HomeAdminComponent } from './components/admin/home-admin/home-admin.component';
 import { OrderListAdminComponent } from './components/admin/order-list-admin/order-list-admin.component';
 import { OrderAcceptAdminComponent } from './components/admin/order-accept-admin/order-accept-admin.component';
+import { PartnerProfileComponent } from './components/partners/partner-profile/partner-profile.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { OrderAcceptAdminComponent } from './components/admin/order-accept-admin
     HomeAdminComponent,
     OrderListAdminComponent,
     OrderAcceptAdminComponent,
+    PartnerProfileComponent,
   ],
   imports: [
     BrowserModule,

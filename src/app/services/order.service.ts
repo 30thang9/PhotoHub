@@ -69,4 +69,34 @@ export class OrderService {
     );
   }
 
+  generateUniqueOrderCode(): Observable<string> {
+    const newOrderCode = this.generateRandomOrderCode(6);
+
+    if (this.cachedOrders && this.isOrderCodeUnique(newOrderCode)) {
+      return of(newOrderCode);
+    } else {
+      return this.generateUniqueOrderCode();
+    }
+  }
+
+  private generateRandomOrderCode(length: number): string {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  }
+
+  private isOrderCodeUnique(code: string): boolean {
+    if (this.cachedOrders) {
+      for (const order of this.cachedOrders) {
+        if (order.code === code) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
 }

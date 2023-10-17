@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RouteAdmin, RouteAuth, RouteClient, RouteShop, RouteUser } from './routes/routes.config';
+import { RouteAdmin, RouteAuth, RouteClient, RoutePartner, RouteShop, RouteUser } from './routes/routes.config';
 import { LayoutClientComponent } from './components/clients/layout-client/layout-client.component';
 import { LayoutShopComponent } from './components/clients/layout-shop/layout-shop.component';
 import { LayoutAuthComponent } from './components/clients/layout-auth/layout-auth.component';
@@ -50,6 +50,11 @@ const routes: Routes = [
   {
     path: 'refund-pc',
     component: PagePictureRefundComponent,
+  },
+  {
+    path: 'partner/:id',
+    component: LayoutProfileComponent,
+    children: RoutePartner
   },
   {
     path: 'admin',

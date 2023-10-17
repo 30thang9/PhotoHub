@@ -48,9 +48,14 @@
                     </div>
                 </div>
                 <div class="des-forMe-wrapper">
-                    <h2 class="des-forMe-name">
-                        {{userData?.user?.full_name}}
-                    </h2>
+                    <div class="des-forMe-name">
+                        <h2>
+                            {{nameText}}
+                        </h2>
+                        <div class="btn-edit-forMe" (click)="showForMeEdit()">
+                            <i class='bx bx-edit-alt'></i>
+                        </div>
+                    </div>
                     <p class="des-forMe-address">
                         Ba Đình, Hà Nội
                     </p>
@@ -65,6 +70,19 @@
                         <span class="rate-text">5.0</span>
                     </div>
                     <p class="des-forMe-exp">13 năm kinh nghiệm</p>
+                    <div class="forMe-edit" [ngClass]="isShowForMeEdit ? 'show' : '' ">
+                        <div class="des-forMe-name">
+                            <input [ngModel]="nameText" (ngModelChange)="updateValue('nameText', $event)" />
+                        </div>
+                        <input class="des-forMe-address" [ngModel]="" />
+                        <!-- Ba Đình, Hà Nội -->
+                        <input class="des-forMe-exp" [ngModel]="" />
+                        <!-- 13 năm kinh nghiệm -->
+                        <div class="btn-edit-control">
+                            <a href="javascript:void(0)" class="btn-save" (click)="saveForMe()">Lưu</a>
+                            <a href="javascript:void(0)" class="btn-cancel" (click)="hideForMeEdit()">Hủy</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,7 +106,7 @@
                 <div class="ic-item">
                     <div class="text-description">
                         <p>
-                            {{userData?.userInfo?.description}}
+                            {{desText}}
                         </p>
                     </div>
                     <div class="prize">
@@ -96,7 +114,7 @@
                             Giải thưởng
                         </h3>
                         <p>
-                            {{userData?.userInfo?.prize}}
+                            {{prizeText}}
                         </p>
                     </div>
                     <div class="interest">
@@ -104,8 +122,38 @@
                             Điều thú vị về tôi
                         </h3>
                         <p>
-                            {{userData?.userInfo?.interest}}
+                            {{interestText}}
                         </p>
+                    </div>
+                    <div class="btn-ic-edit" (click)="showIcEdit()">
+                        <i class='bx bx-edit-alt'></i>
+                    </div>
+                    <div class="ic-edit" [ngClass]="isShowIcEdit ? 'show' : '' " style="overflow-y:auto;">
+                        <div class="text-description">
+                            <textarea [ngModel]="desText" (ngModelChange)="updateValue('desText', $event)">
+                                {{userData?.userInfo?.description}}
+                            </textarea>
+                        </div>
+                        <div class="prize">
+                            <h3 class="prize-title">
+                                Giải thưởng
+                            </h3>
+                            <textarea [ngModel]="prizeText" (ngModelChange)="updateValue('prizeText', $event)">
+                                {{userData?.userInfo?.prize}}
+                            </textarea>
+                        </div>
+                        <div class="interest">
+                            <h3 class="interest-title">
+                                Điều thú vị về tôi
+                            </h3>
+                            <textarea [ngModel]="interestText" (ngModelChange)="updateValue('interestText', $event)">
+                                {{userData?.userInfo?.interest}}
+                            </textarea>
+                        </div>
+                        <div class="btn-edit-control">
+                            <a href="javascript:void(0)" class="btn-save" (click)="saveIc()">Lưu</a>
+                            <a href="javascript:void(0)" class="btn-cancel" (click)="hideIcEdit()">Hủy</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,14 +168,48 @@
                             <img src="./assets/images/icons/translate.png" alt="">
                             <h3>Ngôn ngữ</h3>
                         </div>
-                        <p>Tiếng Việt</p>
+                        <p>
+                            {{languageText}}
+                        </p>
                     </div>
                     <div class="camera">
                         <div class="camera-title">
                             <img src="./assets/images/icons/camera.png" alt="">
                             <h3>Máy ảnh</h3>
                         </div>
-                        <p>Sony A7iii, LUMIX G9, Panasonic GH5</p>
+                        <p>
+                            {{cameraText}}
+                        </p>
+                    </div>
+                    <div class="btn-feature-edit" (click)="showFeEdit()">
+                        <i class='bx bx-edit-alt'></i>
+                    </div>
+                </div>
+                <div class="feature-edit" [ngClass]="isShowFeEdit ? 'show' : '' ">
+                    <h3 class="feature-title">Ngôn ngữ & Máy ảnh</h3>
+                    <div class="feature-content">
+                        <div class="language">
+                            <div class="language-title">
+                                <img src="./assets/images/icons/translate.png" alt="">
+                                <h3>Ngôn ngữ</h3>
+                            </div>
+                            <textarea [ngModel]="languageText">
+                                {{userData?.userInfo?.language}}
+                            </textarea>
+                        </div>
+                        <div class="camera">
+                            <div class="camera-title">
+                                <img src="./assets/images/icons/camera.png" alt="">
+                                <h3>Máy ảnh</h3>
+                            </div>
+                            <textarea [ngModel]="cameraText">
+                                {{userData?.userInfo?.camera}}
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="btn-edit-control">
+                        <a href="javascript:void(0)" class="btn-save">Lưu</a>
+                        <a href="javascript:void(0)" class="btn-cancel">Hủy</a>
                     </div>
                 </div>
             </div>
@@ -145,6 +227,9 @@
                             <div class="it-footer">
                                 <h3 class="it-cate">LookBook</h3>
                                 <span class="it-count-picture">30</span>
+                                <div class="btn-portfolio-edit">
+                                    <i class='bx bx-edit-alt'></i>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -156,6 +241,9 @@
                             <div class="it-footer">
                                 <h3 class="it-cate">LookBook</h3>
                                 <span class="it-count-picture">30</span>
+                                <div class="btn-portfolio-edit">
+                                    <i class='bx bx-edit-alt'></i>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -167,6 +255,9 @@
                             <div class="it-footer">
                                 <h3 class="it-cate">LookBook</h3>
                                 <span class="it-count-picture">30</span>
+                                <div class="btn-portfolio-edit">
+                                    <i class='bx bx-edit-alt'></i>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -178,6 +269,9 @@
                             <div class="it-footer">
                                 <h3 class="it-cate">LookBook</h3>
                                 <span class="it-count-picture">30</span>
+                                <div class="btn-portfolio-edit">
+                                    <i class='bx bx-edit-alt'></i>
+                                </div>
                             </div>
                         </a>
                     </div>
@@ -315,24 +409,17 @@
 
                 <div class="filter-type">
                     <label for="thoi-luong">Loại chụp</label>
-                    <ng-container *ngIf="typeOfPhoto.length >0">
-                        <app-custom-select (selectedOptionChange)="onOptionTypeChange($event)"
-                            [(selectedOption)]="selectedOptionType" [textDefault]="'Chọn loại chụp'">
-                            <option custom-option *ngFor="let tp of typeOfPhoto" [value]="tp.id">
-                                {{ tp.name }}
-                            </option>
-                        </app-custom-select>
-                    </ng-container>
+                    <app-custom-select (selectedOptionChange)="onOptionTypeChange($event)"
+                        [(selectedOption)]="selectedOptionType" [textDefault]="'Chọn loại chụp'">
+                        <option custom-option value="chup-san-pham">Chụp sản phẩm</option>
+                        <option custom-option value="chup-chan-dung">Chụp chân dung</option>
+                        <option custom-option value="chup-canh">Chụp cảnh</option>
+                    </app-custom-select>
                 </div>
 
                 <a href="javascript:void(0)" (click)="onSubmit()">Đặt lịch</a>
                 <div class="deliver-line"></div>
-                <ng-container *ngIf="costPreview">
-                    <p class="p-footer">
-                        {{ costPreview }} <span>1 tiếng</span>
-                    </p>
-                </ng-container>
-
+                <p class="p-footer">300.000 <span>1 tiếng</span></p>
                 <div class="deliver-line"></div>
                 <span class="sug-foot">
                     <i class='bx bx-check'></i>

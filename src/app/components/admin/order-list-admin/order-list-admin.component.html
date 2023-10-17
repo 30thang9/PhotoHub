@@ -21,6 +21,7 @@
                                 <th class="row-header">Thời lượng</th>
                                 <th class="row-header">Loại chụp</th>
                                 <th class="row-header">Người chụp</th>
+                                <th class="row-header">Tổng tiền</th>
                                 <th class="row-header">Trạng thái</th>
                             </tr>
                         </thead>
@@ -35,6 +36,7 @@
                                 <td class="row-content">{{o.order.time}}</td>
                                 <td class="row-content">{{o.order.shooting_type}}</td>
                                 <td class="row-content">{{o.user.full_name}}</td>
+                                <td class="row-content">{{o.order.price}}</td>
                                 <td class="row-content">{{o.order.status==='cho_duyet'?'Chờ duyệt':
                                     o.order.status==='da_duyet' ? 'Đã duyệt' : o.order.status==='huy' ? 'Hủy' : ''}}
                                 </td>

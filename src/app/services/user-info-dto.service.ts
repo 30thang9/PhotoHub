@@ -62,4 +62,32 @@ export class UserInfoDTOService {
     );
   }
 
+  getUserInfoDTOsById(id: number): Observable<UserInfoDTO | null> {
+    if (this.cachedUserInfoDTOs) {
+      const userInfoDTO = this.cachedUserInfoDTOs.find(dto => dto.user.id === id);
+      return of(userInfoDTO || null);
+    }
+
+    return combineLatest([
+      this.userService.getUsers(),
+      this.userInfoService.getAllUserInfo()
+    ]).pipe(
+      map(([users, userInfoList]) => {
+        const userInfoDTOs: UserInfoDTO[] = [];
+        for (const user of users) {
+          const userInfo = userInfoList.find(info => info.user_id === user.id);
+          if (userInfo) {
+            userInfoDTOs.push({ user, userInfo });
+          }
+        }
+        const foundUserInfoDTO = userInfoDTOs.find(dto => dto.user.id === id);
+        return foundUserInfoDTO || null;
+      }),
+      catchError(error => {
+        return of(null);
+      })
+    );
+  }
+
+
 }
