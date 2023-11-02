@@ -1,0 +1,27 @@
+.infor-title-list {
+    padding-left: 2rem;
+
+    .title-list {
+        display: flex;
+        justify-content: flex-start;
+        column-gap: 4rem;
+        flex-wrap: wrap;
+        row-gap: 2rem;
+
+        .it-item {
+            list-style: none;
+            display: inline;
+
+
+            .it-link {
+                text-decoration: none;
+                display: block;
+                font-weight: bold;
+                color: var(--color-primary);
+                font-size: 20px;
+                text-wrap: nowrap;
+            }
+        }
+    }
+
+}

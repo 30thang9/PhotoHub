@@ -1,0 +1,21 @@
+@import 'forMe-wrapper.component.scss';
+@import 'info-title-list.component.scss';
+@import 'info-content-list.component.scss';
+@import 'feature-wrapper.component.scss';
+@import 'portfolio.component.scss';
+@import 'appraise.component.scss';
+@import 'how-it-works.component.scss';
+
+.content-wrapper {
+    padding: 2.5rem 400px 0 4rem;
+
+    .info-wrapper {
+        .deliver-line {
+            height: 2px;
+            width: 100%;
+            margin: 1.5rem 0;
+            background-color: var(--color-primary);
+        }
+
+    }
+}

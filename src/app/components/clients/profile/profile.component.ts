@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/models/order.model';
 import { TypeOfPhoto } from 'src/app/models/typeOfPhoto.model';
 import { UserInfoDTO } from 'src/app/models/userInfoDTO.model';
+import { Order1Service } from 'src/app/services/demo/order1.service';
+import { UserInfoDTO1Service } from 'src/app/services/demo/user-info-dto1.service';
 import { OrderService } from 'src/app/services/order.service';
 import { UserInfoDTOService } from 'src/app/services/user-info-dto.service';
 
@@ -34,7 +36,7 @@ export class ProfileComponent implements OnInit {
   costPreview: number = 300000;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private userInfoDTOService: UserInfoDTOService) {
+  constructor(private router: Router, private route: ActivatedRoute, private orderService: Order1Service, private userInfoDTOService: UserInfoDTO1Service) {
     this.route.params.subscribe(params => {
       const id = params['id'];
 
@@ -61,9 +63,7 @@ export class ProfileComponent implements OnInit {
     this.userInfoDTOService.getUserInfoDTOsById(user_id).subscribe(
       (userData) => {
         this.userData = userData;
-        console.log(userData);
         this.typeOfPhoto = this.userData?.userInfo.typeOfPhoto || [];
-        console.log(this.typeOfPhoto);
 
       },
       (error) => {
@@ -78,6 +78,16 @@ export class ProfileComponent implements OnInit {
 
   onOptionTLChange(optionValue: string) {
     this.selectedOptionTLVal = optionValue;
+    console.log(optionValue);
+    var tl = parseInt(this.selectedOptionTLVal, 10);
+    if (this.selectedOptionTypeVal !== "") {
+      var type_id = parseInt(this.selectedOptionTypeVal, 10);
+      const selectedType = this.typeOfPhoto.find(t => t.id === type_id);
+      if (selectedType) {
+        var cost = parseInt(selectedType.cost, 10);
+        this.costPreview = cost * tl;
+      }
+    }
   }
 
   onOptionTypeChange(optionValue: string) {
@@ -85,11 +95,17 @@ export class ProfileComponent implements OnInit {
     const optionId = parseInt(optionValue.trim(), 10);
     const selectedType = this.typeOfPhoto.find(t => t.id === optionId);
     if (selectedType) {
-      this.costPreview = parseInt(selectedType.cost);
+      var cost = parseInt(selectedType.cost, 10);
+      if (this.selectedOptionTLVal !== "") {
+        var tl = parseInt(this.selectedOptionTLVal, 10);
+        this.costPreview = cost * tl;
+      } else {
+        this.costPreview = cost;
+      }
     }
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.isError = false;
 
     if (!this.selectedDateU || !this.selectedOptionTL || !this.selectedOptionType) {
@@ -118,19 +134,17 @@ export class ProfileComponent implements OnInit {
           cust_email: "",
           cust_phone: "",
           code: "",
-          status: 'cho_duyet',
+          status: 'chua_dien_tt',
           address: "",
           price: price.toString()
         };
 
-        this.orderService.addOrder(order).subscribe((addedOrder) => {
-          if (addedOrder) {
-            localStorage.setItem('order_id', addedOrder.id.toString());
-            this.router.navigate(['/contact']);
-          } else {
-            // Xử lý khi có lỗi trong quá trình lưu đơn hàng.
-          }
-        });
+        var newOrder = await this.orderService.createOrder(order);
+        if (newOrder) {
+          localStorage.setItem('order_id', newOrder.id.toString());
+          this.router.navigate(['/contact']);
+        } else {
+        }
       };
     }
   }

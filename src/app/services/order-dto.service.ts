@@ -33,7 +33,7 @@ export class OrderDTOService {
       map(([orders, userList]) => {
         const ordersDTO: OrderDTO[] = [];
         for (const order of orders) {
-          const user = userList.find(u => u.id === order.id);
+          const user = userList.find(u => u.id === order.partner_id);
           if (user)
             ordersDTO.push({ order, user });
         }

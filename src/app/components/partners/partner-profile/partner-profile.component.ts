@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/models/order.model';
 import { UserInfoDTO } from 'src/app/models/userInfoDTO.model';
+import { Order1Service } from 'src/app/services/demo/order1.service';
+import { UserInfoDTO1Service } from 'src/app/services/demo/user-info-dto1.service';
+import { UserInfo1Service } from 'src/app/services/demo/user-info1.service';
+import { User1Service } from 'src/app/services/demo/user1.service';
 import { OrderService } from 'src/app/services/order.service';
 import { UserInfoDTOService } from 'src/app/services/user-info-dto.service';
 import { UserInfoService } from 'src/app/services/user-info.service';
@@ -39,7 +43,7 @@ export class PartnerProfileComponent implements OnInit {
   languageText: string = "";
   cameraText: string = "";
 
-  constructor(private router: Router, private route: ActivatedRoute, private orderService: OrderService, private userInfoDTOService: UserInfoDTOService, private userInfoService: UserInfoService, private userService: UserService) {
+  constructor(private router: Router, private route: ActivatedRoute, private orderService: Order1Service, private userInfoDTOService: UserInfoDTO1Service, private userInfoService: UserInfo1Service, private userService: User1Service) {
     this.route.params.subscribe(params => {
       const id = params['id'];
 
@@ -90,7 +94,7 @@ export class PartnerProfileComponent implements OnInit {
     this.selectedOptionTypeVal = optionValue;
   }
 
-  onSubmit() {
+  async onSubmit() {
     this.isError = false;
 
     if (!this.selectedDateU || !this.selectedOptionTL || !this.selectedOptionType) {
@@ -122,14 +126,13 @@ export class PartnerProfileComponent implements OnInit {
           price: ''
         };
 
-        this.orderService.addOrder(order).subscribe((addedOrder) => {
-          if (addedOrder) {
-            localStorage.setItem('order_id', addedOrder.id.toString());
-            this.router.navigate(['/contact']);
-          } else {
-            // Xử lý khi có lỗi trong quá trình lưu đơn hàng.
-          }
-        });
+        var addedOrder = await this.orderService.createOrder(order);
+        if (addedOrder) {
+          localStorage.setItem('order_id', addedOrder.id.toString());
+          this.router.navigate(['/contact']);
+        } else {
+          // Xử lý khi có lỗi trong quá trình lưu đơn hàng.
+        }
       };
     }
   }
@@ -181,62 +184,62 @@ export class PartnerProfileComponent implements OnInit {
   }
 
 
-  saveIc() {
+  async saveIc() {
     if (this.userData?.user.id !== undefined) {
       const userInfoId = this.userData?.userInfo.id;
 
-      this.userInfoService.getUserInfoById(userInfoId).subscribe(userInfo => {
-        if (userInfo) {
-          if (this.desText !== undefined && this.prizeText !== undefined && this.interestText !== undefined) {
-            userInfo.description = this.desText;
-            userInfo.prize = this.prizeText;
-            userInfo.interest = this.interestText;
+      var userInfo = await this.userInfoService.getUserInfoById(userInfoId);
+      if (userInfo) {
+        if (this.desText !== undefined && this.prizeText !== undefined && this.interestText !== undefined) {
+          userInfo.description = this.desText;
+          userInfo.prize = this.prizeText;
+          userInfo.interest = this.interestText;
 
-            // console.log(userInfo);
+          // console.log(userInfo);
 
-            this.userInfoService.updateUserInfo(userInfo).subscribe(updatedUserInfo => {
-              if (updatedUserInfo) {
-                console.log('Thông tin người dùng được cập nhật thành công', updatedUserInfo);
-              } else {
-                console.error('Lỗi khi cập nhật thông tin người dùng');
-              }
-            });
+          var updatedUserInfo = await this.userInfoService.updateUserInfo(userInfo);
+          if (updatedUserInfo) {
+            console.log('Thông tin người dùng được cập nhật thành công', updatedUserInfo);
           } else {
-            console.error('Một trong các trường dữ liệu là undefined');
+            console.error('Lỗi khi cập nhật thông tin người dùng');
           }
         } else {
-          console.error('Không tồn tại tại thông tin của tài khoản này');
+          console.error('Một trong các trường dữ liệu là undefined');
         }
-      })
+      } else {
+        console.error('Không tồn tại tại thông tin của tài khoản này');
+      }
     } else {
       console.error('User ID is undefined');
     }
   }
 
-  saveForMe() {
+  async saveForMe() {
     if (this.userData?.user.id !== undefined) {
       const userId = this.userData?.user.id;
 
-      this.userService.getUserById(userId).subscribe(user => {
-        if (user) {
-          if (this.nameText !== undefined) {
-            user.full_name = this.nameText;
-            this.userService.updateUser(user).subscribe(updatedUser => {
-              if (updatedUser) {
-                console.log('Thông tin người dùng được cập nhật thành công', updatedUser);
-              } else {
-                console.error('Lỗi khi cập nhật thông tin người dùng');
-              }
-            });
+      var user = await this.userService.getUserById(userId);
+      if (user) {
+        if (this.nameText !== undefined) {
+          user.full_name = this.nameText;
+          var updatedUser = await this.userService.updateUser(user);
+          if (updatedUser) {
+            console.log('Thông tin người dùng được cập nhật thành công', updatedUser);
           } else {
-            console.error('Một trong các trường dữ liệu là undefined');
+            console.error('Lỗi khi cập nhật thông tin người dùng');
           }
         } else {
-          console.error('Không tồn tại tại thông tin của tài khoản này');
+          console.error('Một trong các trường dữ liệu là undefined');
         }
-      })
+      } else {
+        console.error('Không tồn tại tại thông tin của tài khoản này');
+      }
     } else {
       console.error('User ID is undefined');
     }
+  }
+
+  saveFe() {
+
   }
 }

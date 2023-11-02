@@ -37,10 +37,10 @@
                                 <td class="row-content">{{o.order.appoi_time}}</td>
                                 <td class="row-content">{{o.order.time}}</td>
                                 <td class="row-content">{{o.order.shooting_type}}</td>
-                                <td class="row-content">{{o.user.full_name}}</td>
+                                <td [attr.data-id]="o.user.id" class="row-content">{{o.user.full_name}}</td>
+                                <td class="row-content">{{o.order.status==='cho_duyet'?'Chờ duyệt':''}}</td>
                                 <td class="row-content">{{o.order.price}}</td>
                                 <td class="row-content">{{o.order.code}}</td>
-                                <td class="row-content">{{o.order.status==='cho_duyet'?'Chờ duyệt':''}}</td>
                                 <td class="row-content .col-fixed">
                                     <a href="javascript:void(0)" class="btn btn-accept"
                                         (click)="onAccept(o.order.id)">Duyệt</a>

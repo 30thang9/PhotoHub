@@ -1,0 +1,31 @@
+.infor-content-list {
+    padding-top: 1.5rem;
+    padding-left: 2rem;
+
+    .ic-item {
+        .text-description {
+            p {}
+        }
+
+        .prize {
+            .prize-title {
+                color: var(--color-primary);
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            p {}
+        }
+
+        .interest {
+            .interest-title {
+                font-weight: bold;
+                font-size: 20px;
+                color: var(--color-primary);
+            }
+
+            p {}
+        }
+    }
+
+}

@@ -284,7 +284,7 @@
     </div>
     <div class="order-wrapper" [ngClass]="isShowOrder ? 'show': '' ">
         <div class="order-container">
-            <h4>Đặt lịch chụp tự động</h4>
+            <h4 [attr.data-id]="userData?.user?.id">Đặt lịch chụp tự động</h4>
             <div class="mess-valid" *ngIf="isError">
                 {{ errorMessage }}
             </div>
@@ -329,7 +329,9 @@
                 <div class="deliver-line"></div>
                 <ng-container *ngIf="costPreview">
                     <p class="p-footer">
-                        {{ costPreview }} <span>1 tiếng</span>
+                        {{ costPreview }} <span>/{{selectedOptionTLVal!=="" && selectedOptionTypeVal!=="" ?
+                            selectedOptionTLVal : 1}}
+                            tiếng</span>
                     </p>
                 </ng-container>
 

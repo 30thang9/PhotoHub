@@ -33,6 +33,17 @@ import { HomeAdminComponent } from './components/admin/home-admin/home-admin.com
 import { OrderListAdminComponent } from './components/admin/order-list-admin/order-list-admin.component';
 import { OrderAcceptAdminComponent } from './components/admin/order-accept-admin/order-accept-admin.component';
 import { PartnerProfileComponent } from './components/partners/partner-profile/partner-profile.component';
+import { environment } from './environments/environment';
+import { provideFirebaseApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { Test1Component } from './components/tests/test1/test1.component';
+
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireStorageModule } from "@angular/fire/compat/storage";
+import { FirestoreModule } from "@angular/fire/firestore";
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { initializeApp } from 'firebase/app';
 
 @NgModule({
   declarations: [
@@ -65,12 +76,22 @@ import { PartnerProfileComponent } from './components/partners/partner-profile/p
     OrderListAdminComponent,
     OrderAcceptAdminComponent,
     PartnerProfileComponent,
+    Test1Component,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    provideFirestore(() => getFirestore()),
+    // provideDatabase(() => getDatabase()),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    FirestoreModule,
+    AngularFireDatabaseModule,
+    AngularFirestoreModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

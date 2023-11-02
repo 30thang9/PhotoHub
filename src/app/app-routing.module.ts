@@ -10,6 +10,7 @@ import { LayoutProfileComponent } from './components/clients/layout-profile/layo
 import { RefundPictureComponent } from './components/clients/refund-picture/refund-picture.component';
 import { PagePictureRefundComponent } from './components/clients/page-picture-refund/page-picture-refund.component';
 import { LayoutAdminComponent } from './components/admin/layout-admin/layout-admin.component';
+import { Test1Component } from './components/tests/test1/test1.component';
 
 const routes: Routes = [
   {
@@ -60,6 +61,11 @@ const routes: Routes = [
     path: 'admin',
     component: LayoutAdminComponent,
     children: RouteAdmin
+  }
+  ,
+  {
+    path: 'test',
+    component: Test1Component,
   }
 ];
 

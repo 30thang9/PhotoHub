@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Order1Service } from 'src/app/services/demo/order1.service';
 import { OrderService } from 'src/app/services/order.service';
 
 @Component({
@@ -19,7 +20,7 @@ export class SendContactComponent {
   messageText: string = '';
   isSuccess: boolean = true;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: Order1Service) { }
 
   onChangeName(event: Event) {
     this.name = (event.target as HTMLInputElement).value;
@@ -40,42 +41,35 @@ export class SendContactComponent {
     this.validateAddress();
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.validateName() && this.validatePhone() && this.validateEmail() && this.validateAddress()) {
       const order_idStr = localStorage.getItem('order_id');
       if (order_idStr) {
         const order_id = parseInt(order_idStr, 10);
-        this.orderService.getOrderById(order_id).subscribe(order => {
-          if (order) {
-            order.cust_name = this.name;
-            order.cust_email = this.email;
-            order.cust_phone = this.phone;
-            order.address = this.address;
-            this.orderService.generateUniqueOrderCode().subscribe(
-              (uniqueCode: string) => {
-                order.code = uniqueCode;
-              },
-              (error) => {
-                console.error('Error generating unique order code:', error);
-              }
-            );
-            this.orderService.updateOrder(order).subscribe(updatedOrder => {
-              if (updatedOrder) {
-                // Xử lý khi đơn hàng được cập nhật thành công
-                localStorage.removeItem('order_id');
-                this.isSuccess = true;
-                this.messageText = "Thành công.";
-              } else {
-                // Xử lý khi có lỗi trong quá trình cập nhật đơn hàng
-                this.messageText = "Thất bại."
-                this.isSuccess = false;
-              }
-            });
+        var order = await this.orderService.getOrderById(order_id);
+        if (order) {
+          order.cust_name = this.name;
+          order.cust_email = this.email;
+          order.cust_phone = this.phone;
+          order.address = this.address;
+          order.status = "cho_duyet";
+          var code = await this.orderService.generateUniqueOrderCode();
+          order.code = code.toString();
+          var updatedOrder = await this.orderService.updateOrder(order);
+          if (updatedOrder) {
+            // Xử lý khi đơn hàng được cập nhật thành công
+            this.isSuccess = true;
+            this.messageText = "Thành công.";
           } else {
+            // Xử lý khi có lỗi trong quá trình cập nhật đơn hàng
             this.messageText = "Thất bại."
             this.isSuccess = false;
           }
-        });
+        } else {
+          this.messageText = "Thất bại."
+          this.isSuccess = false;
+        }
+        localStorage.removeItem('order_id');
       } else {
         this.messageText = "Thất bại."
         this.isSuccess = false;
