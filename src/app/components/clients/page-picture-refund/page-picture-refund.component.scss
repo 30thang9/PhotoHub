@@ -184,6 +184,8 @@
                             width: 100%;
                             border: none;
                             outline: none;
+                            resize: none;
+                            padding: .25rem 0;
 
                             &::-webkit-scrollbar {
                                 width: 10px;
@@ -260,13 +262,11 @@
             position: relative;
 
             .ask-repair-content {
-                height: 80%;
-                width: 80%;
-                min-height: 400px;
-                overflow-y: auto;
+                height: 90%;
+                width: 90%;
                 margin: auto;
                 background-color: var(--color-light);
-                position: absolute;
+                position: relative;
                 transform: translateY(-200%);
 
                 .repair-header {
@@ -291,82 +291,89 @@
                     }
                 }
 
-                .repair-content {
-                    // height: 300px;
-                    padding: 2rem 3rem;
+                .repair-cont {
+                    max-height: calc(100% - 120px);
+                    overflow-y: auto;
+                    position: relative;
 
-                    .enter-code-picture {
-                        display: grid;
-                        column-gap: 1rem;
-                        grid-template-columns: repeat(2, 1fr);
-                        margin-bottom: 1.5rem;
+                    .repair-content {
+                        // height: 300px;
+                        padding: 2rem 3rem;
 
-                        .ecp-title {
-                            grid-column: span 1;
+                        .enter-code-picture {
+                            display: grid;
+                            column-gap: 1rem;
+                            grid-template-columns: repeat(2, 1fr);
+                            margin-bottom: 1.5rem;
+
+                            .ecp-title {
+                                grid-column: span 1;
+                            }
+
+                            .po-title {
+                                grid-column: span 1;
+                            }
+
                         }
 
-                        .po-title {
-                            grid-column: span 1;
-                        }
+                        .repair-police {
+                            display: grid;
+                            column-gap: 1rem;
+                            grid-template-columns: repeat(2, 1fr);
 
-                    }
-
-                    .repair-police {
-                        display: grid;
-                        column-gap: 1rem;
-                        grid-template-columns: repeat(2, 1fr);
-
-                        .ecp-content {
-                            grid-column: span 1;
-                            width: 100%;
-                            height: 100%;
-
-                            textarea {
-                                height: 100%;
+                            .ecp-content {
+                                grid-column: span 1;
                                 width: 100%;
-                                outline: none;
-                                border: 2px solid var(--color-secondary);
-                                padding: .5rem;
+                                height: 100%;
+
+                                textarea {
+                                    height: 100%;
+                                    width: 100%;
+                                    outline: none;
+                                    border: 2px solid var(--color-secondary);
+                                    padding: .5rem;
+                                    resize: none;
+                                }
+                            }
+
+                            .po-content-wr {
+                                grid-column: span 1;
+                                padding: 1rem;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                background-color: var(--color-secondary);
+                                height: 100%;
+
+                                .po-content {}
                             }
                         }
 
-                        .po-content-wr {
-                            grid-column: span 1;
-                            padding: 1rem;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: var(--color-secondary);
-                            height: 100%;
-
-                            .po-content {}
-                        }
                     }
 
-                }
-
-                .repair-submit {
-                    padding: 0 3rem;
-                    margin-bottom: 3rem;
-                    display: flex;
-                    justify-content: space-between;
-
-                    .rs-left {}
-
-                    .rs-right {
-                        width: calc(50% - .5rem);
-                        height: 40px;
+                    .repair-submit {
+                        padding: 0 3rem;
+                        margin-bottom: 3rem;
                         display: flex;
+                        justify-content: space-between;
 
-                        .btn-submit-repair {
-                            border-radius: .3rem;
-                            height: 100%;
-                            background-color: var(--color-primary);
-                            color: var(--color-light);
-                            width: 100%;
-                            text-align: center;
-                            text-decoration: none;
-                            line-height: 40px;
+                        .rs-left {}
+
+                        .rs-right {
+                            width: calc(50% - .5rem);
+                            height: 40px;
+                            display: flex;
+
+                            .btn-submit-repair {
+                                border-radius: .3rem;
+                                height: 100%;
+                                background-color: var(--color-primary);
+                                color: var(--color-light);
+                                width: 100%;
+                                text-align: center;
+                                text-decoration: none;
+                                line-height: 40px;
+                            }
                         }
                     }
                 }

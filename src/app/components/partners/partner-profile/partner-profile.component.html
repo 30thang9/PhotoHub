@@ -227,7 +227,7 @@
                             <div class="it-footer">
                                 <h3 class="it-cate">LookBook</h3>
                                 <span class="it-count-picture">30</span>
-                                <div class="btn-portfolio-edit">
+                                <div class="btn-portfolio-edit" (click)="toggleAsk()">
                                     <i class='bx bx-edit-alt'></i>
                                 </div>
                             </div>
@@ -239,9 +239,9 @@
                                 <img src="./assets/images/profile/op2.jpg" alt="">
                             </div>
                             <div class="it-footer">
-                                <h3 class="it-cate">LookBook</h3>
+                                <h3 class="it-cate">Sản phẩm</h3>
                                 <span class="it-count-picture">30</span>
-                                <div class="btn-portfolio-edit">
+                                <div class="btn-portfolio-edit" (click)="toggleAsk()">
                                     <i class='bx bx-edit-alt'></i>
                                 </div>
                             </div>
@@ -253,9 +253,9 @@
                                 <img src="./assets/images/profile/op3.jpg" alt="">
                             </div>
                             <div class="it-footer">
-                                <h3 class="it-cate">LookBook</h3>
+                                <h3 class="it-cate">Du lịch</h3>
                                 <span class="it-count-picture">30</span>
-                                <div class="btn-portfolio-edit">
+                                <div class="btn-portfolio-edit" (click)="toggleAsk()">
                                     <i class='bx bx-edit-alt'></i>
                                 </div>
                             </div>
@@ -267,9 +267,9 @@
                                 <img src="./assets/images/profile/op4.jpg" alt="">
                             </div>
                             <div class="it-footer">
-                                <h3 class="it-cate">LookBook</h3>
+                                <h3 class="it-cate">Motor</h3>
                                 <span class="it-count-picture">30</span>
-                                <div class="btn-portfolio-edit">
+                                <div class="btn-portfolio-edit" (click)="toggleAsk()">
                                     <i class='bx bx-edit-alt'></i>
                                 </div>
                             </div>
@@ -442,4 +442,64 @@
     <div class="toggle-order-wrapper" [ngClass]="isShowOrder ? 'hide': '' " (click)="showOrder()">
         <i class='bx bx-plus-circle'></i>
     </div>
+
+    <div class="ask-repair-wrapper" [ngClass]="isShowAskRepair ? 'active' : '' ">
+        <div class="ask-repair-container">
+            <div class="ask-repair-content">
+                <div class="repair-title">
+                    <h2>Lookbook</h2>
+                    <div class="deliver-line"></div>
+                </div>
+                <div class="repair-cont">
+                    <div class="repair-picture">
+                        <div class="picture-wrapper">
+                            <div class="picture-item hide">
+                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
+                                <a href="javascript:void(0;)" class="btn-del-image" (click)="delPicture()">
+                                    <i class='bx bx-x'></i>
+                                </a>
+                            </div>
+                            <div class="picture-item">
+                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
+                                <a href="javascript:void(0;)" class="btn-del-image">
+                                    <i class='bx bx-x'></i>
+                                </a>
+                            </div>
+                            <div class="picture-item">
+                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
+                                <a href="javascript:void(0;)" class="btn-del-image">
+                                    <i class='bx bx-x'></i>
+                                </a>
+                            </div>
+                            <div class="picture-item">
+                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
+                                <a href="javascript:void(0;)" class="btn-del-image">
+                                    <i class='bx bx-x'></i>
+                                </a>
+                            </div>
+                            <div class="picture-item">
+                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
+                                <a href="javascript:void(0;)" class="btn-del-image">
+                                    <i class='bx bx-x'></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="ask-repair-button">
+                    <div class="rs-left">
+                        <a href="javascript:void(0)" class="btn-submit-repair">Tải lên</a>
+                    </div>
+                    <div class="rs-right">
+                        <a href="javascript:void(0)" class="btn-submit-repair">Cập nhật</a>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" (click)="closeAsk()" class="btn-close-ask">
+                    <i class='bx bx-x'></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
 </div>

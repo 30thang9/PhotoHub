@@ -43,6 +43,16 @@ export class PartnerProfileComponent implements OnInit {
   languageText: string = "";
   cameraText: string = "";
 
+  isShowAskRepair: boolean = false;
+
+  toggleAsk() {
+    this.isShowAskRepair = !this.isShowAskRepair;
+  }
+
+  closeAsk() {
+    this.isShowAskRepair = false;
+  }
+
   constructor(private router: Router, private route: ActivatedRoute, private orderService: Order1Service, private userInfoDTOService: UserInfoDTO1Service, private userInfoService: UserInfo1Service, private userService: User1Service) {
     this.route.params.subscribe(params => {
       const id = params['id'];
@@ -240,6 +250,10 @@ export class PartnerProfileComponent implements OnInit {
   }
 
   saveFe() {
+
+  }
+
+  delPicture() {
 
   }
 }
