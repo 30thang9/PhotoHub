@@ -36,6 +36,7 @@ export class Order1Service {
               price: orderData.price,
               status: orderData.status,
               code: orderData.code,
+              link_down: orderData.link_down
             };
 
             orders.push(order);
@@ -91,6 +92,7 @@ export class Order1Service {
         price: orderData.price,
         status: orderData.status,
         code: orderData.code,
+        link_down:orderData.link_down
       };
 
       await set(newOrderRef, newOrder);

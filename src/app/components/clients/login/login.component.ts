@@ -46,7 +46,11 @@ export class LoginComponent {
               this.loginMessage = `Đăng nhập thành công với vai trò: ${userRole.name}`;
               if (user.role_id === 1) {
                 this.router.navigate(['/admin/home']);
-              } else {
+              } else if (user.role_id === 2) {
+                var route = "/partner/" + user.id;
+                this.router.navigate([route]);
+              }
+              else {
                 this.router.navigate(['/home']);
               }
             } else {

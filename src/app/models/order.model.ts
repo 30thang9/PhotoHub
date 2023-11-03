@@ -12,4 +12,5 @@ export interface Order {
     price: string;
     status: string;
     code: string;
+    link_down:string;
 }

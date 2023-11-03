@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Deces } from 'src/app/models/deces.model';
 import { Order } from 'src/app/models/order.model';
 import { UserInfoDTO } from 'src/app/models/userInfoDTO.model';
+import { Deces1Service } from 'src/app/services/demo/deces1.service';
 import { Order1Service } from 'src/app/services/demo/order1.service';
 import { UserInfoDTO1Service } from 'src/app/services/demo/user-info-dto1.service';
 import { UserInfo1Service } from 'src/app/services/demo/user-info1.service';
 import { User1Service } from 'src/app/services/demo/user1.service';
-import { OrderService } from 'src/app/services/order.service';
-import { UserInfoDTOService } from 'src/app/services/user-info-dto.service';
-import { UserInfoService } from 'src/app/services/user-info.service';
-import { UserService } from 'src/app/services/user.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Category } from 'src/app/models/category.model';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-partner-profile',
@@ -18,7 +19,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class PartnerProfileComponent implements OnInit {
   userData: UserInfoDTO | null = null;
-
+  decesData: Deces | null = null;
   selectedDateU: string = '';
   selectedOptionTL: string = '';
   selectedOptionType: string = '';
@@ -44,16 +45,34 @@ export class PartnerProfileComponent implements OnInit {
   cameraText: string = "";
 
   isShowAskRepair: boolean = false;
+  isShowAddPortfo: boolean = false;
 
-  toggleAsk() {
+  modalName: string = "";
+  modalImagesRepair: string[] = [];
+
+  toggleAsk(name: string) {
     this.isShowAskRepair = !this.isShowAskRepair;
+    this.modalName = name;
+    this.decesData?.category.forEach((item) => {
+      if (item.name === name) {
+        this.modalImagesRepair = item.images;
+        return;
+      }
+    });
   }
 
   closeAsk() {
     this.isShowAskRepair = false;
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, private orderService: Order1Service, private userInfoDTOService: UserInfoDTO1Service, private userInfoService: UserInfo1Service, private userService: User1Service) {
+  constructor(private router: Router, private route: ActivatedRoute,
+    private orderService: Order1Service,
+    private userInfoDTOService: UserInfoDTO1Service,
+    private userInfoService: UserInfo1Service,
+    private userService: User1Service,
+    private decesService: Deces1Service,
+    private fileStorage: AngularFireStorage) {
+
     this.route.params.subscribe(params => {
       const id = params['id'];
 
@@ -64,12 +83,14 @@ export class PartnerProfileComponent implements OnInit {
       }
     });
   }
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
         const user_id = parseInt(id, 10);
         this.loadUserInfoData(user_id);
+        this.loadDecesData(user_id);
       } else {
         console.error('ID not found in URL');
       }
@@ -91,6 +112,11 @@ export class PartnerProfileComponent implements OnInit {
         console.error('Error loading user info:', error);
       }
     );
+  }
+
+  async loadDecesData(user_id: number) {
+    this.decesData = await this.decesService.getDecesByPartnerId(user_id);
+    console.log(this.decesData);
   }
 
   onDateChange(date: string) {
@@ -133,7 +159,8 @@ export class PartnerProfileComponent implements OnInit {
           code: "",
           status: 'cho_duyet',
           address: "",
-          price: ''
+          price: '',
+          link_down: ''
         };
 
         var addedOrder = await this.orderService.createOrder(order);
@@ -253,7 +280,218 @@ export class PartnerProfileComponent implements OnInit {
 
   }
 
-  delPicture() {
-
+  showAddPortfo() {
+    this.isShowAddPortfo = !this.isShowAddPortfo;
   }
+
+  closeNewPortfo() {
+    this.isShowAddPortfo = false;
+  }
+
+  imagePreviews: string[] = [];
+  filesAddPortfo: File[] = [];
+  portfo_name: string = "";
+  previewImages(event: any) {
+    const input = event.target as HTMLInputElement;
+    const files = input.files;
+    if (files && files.length > 0) {
+      this.filesAddPortfo = Array.from(files);
+      this.imagePreviews = []; // Clear the previous previews
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const reader = new FileReader();
+
+        reader.onload = (e) => {
+          this.imagePreviews.push(e.target?.result as string);
+        };
+
+        reader.readAsDataURL(file);
+      }
+    } else {
+      this.imagePreviews = [];
+    }
+  }
+
+  deleteImageOfNewPortfo(index: number) {
+    if (index >= 0 && index < this.imagePreviews.length) {
+      this.imagePreviews.splice(index, 1);
+      this.filesAddPortfo.splice(index, 1);
+      const input = document.getElementById('image') as HTMLInputElement;
+      input.value = ''; // Clear the file input to remove the deleted file
+    }
+  }
+
+  async addNewPortfo() {
+    if (this.portfo_name !== "" && this.filesAddPortfo.length > 0) {
+      var urls: string[] = [];
+      var renamedFiles: File[] = [];
+
+      // Generate unique filenames for each file
+      for (let i = 0; i < this.filesAddPortfo.length; i++) {
+        const file = this.filesAddPortfo[i];
+        const fileExtension = file.name.split('.').pop();
+        const newFileName = uuidv4() + '.' + fileExtension;
+
+        renamedFiles.push(new File([file], newFileName, { type: file.type }));
+      }
+
+      // Upload the renamed files
+      for (let i = 0; i < renamedFiles.length; i++) {
+        const file = renamedFiles[i];
+        const path = `images/${file.name}`;
+        const uploadTask = await this.fileStorage.upload(path, file);
+        const url = await uploadTask.ref.getDownloadURL();
+        urls.push(url);
+      }
+
+      var des = await this.decesService.getDecesByPartnerId(this.partnerId);
+      if (des) {
+        var isDuplicate: boolean = false;
+        des.category.forEach((catego) => {
+          if (catego.name === this.portfo_name) {
+            // catego.images.push(url);
+            isDuplicate = true;
+            return;
+          } else {
+          }
+        });
+
+        if (!isDuplicate) {
+          var cate: Category = {
+            name: this.portfo_name,
+            images: urls
+          }
+          des.category.push(cate);
+        }
+
+        await this.decesService.updateDeces(des);
+        window.alert('Category added successfully');
+        await this.loadDecesData(this.partnerId);
+      } else {
+        var cate: Category = {
+          name: this.portfo_name,
+          images: urls
+        }
+        var cateList: Category[] = [];
+        cateList.push(cate);
+        var newDeces: Deces = {
+          id: 0,
+          partner_id: this.partnerId,
+          category: cateList
+        }
+        await this.decesService.createDeces(newDeces);
+        window.alert('Category added successfully');
+        await this.loadDecesData(this.partnerId);
+      }
+    }
+  }
+
+
+  ////////////////////
+
+  delPicture(index: number) {
+    if (index >= 0 && index < this.modalImagesRepair.length) {
+      this.modalImagesRepair.splice(index, 1);
+    }
+  }
+
+  imageData: { url: string, file: File }[] = [];
+
+  addImageFromAsk(url: string, file: File) {
+    this.imageData.push({ url, file });
+  }
+
+  deleteImageFromAsk(index: number) {
+    if (index >= 0 && index < this.imageData.length) {
+      this.imageData.splice(index, 1);
+    }
+  }
+
+
+
+  onFileInputChange(event: any) {
+    const files = event.target.files;
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        const url = URL.createObjectURL(file);
+        this.addImageFromAsk(url, file); // Add both the URL and the file
+      }
+    }
+  }
+
+
+  triggerFileInput() {
+    const fileInput = document.getElementById('hiddenFileInput') as HTMLInputElement;
+    fileInput.click();
+  }
+
+  async submitRepair() {
+    if (this.imageData.length > 0) {
+      var urls: string[] = [];
+      var renamedFiles: File[] = []; // Array to store renamed files
+
+      // Generate unique filenames for each file in imageData
+      for (let i = 0; i < this.imageData.length; i++) {
+        const file = this.imageData[i].file;
+        const fileExtension = file.name.split('.').pop(); // Get the file extension
+        const newFileName = uuidv4() + '.' + fileExtension; // Generate a new unique filename
+
+        renamedFiles.push(new File([file], newFileName, { type: file.type }));
+      }
+
+      // Upload the renamed files
+      for (let i = 0; i < renamedFiles.length; i++) {
+        const file = renamedFiles[i];
+        const path = `images/${file.name}`;
+        const uploadTask = await this.fileStorage.upload(path, file);
+        const url = await uploadTask.ref.getDownloadURL();
+        urls.push(url);
+      }
+
+      var des = await this.decesService.getDecesByPartnerId(this.partnerId);
+
+      if (des) {
+        var isDuplicate: boolean = false;
+
+        for (let i = 0; i < des.category.length; i++) {
+          const catego = des.category[i];
+
+          if (catego.name === this.modalName) {
+            // Add the new image URLs to the existing images array
+            catego.images = [...catego.images, ...urls];
+
+            // Update the 'des' object
+            await this.decesService.updateDeces(des);
+
+            window.alert('Category added successfully');
+
+            // Load data again if needed
+            await this.loadDecesData(this.partnerId);
+
+            this.decesData?.category.forEach((item) => {
+              if (item.name === this.modalName) {
+                this.modalImagesRepair = item.images;
+                return;
+              }
+            });
+            this.imageData = [];
+
+            isDuplicate = true;
+            break; // Exit the loop
+          }
+        }
+
+        if (!isDuplicate) {
+          // Handle the case where the category doesn't exist
+          // You can create a new category if needed
+          // ...
+        }
+      }
+    }
+  }
+
+
+
 }

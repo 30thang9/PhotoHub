@@ -217,23 +217,31 @@
             <div class="deliver-line"></div>
 
             <div class="portfolio">
-                <h3 class="portfolio-title">My Portfolio</h3>
+                <div class="portfolio-title">
+                    <h3>
+                        My Portfolio
+                    </h3>
+                    <a href="javascript:void(0);" (click)="showAddPortfo()">
+                        <i class='bx bx-plus-circle'></i>
+                    </a>
+                </div>
                 <div class="portfolio-content">
-                    <div class="portfolio-item">
+
+                    <div class="portfolio-item" *ngFor="let d of decesData?.category; let i = index">
                         <a href="javascript:void(0);">
                             <div class="it-header">
-                                <img src="./assets/images/profile/op1.jpg" alt="">
+                                <img src="{{d.images[0]}}" alt="">
                             </div>
                             <div class="it-footer">
-                                <h3 class="it-cate">LookBook</h3>
+                                <h3 class="it-cate">{{d.name}}</h3>
                                 <span class="it-count-picture">30</span>
-                                <div class="btn-portfolio-edit" (click)="toggleAsk()">
+                                <div class="btn-portfolio-edit" (click)="toggleAsk(d.name)">
                                     <i class='bx bx-edit-alt'></i>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="portfolio-item">
+                    <!-- <div class="portfolio-item">
                         <a href="javascript:void(0);">
                             <div class="it-header">
                                 <img src="./assets/images/profile/op2.jpg" alt="">
@@ -274,7 +282,7 @@
                                 </div>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -447,52 +455,35 @@
         <div class="ask-repair-container">
             <div class="ask-repair-content">
                 <div class="repair-title">
-                    <h2>Lookbook</h2>
+                    <h2>{{modalName}}</h2>
                     <div class="deliver-line"></div>
                 </div>
                 <div class="repair-cont">
                     <div class="repair-picture">
                         <div class="picture-wrapper">
-                            <div class="picture-item hide">
-                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
-                                <a href="javascript:void(0;)" class="btn-del-image" (click)="delPicture()">
+                            <div class="picture-item" *ngFor="let mi of modalImagesRepair;let i = index">
+                                <img src="{{mi}}" alt="" srcset="">
+                                <a href="javascript:void(0;)" class="btn-del-image" (click)="delPicture(i)">
                                     <i class='bx bx-x'></i>
                                 </a>
                             </div>
-                            <div class="picture-item">
-                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
-                                <a href="javascript:void(0;)" class="btn-del-image">
+                            <div class="picture-item" *ngFor="let imageData of imageData; let i = index">
+                                <img src="{{imageData.url}}" alt="" srcset="">
+                                <a href="javascript:void(0)" class="btn-del-image" (click)="deleteImageFromAsk(i)">
                                     <i class='bx bx-x'></i>
                                 </a>
                             </div>
-                            <div class="picture-item">
-                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
-                                <a href="javascript:void(0;)" class="btn-del-image">
-                                    <i class='bx bx-x'></i>
-                                </a>
-                            </div>
-                            <div class="picture-item">
-                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
-                                <a href="javascript:void(0;)" class="btn-del-image">
-                                    <i class='bx bx-x'></i>
-                                </a>
-                            </div>
-                            <div class="picture-item">
-                                <img src="./assets/images/profile/op1.jpg" alt="" srcset="">
-                                <a href="javascript:void(0;)" class="btn-del-image">
-                                    <i class='bx bx-x'></i>
-                                </a>
-                            </div>
-
                         </div>
                     </div>
                 </div>
                 <div class="ask-repair-button">
                     <div class="rs-left">
-                        <a href="javascript:void(0)" class="btn-submit-repair">Tải lên</a>
+                        <input type="file" id="hiddenFileInput" style="display: none"
+                            (change)="onFileInputChange($event)" accept="image/*" multiple>
+                        <a href="javascript:void(0)" class="btn-upload-repair" (click)="triggerFileInput()">Tải lên</a>
                     </div>
                     <div class="rs-right">
-                        <a href="javascript:void(0)" class="btn-submit-repair">Cập nhật</a>
+                        <a href="javascript:void(0)" class="btn-submit-repair" (click)=submitRepair()>Cập nhật</a>
                     </div>
                 </div>
                 <a href="javascript:void(0)" (click)="closeAsk()" class="btn-close-ask">
@@ -502,4 +493,47 @@
         </div>
     </div>
 
+    <div class="add-new-portfo" [ngClass]="isShowAddPortfo ? 'active' : '' ">
+        <div class="new-portfo-container">
+            <div class="new-portfo-content">
+                <div class="new-portfo-title">
+                    <h2>Thêm mới</h2>
+                    <div class="deliver-line"></div>
+                </div>
+                <div class="new-portfo-cont">
+                    <div class="name-wapper">
+                        <label for="name">Tên</label>
+                        <input type="text" name="name" id="name" [(ngModel)]="portfo_name">
+                    </div>
+                    <div class="image-wrapper">
+                        <div class="upload-control">
+                            <label for="image">Ảnh</label>
+                            <input type="file" name="image" id="image" accept="image/*" (change)="previewImages($event)"
+                                multiple>
+                        </div>
+                        <div class="list-preview">
+                            <div class="preview-item" *ngFor="let preview of imagePreviews; let i = index">
+                                <div class="preview-content">
+                                    <img [src]="preview" alt="Preview Image"
+                                        style="max-width: 100%; max-height: 200px;">
+                                    <a class="item-close" href="javascript:void(0);"
+                                        (click)="deleteImageOfNewPortfo(i)">
+                                        <i class="bx bx-x"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="submit-portfo-wrapper">
+                        <div class="btn-add-portfo" (click)="addNewPortfo()">
+                            <a class="" href="javascript:void(0);">Up</a>
+                        </div>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" (click)="closeNewPortfo()" class="btn-close-newPortfo">
+                    <i class='bx bx-x'></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

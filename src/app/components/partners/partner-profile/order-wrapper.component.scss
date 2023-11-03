@@ -132,3 +132,19 @@
         display: none;
     }
 }
+
+.toggle-order-wrapper {
+    position: fixed;
+    bottom: 5rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-primary);
+    z-index: 999;
+    display: none;
+    font-size: 30px;
+    border-radius: 50%;
+    padding-top: 3.5px;
+    padding-left: 5px;
+    color: var(--color-light);
+}

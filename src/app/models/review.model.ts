@@ -4,5 +4,4 @@ export interface Review {
     order_id: number;
     description: string;
     rate: number;
-
 }
