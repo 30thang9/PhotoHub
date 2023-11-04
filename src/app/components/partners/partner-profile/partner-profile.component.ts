@@ -38,6 +38,8 @@ export class PartnerProfileComponent implements OnInit {
   isShowFeEdit: boolean = false;
 
   nameText: string = "";
+  expText: string = "";
+  addressText: string = "";
   desText: string = "";
   prizeText: string = "";
   interestText: string = "";
@@ -216,6 +218,12 @@ export class PartnerProfileComponent implements OnInit {
       case 'interestText':
         this.interestText = newValue;
         break;
+      case 'addressText':
+        this.addressText = newValue;
+        break;
+      case 'expText':
+        this.expText = newValue;
+        break;
       // Thêm các trường khác tùy theo cần thiết
     }
   }
@@ -232,22 +240,28 @@ export class PartnerProfileComponent implements OnInit {
           userInfo.prize = this.prizeText;
           userInfo.interest = this.interestText;
 
-          // console.log(userInfo);
+          // Log thông tin
+          console.log(userInfo);
 
           var updatedUserInfo = await this.userInfoService.updateUserInfo(userInfo);
           if (updatedUserInfo) {
             console.log('Thông tin người dùng được cập nhật thành công', updatedUserInfo);
+            window.alert('Thông tin người dùng được cập nhật thành công');
           } else {
             console.error('Lỗi khi cập nhật thông tin người dùng');
+            window.alert('Lỗi khi cập nhật thông tin người dùng');
           }
         } else {
           console.error('Một trong các trường dữ liệu là undefined');
+          window.alert('Một trong các trường dữ liệu là undefined');
         }
       } else {
         console.error('Không tồn tại tại thông tin của tài khoản này');
+        window.alert('Không tồn tại tại thông tin của tài khoản này');
       }
     } else {
       console.error('User ID is undefined');
+      window.alert('User ID is undefined');
     }
   }
 
@@ -257,27 +271,63 @@ export class PartnerProfileComponent implements OnInit {
 
       var user = await this.userService.getUserById(userId);
       if (user) {
-        if (this.nameText !== undefined) {
+        if (this.nameText !== undefined && this.addressText !== undefined && this.expText !== undefined) {
           user.full_name = this.nameText;
+          user.address = this.addressText;
+          user.exp = parseFloat(this.expText);
           var updatedUser = await this.userService.updateUser(user);
           if (updatedUser) {
             console.log('Thông tin người dùng được cập nhật thành công', updatedUser);
+            window.alert('Thông tin người dùng được cập nhật thành công');
+
           } else {
             console.error('Lỗi khi cập nhật thông tin người dùng');
+            window.alert('Lỗi khi cập nhật thông tin người dùng');
           }
         } else {
           console.error('Một trong các trường dữ liệu là undefined');
+          window.alert('Một trong các trường dữ liệu là undefined');
         }
       } else {
         console.error('Không tồn tại tại thông tin của tài khoản này');
+        window.alert('Không tồn tại tại thông tin của tài khoản này');
       }
     } else {
       console.error('User ID is undefined');
+      window.alert('User ID is undefined');
     }
   }
 
-  saveFe() {
+  async saveFe() {
+    if (this.userData?.user.id !== undefined) {
+      const userInfoId = this.userData?.userInfo.id;
 
+      var userInfo = await this.userInfoService.getUserInfoById(userInfoId);
+      if (userInfo) {
+        if (this.languageText !== undefined && this.cameraText !== undefined) {
+          userInfo.language = this.languageText;
+          userInfo.prize = this.languageText;
+
+          var updatedUserInfo = await this.userInfoService.updateUserInfo(userInfo);
+          if (updatedUserInfo) {
+            console.log('Thông tin người dùng được cập nhật thành công', updatedUserInfo);
+            window.alert('Thông tin người dùng được cập nhật thành công');
+          } else {
+            console.error('Lỗi khi cập nhật thông tin người dùng');
+            window.alert('Lỗi khi cập nhật thông tin người dùng');
+          }
+        } else {
+          console.error('Một trong các trường dữ liệu là undefined');
+          window.alert('Một trong các trường dữ liệu là undefined');
+        }
+      } else {
+        console.error('Không tồn tại tại thông tin của tài khoản này');
+        window.alert('Không tồn tại tại thông tin của tài khoản này');
+      }
+    } else {
+      console.error('User ID is undefined');
+      window.alert('User ID is undefined');
+    }
   }
 
   showAddPortfo() {

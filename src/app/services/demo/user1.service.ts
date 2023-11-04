@@ -33,6 +33,7 @@ export class User1Service {
               address: userData.address || '',
               avatar: userData.avatar || '',
               role_id: userData.role_id || 0,
+              exp: userData.exp || 0
             };
 
             users.push(user);
@@ -81,7 +82,7 @@ export class User1Service {
       const newUserId = await this.generateNewId();
       const newUserRef = ref(db, 'users/' + newUserId);
 
-      const newUser = {
+      const newUser: User = {
         id: newUserId,
         username: userData.username,
         password: userData.password,
@@ -89,6 +90,7 @@ export class User1Service {
         email: userData.email,
         phone_number: userData.phone_number,
         address: userData.address,
+        exp: userData.exp,
         avatar: userData.avatar,
         role_id: userData.role_id,
       };
@@ -112,7 +114,7 @@ export class User1Service {
       const app = initializeApp(environment.firebaseConfig);
       const db = getDatabase(app);
 
-      const up = {
+      const up: User = {
         id: updatedUser.id,
         username: updatedUser.username,
         password: updatedUser.password,
@@ -122,6 +124,7 @@ export class User1Service {
         address: updatedUser.address,
         avatar: updatedUser.avatar,
         role_id: updatedUser.role_id,
+        exp: updatedUser.exp
       };
 
       // Update the user info in Firebase

@@ -44,7 +44,7 @@
             <div class="forMe-content">
                 <div class="avatar-wrapper">
                     <div class="avatar">
-                        <img class="avatar-image" src="./assets/images/avatar/{{userData?.user?.avatar}}" alt="">
+                        <img class="avatar-image" src="{{userData?.user?.avatar}}" alt="">
                     </div>
                 </div>
                 <div class="des-forMe-wrapper">
@@ -52,7 +52,7 @@
                         {{userData?.user?.full_name}}
                     </h2>
                     <p class="des-forMe-address">
-                        Ba Đình, Hà Nội
+                        {{userData?.user?.address}}
                     </p>
                     <div class="des-forMe-rate">
                         <div class="rate-star">
@@ -64,7 +64,7 @@
                         </div>
                         <span class="rate-text">5.0</span>
                     </div>
-                    <p class="des-forMe-exp">13 năm kinh nghiệm</p>
+                    <p class="des-forMe-exp">{{userData?.user?.exp}} năm kinh nghiệm</p>
                 </div>
             </div>
         </div>
@@ -120,14 +120,14 @@
                             <img src="./assets/images/icons/translate.png" alt="">
                             <h3>Ngôn ngữ</h3>
                         </div>
-                        <p>Tiếng Việt</p>
+                        <p>{{userData?.userInfo?.language}}</p>
                     </div>
                     <div class="camera">
                         <div class="camera-title">
                             <img src="./assets/images/icons/camera.png" alt="">
                             <h3>Máy ảnh</h3>
                         </div>
-                        <p>Sony A7iii, LUMIX G9, Panasonic GH5</p>
+                        <p>{{userData?.userInfo?.camera}}</p>
                     </div>
                 </div>
             </div>
@@ -137,51 +137,17 @@
             <div class="portfolio">
                 <h3 class="portfolio-title">My Portfolio</h3>
                 <div class="portfolio-content">
-                    <div class="portfolio-item">
-                        <a routerLink="/collection">
+                    <div class="portfolio-item" *ngFor="let d of decesData?.category; let i = index">
+                        <a href="javascript:void(0);">
                             <div class="it-header">
-                                <img src="./assets/images/profile/op1.jpg" alt="">
+                                <img src="{{d.images[0]}}" alt="">
                             </div>
                             <div class="it-footer">
-                                <h3 class="it-cate">LookBook</h3>
-                                <span class="it-count-picture">30</span>
+                                <h3 class="it-cate">{{d.name}}</h3>
+                                <span class="it-count-picture">{{d.images.length}}</span>
                             </div>
                         </a>
                     </div>
-                    <div class="portfolio-item">
-                        <a routerLink="/collection">
-                            <div class="it-header">
-                                <img src="./assets/images/profile/op2.jpg" alt="">
-                            </div>
-                            <div class="it-footer">
-                                <h3 class="it-cate">LookBook</h3>
-                                <span class="it-count-picture">30</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="portfolio-item">
-                        <a routerLink="/collection">
-                            <div class="it-header">
-                                <img src="./assets/images/profile/op3.jpg" alt="">
-                            </div>
-                            <div class="it-footer">
-                                <h3 class="it-cate">LookBook</h3>
-                                <span class="it-count-picture">30</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="portfolio-item">
-                        <a routerLink="/collection">
-                            <div class="it-header">
-                                <img src="./assets/images/profile/op4.jpg" alt="">
-                            </div>
-                            <div class="it-footer">
-                                <h3 class="it-cate">LookBook</h3>
-                                <span class="it-count-picture">30</span>
-                            </div>
-                        </a>
-                    </div>
-
                 </div>
             </div>
 

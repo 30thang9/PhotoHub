@@ -63,11 +63,11 @@ export class RegisterComponent {
     this.validateExp();
   }
   onChangeCost(event: Event) {
-    this.exp = (event.target as HTMLInputElement).value;
+    this.cost = (event.target as HTMLInputElement).value;
     this.validateExp();
   }
   onChangeAddress(event: Event) {
-    this.exp = (event.target as HTMLInputElement).value;
+    this.address = (event.target as HTMLInputElement).value;
     this.validateExp();
   }
 
@@ -124,11 +124,11 @@ export class RegisterComponent {
     const files = input.files;
 
     if (files && files.length > 0) {
-      this.filesAddAvatar = Array.from(files);
+      this.filesAddAvatar = Array.from(files).slice(0, 1);
       this.avatarPreview = []; // Clear the previous previews
 
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
+      for (let i = 0; i < this.filesAddAvatar.length; i++) {
+        const file = this.filesAddAvatar[i];
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -207,11 +207,12 @@ export class RegisterComponent {
           username: this.email,
           password: this.password,
           full_name: this.fullName,
-          role_id: 3,
+          role_id: 2,
           email: '',
           phone_number: '',
           address: this.address,
-          avatar: urlsAvatar[0]
+          avatar: urlsAvatar[0],
+          exp: parseFloat(this.exp)
         };
 
         var user = await this.userService.createUser(newUser);
@@ -339,7 +340,7 @@ export class RegisterComponent {
     return !this.invalidAvatar;
   }
   private validatePicture(): boolean {
-    this.invalidPicture = this.filesAddPicture.length < 1 || this.filesAddPicture.length > 3;
+    this.invalidPicture = this.filesAddPicture.length !== 3;
     return !this.invalidPicture;
   }
 

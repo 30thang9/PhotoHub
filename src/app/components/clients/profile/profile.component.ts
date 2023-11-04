@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Deces } from 'src/app/models/deces.model';
 import { Order } from 'src/app/models/order.model';
 import { TypeOfPhoto } from 'src/app/models/typeOfPhoto.model';
 import { UserInfoDTO } from 'src/app/models/userInfoDTO.model';
+import { Deces1Service } from 'src/app/services/demo/deces1.service';
 import { Order1Service } from 'src/app/services/demo/order1.service';
 import { UserInfoDTO1Service } from 'src/app/services/demo/user-info-dto1.service';
 
@@ -15,7 +17,7 @@ import { UserInfoDTO1Service } from 'src/app/services/demo/user-info-dto1.servic
 export class ProfileComponent implements OnInit {
 
   userData: UserInfoDTO | null = null;
-
+  decesData: Deces | null = null;
 
   selectedDateU: string = '';
   selectedOptionTL: string = '';
@@ -35,7 +37,11 @@ export class ProfileComponent implements OnInit {
   costPreview: number = 300000;
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private orderService: Order1Service, private userInfoDTOService: UserInfoDTO1Service) {
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private orderService: Order1Service,
+    private userInfoDTOService: UserInfoDTO1Service,
+    private decesService: Deces1Service) {
     this.route.params.subscribe(params => {
       const id = params['id'];
 
@@ -52,6 +58,7 @@ export class ProfileComponent implements OnInit {
       if (id) {
         const user_id = parseInt(id, 10);
         this.loadUserInfoData(user_id);
+        this.loadDecesData(user_id);
       } else {
         console.error('ID not found in URL');
       }
@@ -69,6 +76,11 @@ export class ProfileComponent implements OnInit {
         console.error('Error loading user info:', error);
       }
     );
+  }
+
+  async loadDecesData(user_id: number) {
+    this.decesData = await this.decesService.getDecesByPartnerId(user_id);
+    console.log(this.decesData);
   }
 
   onDateChange(date: string) {

@@ -9,6 +9,7 @@ export interface User {
     phone_number: string;
     address: string;
     avatar: string;
+    exp: number;
     role_id: number;
     role?: Role;
 }

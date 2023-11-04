@@ -44,7 +44,7 @@
             <div class="forMe-content">
                 <div class="avatar-wrapper">
                     <div class="avatar">
-                        <img class="avatar-image" src="./assets/images/avatar/{{userData?.user?.avatar}}" alt="">
+                        <img class="avatar-image" src="{{userData?.user?.avatar}}" alt="">
                     </div>
                 </div>
                 <div class="des-forMe-wrapper">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <p class="des-forMe-address">
-                        Ba Đình, Hà Nội
+                        {{ addressText }}
                     </p>
                     <div class="des-forMe-rate">
                         <div class="rate-star">
@@ -69,14 +69,16 @@
                         </div>
                         <span class="rate-text">5.0</span>
                     </div>
-                    <p class="des-forMe-exp">13 năm kinh nghiệm</p>
+                    <p class="des-forMe-exp">{{ expText }}</p>
                     <div class="forMe-edit" [ngClass]="isShowForMeEdit ? 'show' : '' ">
                         <div class="des-forMe-name">
                             <input [ngModel]="nameText" (ngModelChange)="updateValue('nameText', $event)" />
                         </div>
-                        <input class="des-forMe-address" [ngModel]="" />
+                        <input class="des-forMe-address" [ngModel]="addressText"
+                            (ngModelChange)="updateValue('addressText', $event)" />
                         <!-- Ba Đình, Hà Nội -->
-                        <input class="des-forMe-exp" [ngModel]="" />
+                        <input class="des-forMe-exp" [ngModel]="expText"
+                            (ngModelChange)="updateValue('expText', $event)" />
                         <!-- 13 năm kinh nghiệm -->
                         <div class="btn-edit-control">
                             <a href="javascript:void(0)" class="btn-save" (click)="saveForMe()">Lưu</a>
@@ -234,7 +236,7 @@
                             </div>
                             <div class="it-footer">
                                 <h3 class="it-cate">{{d.name}}</h3>
-                                <span class="it-count-picture">30</span>
+                                <span class="it-count-picture">{{d.images.length}}</span>
                                 <div class="btn-portfolio-edit" (click)="toggleAsk(d.name)">
                                     <i class='bx bx-edit-alt'></i>
                                 </div>
