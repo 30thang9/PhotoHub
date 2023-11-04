@@ -3,8 +3,7 @@ import { UserService } from './user.service';
 import { OrderService } from './order.service';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError, combineLatest, map, of } from 'rxjs';
-import { Order } from '../models/order.model';
-import { OrderDTO } from '../models/orderDTO.model';
+import { OrderDTO } from 'src/app/models/orderDTO.model';
 
 @Injectable({
   providedIn: 'root'

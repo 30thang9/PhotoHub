@@ -2,8 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Role } from '../models/role.model';
+import { Role } from 'src/app/models/role.model';
 
 @Injectable({
     providedIn: 'root'

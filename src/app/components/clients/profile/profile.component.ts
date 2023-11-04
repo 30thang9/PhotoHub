@@ -5,8 +5,7 @@ import { TypeOfPhoto } from 'src/app/models/typeOfPhoto.model';
 import { UserInfoDTO } from 'src/app/models/userInfoDTO.model';
 import { Order1Service } from 'src/app/services/demo/order1.service';
 import { UserInfoDTO1Service } from 'src/app/services/demo/user-info-dto1.service';
-import { OrderService } from 'src/app/services/order.service';
-import { UserInfoDTOService } from 'src/app/services/user-info-dto.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -108,15 +107,9 @@ export class ProfileComponent implements OnInit {
   async onSubmit() {
     this.isError = false;
 
-    if (!this.selectedDateU || !this.selectedOptionTL || !this.selectedOptionType) {
+    if (!this.selectedDateU || !this.selectedOptionTL || !this.selectedOptionType || this.setTimeVal) {
       this.errorMessage = "Vui lòng điền đầy đủ thông tin";
       this.isError = true;
-      console.log(this.dateVal);
-      console.log(this.setTimeVal);
-      // console.log(this.selectedOptionTLVal);
-      // console.log(this.selectedOptionTypeVal);
-
-
     } else {
 
       if (this.partnerId !== 0) {

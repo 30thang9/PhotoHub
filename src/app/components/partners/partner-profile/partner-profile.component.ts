@@ -318,7 +318,7 @@ export class PartnerProfileComponent implements OnInit {
       this.imagePreviews.splice(index, 1);
       this.filesAddPortfo.splice(index, 1);
       const input = document.getElementById('image') as HTMLInputElement;
-      input.value = ''; // Clear the file input to remove the deleted file
+      input.value = '';
     }
   }
 

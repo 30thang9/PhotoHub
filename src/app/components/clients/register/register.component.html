@@ -19,50 +19,103 @@
         <div class="register-message">{{ registerMessage }}</div>
         <div class="register-content">
             <form (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                    <label for="username">Email</label>
-                    <input type="text" id="username" name="username" required (input)="onChangeEmail($event)"
-                        placeholder="quang@gmail.com">
-                    <span *ngIf="invalidEmail" class="validate-message">Vui lòng nhập email hợp lệ.</span>
-                </div>
-                <div class="form-group">
-                    <label for="fullName">Họ tên</label>
-                    <input type="text" id="fullName" name="fullName" required (input)="onChangeFullName($event)"
-                        placeholder="Nguyen Quang Nam">
-                    <span *ngIf="invalidFullName" class="validate-message">Vui lòng nhập họ tên.</span>
-                </div>
-                <div class="form-group">
-                    <label for="password">Mật khẩu</label>
-                    <div class="password-wrapper">
-                        <input [type]="isShowPassword ? 'text' : 'password'" id="password" name="password" required
-                            (input)="onChangePassword($event)">
-                        <a id="showPassword" [class.show]="isShowPassword" href="javascript:void(0)"
-                            (click)="togglePassword()">
-                            <i class='bx bx-show'></i>
-                        </a>
-                        <a id="hidePassword" [class.show]="!isShowPassword" href="javascript:void(0)"
-                            (click)="togglePassword()">
-                            <i class='bx bx-hide'></i>
-                        </a>
+                <div class="form-content">
+                    <div class="form-left">
+                        <div class="form-group">
+                            <label for="username">Email</label>
+                            <input type="text" id="username" name="username" required (input)="onChangeEmail($event)"
+                                placeholder="quang@gmail.com">
+                            <span *ngIf="invalidEmail" class="validate-message">Vui lòng nhập email hợp lệ.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="fullName">Họ tên</label>
+                            <input type="text" id="fullName" name="fullName" required (input)="onChangeFullName($event)"
+                                placeholder="Nguyen Quang Nam">
+                            <span *ngIf="invalidFullName" class="validate-message">Vui lòng nhập họ tên.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <div class="password-wrapper">
+                                <input [type]="isShowPassword ? 'text' : 'password'" id="password" name="password"
+                                    required (input)="onChangePassword($event)">
+                                <a id="showPassword" [class.show]="isShowPassword" href="javascript:void(0)"
+                                    (click)="togglePassword()">
+                                    <i class='bx bx-show'></i>
+                                </a>
+                                <a id="hidePassword" [class.show]="!isShowPassword" href="javascript:void(0)"
+                                    (click)="togglePassword()">
+                                    <i class='bx bx-hide'></i>
+                                </a>
+                            </div>
+                            <span *ngIf="invalidPassword" class="validate-message">Mật khẩu phải có ít nhất 6 ký
+                                tự.</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Xác nhận mật khẩu</label>
+                            <div class="password-wrapper">
+                                <input [type]="isShowConfirmPassword ? 'text' : 'password'" name="password" required
+                                    (input)="onChangeConfirmPassword($event)">
+                                <a id="showConfirmPassword" [class.show]="isShowConfirmPassword"
+                                    href="javascript:void(0)" (click)="toggleConfirmPassword()">
+                                    <i class='bx bx-show'></i>
+                                </a>
+                                <a id="hideConfirmPassword" [class.show]="!isShowConfirmPassword"
+                                    href="javascript:void(0)" (click)="toggleConfirmPassword()">
+                                    <i class='bx bx-hide'></i>
+                                </a>
+                            </div>
+                            <span *ngIf="invalidConfirmPassword" class="validate-message">Mật khẩu phải có ít nhất 6 ký
+                                tự
+                                và
+                                trùng mới mật khẩu ở trên.</span>
+                        </div>
                     </div>
-                    <span *ngIf="invalidPassword" class="validate-message">Mật khẩu phải có ít nhất 6 ký tự.</span>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Xác nhận mật khẩu</label>
-                    <div class="password-wrapper">
-                        <input [type]="isShowConfirmPassword ? 'text' : 'password'" name="password" required
-                            (input)="onChangeConfirmPassword($event)">
-                        <a id="showConfirmPassword" [class.show]="isShowConfirmPassword" href="javascript:void(0)"
-                            (click)="toggleConfirmPassword()">
-                            <i class='bx bx-show'></i>
-                        </a>
-                        <a id="hideConfirmPassword" [class.show]="!isShowConfirmPassword" href="javascript:void(0)"
-                            (click)="toggleConfirmPassword()">
-                            <i class='bx bx-hide'></i>
-                        </a>
+                    <div class="form-right">
+                        <div class="form-group">
+                            <label for="exprire">Số năm kinh nghiệm</label>
+                            <input min="0" type="number" required (input)="onChangeExp($event)">
+                            <span *ngIf="invalidExp" class="validate-message">Vui lòng nhập số năm kinh
+                                nghiệm</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="cost">Giá chụp cơ bản(x/1 tiếng)</label>
+                            <input min="0" type="number" required (input)="onChangeCost($event)">
+                            <span *ngIf="invalidCost" class="validate-message">Vui lòng nhập giá chụp ảnh</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Địa chỉ của bạn</label>
+                            <input type="text" required (input)="onChangeAddress($event)">
+                            <span *ngIf="invalidAddress" class="validate-message">Vui lòng nhập địa chỉ</span>
+                        </div>
                     </div>
-                    <span *ngIf="invalidConfirmPassword" class="validate-message">Mật khẩu phải có ít nhất 6 ký tự và
-                        trùng mới mật khẩu ở trên.</span>
+                </div>
+                <div class="form-groupk">
+                    <label>Ảnh đại diện</label>
+                    <label for="avatar" class="label-input-file">Chọn</label>
+                    <input type="file" accept="image/*" (change)="previewAvatar($event)" style="display: none;"
+                        id="avatar" required multiple>
+                    <span *ngIf="invalidAvatar" class="validate-message">Vui lòng chọn ảnh đại diện</span>
+                    <!-- Display the preview images -->
+                    <div *ngIf="avatarPreview.length > 0" class="avatar-preview">
+                        <div *ngFor="let preview of avatarPreview">
+                            <img [src]="preview" alt="Preview Image">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-groupk">
+                    <label for="picture">Ảnh bìa của bạn(3/3 ảnh)</label>
+                    <label for="picture-3" class="label-input-file">Chọn</label>
+                    <input multiple type="file" id="picture-3" accept="image/*" style="display:none;" required
+                        placeholder="Chọn 3 ảnh bìa" (change)="previewPicture($event)">
+                    <span *ngIf="invalidPicture" class="validate-message">Vui lòng chọn 3 ảnh bìa</span>
+                    <div *ngIf="picturePreview.length > 0" class="picture-review">
+                        <div *ngFor="let preview of picturePreview;let i = index">
+                            <img [src]="preview" alt="Preview Image">
+                            <a href="javascript:void(0)" class="btn-del-image" (click)="deletePicture(i)">
+                                <i class='bx bx-x'></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <button type="submit">Đăng ký</button>
             </form>

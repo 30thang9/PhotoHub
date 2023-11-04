@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderDTO } from 'src/app/models/orderDTO.model';
 import { OrderDTO1Service } from 'src/app/services/demo/order-dto1.service';
-import { OrderDTOService } from 'src/app/services/order-dto.service';
 
 @Component({
   selector: 'app-order-accept-admin',

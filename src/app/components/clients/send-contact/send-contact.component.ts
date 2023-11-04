@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Order1Service } from 'src/app/services/demo/order1.service';
-import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-send-contact',
@@ -53,8 +52,11 @@ export class SendContactComponent {
           order.cust_phone = this.phone;
           order.address = this.address;
           order.status = "cho_duyet";
-          var code = await this.orderService.generateUniqueOrderCode();
-          order.code = code.toString();
+          var code = "";
+          (await this.orderService.generateUniqueOrderCode()).subscribe((uniqueOrderCode) => {
+            code = uniqueOrderCode;
+          });
+          order.code = code;
           var updatedOrder = await this.orderService.updateOrder(order);
           if (updatedOrder) {
             // Xử lý khi đơn hàng được cập nhật thành công

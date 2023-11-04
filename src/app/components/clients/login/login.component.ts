@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { Role } from 'src/app/models/role.model';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import { User1Service } from 'src/app/services/demo/user1.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +18,7 @@ export class LoginComponent {
   loginMessage: string = '';
 
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: User1Service, private router: Router) { }
 
   onChangeEmail(event: Event) {
     this.email = (event.target as HTMLInputElement).value;
@@ -36,31 +34,22 @@ export class LoginComponent {
     this.isShowPassword = !this.isShowPassword;
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.validateEmail() && this.validatePassword()) {
-      this.userService.getUserByUsername(this.email).subscribe((user: User | null) => {
-        if (user) {
-          this.userService.getRoles().subscribe((roles: Role[]) => {
-            const userRole = roles.find(role => role.id === user.role_id);
-            if (userRole) {
-              this.loginMessage = `Đăng nhập thành công với vai trò: ${userRole.name}`;
-              if (user.role_id === 1) {
-                this.router.navigate(['/admin/home']);
-              } else if (user.role_id === 2) {
-                var route = "/partner/" + user.id;
-                this.router.navigate([route]);
-              }
-              else {
-                this.router.navigate(['/home']);
-              }
-            } else {
-              this.loginMessage = 'Vai trò không hợp lệ';
-            }
-          });
-        } else {
-          this.loginMessage = 'Sai email hoặc mật khẩu';
+      var user = await this.userService.getUserByUsername(this.email);
+      if (user) {
+        if (user.role_id === 1) {
+          this.router.navigate(['/admin/home']);
+        } else if (user.role_id === 2) {
+          var route = "/partner/" + user.id;
+          this.router.navigate([route]);
         }
-      });
+        else {
+          this.router.navigate(['/home']);
+        }
+      } else {
+        this.loginMessage = 'Sai email hoặc mật khẩu';
+      }
     } else {
       // Trường hợp các hàm validate trả về false
       this.validateEmail();

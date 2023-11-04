@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
+import { User1Service } from 'src/app/services/demo/user1.service';
 
 @Component({
   selector: 'app-user-list',
@@ -10,11 +10,9 @@ import { UserService } from 'src/app/services/user.service';
 export class UserListComponent implements OnInit {
   users: User[] = [];
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: User1Service) { }
 
-  ngOnInit(): void {
-    this.userService.getUsers().subscribe((data) => {
-      this.users = data;
-    });
+  async ngOnInit(): Promise<void> {
+    this.users = await this.userService.getUsers();
   }
 }

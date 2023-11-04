@@ -72,9 +72,101 @@
             form {
                 width: 100%;
 
-                .form-group {
+                .form-content {
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    column-gap: 1rem;
+
+                    .form-left {
+                        grid-column: span 1;
+                    }
+
+                    .form-right {
+                        grid-column: span 1;
+
+                    }
+
+                    .form-group {
+                        position: relative;
+                        margin-bottom: 15px;
+
+                        label {
+                            display: block;
+                            margin-bottom: 5px;
+                            color: gray;
+                            font-weight: 600;
+                            font-size: 18px;
+                        }
+
+                        input {
+                            width: 100%;
+                            padding: 15px 10px;
+                            border: 2px solid gray;
+                            border-radius: 5px;
+                            background-color: transparent;
+                            outline: none;
+
+                            &:focus {
+                                border-color: var(--color-primary);
+                            }
+                        }
+
+                        .password-wrapper {
+                            position: relative;
+
+                            #hidePassword,
+                            #showPassword,
+                            #hideConfirmPassword,
+                            #showConfirmPassword {
+                                position: absolute;
+                                right: 10px;
+                                top: calc(50% + 3px);
+                                transform: translateY(-50%);
+                                text-decoration: none;
+                                font-size: 20px;
+                                color: var(--color-primary);
+                                display: none;
+
+                                i {}
+
+                            }
+
+                            #hidePassword.show,
+                            #showPassword.show,
+                            #hideConfirmPassword.show,
+                            #showConfirmPassword.show {
+                                display: block;
+                            }
+                        }
+
+                        .validate-message {
+                            width: 100%;
+                            font-size: 14px;
+                            color: rgb(255, 24, 24);
+                        }
+
+                        .forgot-password {
+                            position: absolute;
+                            top: 100%;
+                            color: var(--color-primary);
+                            width: 100%;
+                            right: 0;
+                            text-align: right;
+                        }
+                    }
+
+
+                }
+
+                .form-groupk {
                     position: relative;
                     margin-bottom: 15px;
+
+                    .validate-message {
+                        width: 100%;
+                        font-size: 14px;
+                        color: rgb(255, 24, 24);
+                    }
 
                     label {
                         display: block;
@@ -84,60 +176,73 @@
                         font-size: 18px;
                     }
 
-                    input {
-                        width: 100%;
-                        padding: 15px 10px;
-                        border: 2px solid gray;
+                    .label-input-file {
+                        background-color: var(--color-secondary);
+                        // color: #fff;
+                        padding: 5px;
+                        width: 70px;
+                        border: 1px solid black;
                         border-radius: 5px;
-                        background-color: transparent;
-                        outline: none;
-
-                        &:focus {
-                            border-color: var(--color-primary);
-                        }
-                    }
-
-                    .password-wrapper {
-                        position: relative;
-
-                        #hidePassword,
-                        #showPassword,
-                        #hideConfirmPassword,
-                        #showConfirmPassword {
-                            position: absolute;
-                            right: 10px;
-                            top: calc(50% + 3px);
-                            transform: translateY(-50%);
-                            text-decoration: none;
-                            font-size: 20px;
-                            color: var(--color-primary);
-                            display: none;
-
-                            i {}
-
-                        }
-
-                        #hidePassword.show,
-                        #showPassword.show,
-                        #hideConfirmPassword.show,
-                        #showConfirmPassword.show {
-                            display: block;
-                        }
-                    }
-
-                    .validate-message {
-                        width: 100%;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        cursor: pointer;
                         font-size: 14px;
-                        color: rgb(255, 24, 24);
                     }
 
-                    .forgot-password {
-                        position: absolute;
-                        top: 100%;
-                        color: var(--color-primary);
-                        width: 100%;
-                        right: 0;
-                        text-align: right;
+                    input[type="file"] {
+                        display: none;
+                    }
+
+                    .picture-review {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        gap: 1rem;
+                        padding-top: 1rem;
+
+                        img {
+                            width: 200px;
+                            height: 200px;
+                            object-fit: cover;
+                        }
+
+                        div {
+                            position: relative;
+
+                            .btn-del-image {
+                                position: absolute;
+                                top: -.4rem;
+                                right: -.3rem;
+                                font-size: 22px;
+                                width: 22px;
+                                height: 22px;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                border-radius: 50%;
+                                background-color: var(--color-secondary);
+                                text-decoration: none;
+                                color: black;
+                                padding-top: 1px;
+                            }
+                        }
+                    }
+
+                    .avatar-preview {
+                        div {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            img {
+                                width: 200px;
+                                height: 200px;
+                                object-fit: cover;
+                                border-radius: 50%;
+                            }
+                        }
                     }
                 }
 
@@ -274,6 +379,17 @@
                     }
                 }
             }
+        }
+    }
+
+    .form-content {
+        .form-left {
+            grid-column: span 2 !important;
+        }
+
+        .form-right {
+            grid-column: span 2 !important;
+
         }
     }
 }
