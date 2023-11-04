@@ -36,7 +36,10 @@ export class RegisterComponent {
   registerMessage: string = '';
 
 
-  constructor(private userService: User1Service, private userInfoService: UserInfo1Service, private router: Router, private fileStorage: AngularFireStorage) { }
+  constructor(private userService: User1Service,
+    private userInfoService: UserInfo1Service,
+    private router: Router,
+    private fileStorage: AngularFireStorage) { }
 
   onChangeEmail(event: Event) {
     this.email = (event.target as HTMLInputElement).value;

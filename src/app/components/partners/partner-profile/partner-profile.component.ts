@@ -48,6 +48,7 @@ export class PartnerProfileComponent implements OnInit {
 
   isShowAskRepair: boolean = false;
   isShowAddPortfo: boolean = false;
+  isShowWarehouse: boolean = false;
 
   modalName: string = "";
   modalImagesRepair: string[] = [];
@@ -104,6 +105,8 @@ export class PartnerProfileComponent implements OnInit {
       (userData) => {
         this.userData = userData;
         this.nameText = this.userData?.user.full_name || "";
+        this.addressText = this.userData?.user.address || "";
+        this.expText = this.userData?.user.exp.toString() || "";
         this.desText = this.userData?.userInfo.description || "";
         this.prizeText = this.userData?.userInfo.prize || "";
         this.interestText = this.userData?.userInfo.interest || "";
@@ -162,7 +165,8 @@ export class PartnerProfileComponent implements OnInit {
           status: 'cho_duyet',
           address: "",
           price: '',
-          link_down: ''
+          link_down: '',
+          des_refund: ''
         };
 
         var addedOrder = await this.orderService.createOrder(order);
@@ -202,6 +206,14 @@ export class PartnerProfileComponent implements OnInit {
   }
   hideFeEdit() {
     this.isShowFeEdit = false;
+  }
+
+  toggleWarehouse() {
+    this.isShowWarehouse = !this.isShowWarehouse;
+  }
+
+  hideWarehouse() {
+    this.isShowWarehouse = true; // Set isShowWarehouse to false to hide the menu
   }
 
   updateValue(fieldName: string, newValue: string) {

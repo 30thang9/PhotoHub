@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Order1Service } from 'src/app/services/demo/order1.service';
 
 @Component({
   selector: 'app-refund-picture',
@@ -14,6 +16,9 @@ export class RefundPictureComponent {
   email: string = '';
   phone: string = '';
   code: string = '';
+
+  constructor(private orderService: Order1Service,
+    private router: Router) { }
 
   onChangePhone(event: Event) {
     let inputPhone = (event.target as HTMLInputElement).value;
@@ -31,11 +36,17 @@ export class RefundPictureComponent {
     this.validateCode();
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.validateEmail() && this.validatePhone() && this.validateCode()) {
-      // Thực hiện xử lý gửi dữ liệu khi cả email và số điện thoại hợp lệ
-      // Ví dụ: this.refundService.submitRefund(this.name, this.email, this.phone);
-      this.isError = true;
+      const order = await this.orderService.getOrderByCode(this.code);
+      if (order) {
+        var route = '/refund-pc/' + order.id;
+        window.alert('true');
+        this.router.navigate([route]);
+      } else {
+
+        this.isError = true;
+      }
     } else {
       this.validateEmail();
       this.validatePhone();

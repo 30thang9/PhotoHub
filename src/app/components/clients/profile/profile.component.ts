@@ -142,7 +142,8 @@ export class ProfileComponent implements OnInit {
           status: 'chua_dien_tt',
           address: "",
           price: price.toString(),
-          link_down: ''
+          link_down: '',
+          des_refund: ''
         };
 
         var newOrder = await this.orderService.createOrder(order);

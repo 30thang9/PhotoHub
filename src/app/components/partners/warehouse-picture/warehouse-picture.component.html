@@ -1,0 +1,38 @@
+<div class="page-pr-wrapper">
+    <div class="page-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h2>
+                    <a [routerLink]="['/partner', partnerId]">
+                        <i class='bx bx-left-arrow-alt'></i>
+                    </a>
+                    Kho trả ảnh khách hàng
+                </h2>
+                <p>Nhiếp ảnh gia trả ảnh cho khách hàng của mình tại đây.</p>
+            </div>
+            <div class="header-right">
+                <a [routerLink]="['/partner', partnerId]"><i class='bx bx-chevron-left'></i>Quay lại</a>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="list-order-wrapper">
+            <div class="order-content">
+                <div class="order-item" *ngFor="let o of orders">
+                    <div class="item-info">
+
+                    </div>
+                    <div class="item-info">
+
+                    </div>
+                    <div class="item-info">
+
+                    </div>
+                    <div class="item-info">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

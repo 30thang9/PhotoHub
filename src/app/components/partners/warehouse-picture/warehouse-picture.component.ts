@@ -4,13 +4,13 @@ import { Order } from 'src/app/models/order.model';
 import { Order1Service } from 'src/app/services/demo/order1.service';
 
 @Component({
-  selector: 'app-page-picture-refund',
-  templateUrl: './page-picture-refund.component.html',
-  styleUrls: ['./page-picture-refund.component.scss']
+  selector: 'app-warehouse-picture',
+  templateUrl: './warehouse-picture.component.html',
+  styleUrls: ['./warehouse-picture.component.scss']
 })
-export class PagePictureRefundComponent {
-  orderId!: number;
-  order!: Order;
+export class WarehousePictureComponent {
+  partnerId!: number;
+  orders: Order[] = [];
   isShowAskRepair: boolean = false;
   isDropdownOpen: boolean = false;
 
@@ -21,7 +21,7 @@ export class PagePictureRefundComponent {
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.orderId = parseInt(id, 10);
+        this.partnerId = parseInt(id, 10);
       } else {
         console.error('ID not found in URL');
       }
@@ -31,17 +31,11 @@ export class PagePictureRefundComponent {
     this.route.params.subscribe(async params => {
       const id = params['id'];
       if (id) {
-        const order_id = parseInt(id, 10);
-        this.orderService.getOrderById(order_id)
-          .then(order => {
-            if (order !== null) {
-              this.order = order;
-            }
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      } else {
+        const partner_id = parseInt(id, 10);
+        this.orders = await this.orderService.getOrderByPartnerId(partner_id);
+        this.orders = this.orders.filter(order => order.status === "da_duyet");
+      }
+      else {
         console.error('ID not found in URL');
       }
     });

@@ -69,7 +69,7 @@
                         </div>
                         <span class="rate-text">5.0</span>
                     </div>
-                    <p class="des-forMe-exp">{{ expText }}</p>
+                    <p class="des-forMe-exp">{{ expText }} năm kinh nghiệm</p>
                     <div class="forMe-edit" [ngClass]="isShowForMeEdit ? 'show' : '' ">
                         <div class="des-forMe-name">
                             <input [ngModel]="nameText" (ngModelChange)="updateValue('nameText', $event)" />
@@ -538,4 +538,20 @@
             </div>
         </div>
     </div>
+
+    <div class="toggle-warehouse-wrapper" (click)="toggleWarehouse()">
+        <i class='bx bx-left-arrow-circle'></i>
+        <div class="warehouse-menu" *ngIf="isShowWarehouse">
+            <div>
+                <a [routerLink]="['/ware-house', partnerId]">Kho ảnh trả</a>
+            </div>
+            <div>
+                <a routerLink="">Kho ảnh yêu cầu sửa</a>
+            </div>
+            <a href="javascript:void(0);" class="close-warehouse" (click)="hideWarehouse()">
+                <i class="bx bx-x"></i>
+            </a>
+        </div>
+    </div>
+
 </div>

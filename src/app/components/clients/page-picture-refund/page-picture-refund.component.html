@@ -11,10 +11,10 @@
         </div>
     </div>
     <div class="page-content">
-        <div class="btn-control-wrapper">
+        <!-- <div class="btn-control-wrapper">
             <a href="javascript:void(0)" class="btn-control active">23/09/2023</a>
             <a href="javascript:void(0)" class="btn-control">15/09/2023</a>
-        </div>
+        </div> -->
         <div class="picture-wrapper">
             <div class="picture-content">
                 <div class="picture-item">
@@ -36,9 +36,18 @@
         </div>
         <div class="link-dow-wrapper">
             <div class="link-dow-content">
-                <a href="javascript:void(0)" class="btn-get-link">
-                    Link Download
-                </a>
+                <ng-container *ngIf="order.link_down !== ''; else elseBlock">
+                    <a href="{{order.link_down}}" target="_blank" class="btn-get-link">
+                        Link Download
+                    </a>
+                </ng-container>
+
+                <ng-template #elseBlock>
+                    <a href="javascript:void(0);" class="btn-get-link">
+                        Link Download
+                    </a>
+                </ng-template>
+
                 <span>File ảnh có định dang JPEG</span>
             </div>
             <div class="link-dow-footer">

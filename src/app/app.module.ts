@@ -44,6 +44,7 @@ import { FirestoreModule } from "@angular/fire/firestore";
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { initializeApp } from 'firebase/app';
+import { WarehousePictureComponent } from './components/partners/warehouse-picture/warehouse-picture.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { initializeApp } from 'firebase/app';
     OrderAcceptAdminComponent,
     PartnerProfileComponent,
     Test1Component,
+    WarehousePictureComponent,
   ],
   imports: [
     BrowserModule,

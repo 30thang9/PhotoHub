@@ -36,7 +36,8 @@ export class Order1Service {
               price: orderData.price,
               status: orderData.status,
               code: orderData.code,
-              link_down: orderData.link_down
+              link_down: orderData.link_down,
+              des_refund: orderData.des_refund
             };
 
             orders.push(order);
@@ -44,6 +45,86 @@ export class Order1Service {
         }
 
         resolve(orders); // Trả về danh sách người dùng khi hoàn thành
+      });
+    });
+  }
+
+  getOrderByPartnerId(partnerId: number): Promise<Order[]> {
+    return new Promise((resolve, reject) => {
+      const app = initializeApp(environment.firebaseConfig);
+      const db = getDatabase(app);
+      const starCountRef = ref(db, 'orders/');
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const orders = [];
+
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const orderData = data[key];
+            if (orderData.partner_id === partnerId) {
+              const order: Order = {
+                id: orderData.id,
+                order_date: orderData.order_date,
+                time: orderData.time,
+                appoi_time: orderData.appoi_time,
+                shooting_type: orderData.shooting_type,
+                partner_id: orderData.partner_id,
+                cust_name: orderData.cust_name,
+                cust_email: orderData.cust_email,
+                cust_phone: orderData.cust_phone,
+                address: orderData.address,
+                price: orderData.price,
+                status: orderData.status,
+                code: orderData.code,
+                link_down: orderData.link_down,
+                des_refund: orderData.des_refund
+              };
+
+              orders.push(order);
+            }
+          }
+        }
+        resolve(orders);
+      });
+    });
+  }
+
+  getOrderByStatus(status: string): Promise<Order[]> {
+    return new Promise((resolve, reject) => {
+      const app = initializeApp(environment.firebaseConfig);
+      const db = getDatabase(app);
+      const starCountRef = ref(db, 'orders/');
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const orders = [];
+
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const orderData = data[key];
+            if (orderData.status === status) {
+              const order: Order = {
+                id: orderData.id,
+                order_date: orderData.order_date,
+                time: orderData.time,
+                appoi_time: orderData.appoi_time,
+                shooting_type: orderData.shooting_type,
+                partner_id: orderData.partner_id,
+                cust_name: orderData.cust_name,
+                cust_email: orderData.cust_email,
+                cust_phone: orderData.cust_phone,
+                address: orderData.address,
+                price: orderData.price,
+                status: orderData.status,
+                code: orderData.code,
+                link_down: orderData.link_down,
+                des_refund: orderData.des_refund
+              };
+
+              orders.push(order);
+            }
+          }
+        }
+        resolve(orders);
       });
     });
   }
@@ -59,16 +140,27 @@ export class Order1Service {
     }
   }
 
-  async getOrderByPartnerId(partnerId: number): Promise<Order | null> {
+  async getOrderByCode(code: string): Promise<Order | null> {
     try {
-      const orderInfos = await this.getOrders();
-      const orderInfo = orderInfos.find((Order) => Order.partner_id === partnerId);
-      return orderInfo || null;
+      const orders = await this.getOrders();
+      const order = orders.find((order) => order.code === code);
+      return order || null;
     } catch (error) {
-      console.error('Error fetching Order by Ordername', error);
+      console.error('Error fetching Order by code:', error);
       return null;
     }
   }
+
+  // async getOrderByPartnerId(partnerId: number): Promise<Order[]> {
+  //   try {
+  //     const orderInfos = await this.getOrders();
+  //     const orderInfo = orderInfos.filter((Order) => Order.partner_id === partnerId);
+  //     return orderInfo;
+  //   } catch (error) {
+  //     console.error('Error fetching Order by Ordername', error);
+  //     return [];
+  //   }
+  // }
 
 
   async createOrder(orderData: Order): Promise<Order | null> {
@@ -78,7 +170,7 @@ export class Order1Service {
       const newOrderId = await this.generateNewId();
       const newOrderRef = ref(db, 'orders/' + newOrderId);
 
-      const newOrder = {
+      const newOrder: Order = {
         id: newOrderId,
         order_date: orderData.order_date,
         time: orderData.time,
@@ -92,7 +184,8 @@ export class Order1Service {
         price: orderData.price,
         status: orderData.status,
         code: orderData.code,
-        link_down:orderData.link_down
+        link_down: orderData.link_down,
+        des_refund: orderData.des_refund
       };
 
       await set(newOrderRef, newOrder);
@@ -114,7 +207,7 @@ export class Order1Service {
       const app = initializeApp(environment.firebaseConfig);
       const db = getDatabase(app);
 
-      const up = {
+      const up: Order = {
         id: orderData.id,
         order_date: orderData.order_date,
         time: orderData.time,
@@ -128,6 +221,8 @@ export class Order1Service {
         price: orderData.price,
         status: orderData.status,
         code: orderData.code,
+        link_down: orderData.link_down,
+        des_refund: orderData.des_refund
       };
 
       // Update the Order info in Firebase
