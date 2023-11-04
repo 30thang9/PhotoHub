@@ -70,6 +70,10 @@
                 border-radius: 4px;
             }
 
+            input[type="time"]::-webkit-datetime-edit-second-field {
+                display: none;
+            }
+
             /* Định dạng cho nút Đặt lịch */
             a {
                 background-color: #007bff;

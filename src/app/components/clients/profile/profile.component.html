@@ -276,7 +276,8 @@
                 </div>
                 <div class="set-time">
                     <label for="gio-hen">Giờ hẹn:</label>
-                    <input [(ngModel)]="setTimeVal" type="time" id="gio-hen" name="gio-hen" required>
+                    <input [(ngModel)]="setTimeVal" type="time" id="gio-hen" name="gio-hen"
+                        pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" placeholder="hh:mm" required>
                 </div>
 
                 <div class="filter-type">

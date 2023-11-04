@@ -119,7 +119,7 @@ export class ProfileComponent implements OnInit {
   async onSubmit() {
     this.isError = false;
 
-    if (!this.selectedDateU || !this.selectedOptionTL || !this.selectedOptionType || this.setTimeVal) {
+    if (!this.selectedDateU || !this.selectedOptionTL || !this.selectedOptionType || !this.setTimeVal) {
       this.errorMessage = "Vui lòng điền đầy đủ thông tin";
       this.isError = true;
     } else {
