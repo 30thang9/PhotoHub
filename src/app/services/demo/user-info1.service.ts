@@ -56,6 +56,16 @@ export class UserInfo1Service {
       return null;
     }
   }
+  async getUserInfoByUserId(id: number): Promise<UserInfo | null> {
+    try {
+      const userInfos = await this.getUserInfos();
+      const userInfo = userInfos.find((info) => info.user_id === id);
+      return userInfo || null;
+    } catch (error) {
+      console.error('Error fetching user info by ID:', error);
+      return null;
+    }
+  }
 
 
   async createUserInfo(userInfoData: UserInfo): Promise<UserInfo | null> {
@@ -138,6 +148,12 @@ export class UserInfo1Service {
   async generateNewId(): Promise<number> {
     const users = await this.getUserInfos();
     const maxId = users.length === 0 ? 0 : Math.max(...users.map((user) => user.id));
+    return maxId + 1;
+  }
+
+  async generateNewTyOfPhotoId(user: UserInfo): Promise<number> {
+    const types = user.typeOfPhoto;
+    const maxId = types?.length === 0 ? 0 : Math.max(...types.map((t) => t.id));
     return maxId + 1;
   }
 

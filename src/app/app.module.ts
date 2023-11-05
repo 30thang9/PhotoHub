@@ -46,6 +46,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { initializeApp } from 'firebase/app';
 import { WarehousePictureComponent } from './components/partners/warehouse-picture/warehouse-picture.component';
 import { WarehouseRepairComponent } from './components/partners/warehouse-repair/warehouse-repair.component';
+import { ImageCarouselComponent } from './components/common/image-carousel/image-carousel.component';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { WarehouseRepairComponent } from './components/partners/warehouse-repair
     Test1Component,
     WarehousePictureComponent,
     WarehouseRepairComponent,
+    ImageCarouselComponent,
   ],
   imports: [
     BrowserModule,

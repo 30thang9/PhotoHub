@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Deces } from 'src/app/models/deces.model';
 import { Order } from 'src/app/models/order.model';
@@ -11,6 +11,11 @@ import { User1Service } from 'src/app/services/demo/user1.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Category } from 'src/app/models/category.model';
 import { v4 as uuidv4 } from 'uuid';
+import { Review1Service } from 'src/app/services/demo/review1.service';
+import { Review } from 'src/app/models/review.model';
+import { UserInfo } from 'src/app/models/userInfo.model';
+import { TypeOfPhoto } from 'src/app/models/typeOfPhoto.model';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-partner-profile',
@@ -20,6 +25,9 @@ import { v4 as uuidv4 } from 'uuid';
 export class PartnerProfileComponent implements OnInit {
   userData: UserInfoDTO | null = null;
   decesData: Deces | null = null;
+  reviewData: Review[] = [];
+  infoData!: UserInfo | null;
+
   selectedDateU: string = '';
   selectedOptionTL: string = '';
   selectedOptionType: string = '';
@@ -32,7 +40,9 @@ export class PartnerProfileComponent implements OnInit {
 
   partnerId: number = 0;
 
-  isShowOrder: boolean = false;
+  isShowOrder: boolean = true;
+  isShowBtnCloseOrder: boolean = false;
+
   isShowForMeEdit: boolean = false;
   isShowIcEdit: boolean = false;
   isShowFeEdit: boolean = false;
@@ -48,10 +58,20 @@ export class PartnerProfileComponent implements OnInit {
 
   isShowAskRepair: boolean = false;
   isShowAddPortfo: boolean = false;
-  isShowWarehouse: boolean = false;
+
+  isShowWarehouse: boolean = true;
+  isShowBtnCloseWarehouse: boolean = false;
+
 
   modalName: string = "";
   modalImagesRepair: string[] = [];
+
+  review1Star = ['bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
+  review2Star = ['bx bxs-star', 'bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
+  review3Star = ['bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bx-star', 'bx bx-star'];
+  review4Star = ['bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bx-star'];
+  review5Star = ['bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bxs-star'];
+  countRate = 0;
 
   toggleAsk(name: string) {
     this.isShowAskRepair = !this.isShowAskRepair;
@@ -73,9 +93,10 @@ export class PartnerProfileComponent implements OnInit {
     private userInfoDTOService: UserInfoDTO1Service,
     private userInfoService: UserInfo1Service,
     private userService: User1Service,
+    private reviewService: Review1Service,
     private decesService: Deces1Service,
     private fileStorage: AngularFireStorage) {
-
+    this.checkScreenSize();
     this.route.params.subscribe(params => {
       const id = params['id'];
 
@@ -87,6 +108,28 @@ export class PartnerProfileComponent implements OnInit {
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    if (window.innerWidth < 992) {
+      this.isShowWarehouse = false;
+      this.isShowBtnCloseWarehouse = true;
+
+      this.isShowOrder = false;
+      this.isShowBtnCloseOrder = true;
+    } else {
+      this.isShowWarehouse = true;
+      this.isShowBtnCloseWarehouse = false;
+
+      this.isShowOrder = true;
+      this.isShowBtnCloseOrder = false;
+    }
+  }
+
+
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       const id = params['id'];
@@ -94,10 +137,27 @@ export class PartnerProfileComponent implements OnInit {
         const user_id = parseInt(id, 10);
         this.loadUserInfoData(user_id);
         this.loadDecesData(user_id);
+        this.loadReviewData(user_id);
+        this.loadInfo(user_id);
       } else {
         console.error('ID not found in URL');
       }
     });
+  }
+
+  async loadReviewData(user_id: number) {
+    this.reviewData = await this.reviewService.getReviewByPartnerId(user_id);
+    var c = 0.0;
+    var i = 0;
+    this.reviewData.forEach(r => {
+      c += r.rate;
+      i++;
+    });
+    if (i > 0) {
+      this.countRate = parseFloat((c / i).toFixed(1));;
+    } else {
+      this.countRate = 0.0;
+    }
   }
 
   loadUserInfoData(user_id: number) {
@@ -181,14 +241,6 @@ export class PartnerProfileComponent implements OnInit {
   }
 
 
-  showOrder() {
-    this.isShowOrder = true;
-  }
-
-  hideOrder() {
-    this.isShowOrder = false;
-  }
-
   showForMeEdit() {
     this.isShowForMeEdit = true;
   }
@@ -208,12 +260,20 @@ export class PartnerProfileComponent implements OnInit {
     this.isShowFeEdit = false;
   }
 
+  showOrder() {
+    this.isShowOrder = !this.isShowOrder;
+  }
+
+  hideOrder() {
+    this.isShowOrder = false;
+  }
+
   toggleWarehouse() {
     this.isShowWarehouse = !this.isShowWarehouse;
   }
 
   hideWarehouse() {
-    this.isShowWarehouse = true; // Set isShowWarehouse to false to hide the menu
+    this.isShowWarehouse = false;
   }
 
   updateValue(fieldName: string, newValue: string) {
@@ -555,5 +615,85 @@ export class PartnerProfileComponent implements OnInit {
   }
 
 
+  isShowAddCate: boolean = false;
+  cate_name: string = "";
+  cate_cost: string = "";
+  showAddCate() {
+    this.isShowAddCate = !this.isShowAddCate;
+  }
+  closeNewCate() {
+    this.isShowAddCate = !this.isShowAddCate;
+  }
+  async addNewCate() {
+    if (this.cate_cost == "" || this.cate_name == "") {
+      window.alert("Nhập đủ tên và giá");
+    }
+    else {
+      var userInfo = await this.userInfoService.getUserInfoByUserId(this.partnerId);
+      if (userInfo) {
+        var newTypeId = await this.userInfoService.generateNewTyOfPhotoId(userInfo);
+        var type: TypeOfPhoto = {
+          id: newTypeId,
+          name: this.cate_name,
+          cost: this.cate_cost
+        }
+        userInfo.typeOfPhoto.push(type);
+        var u = await this.userInfoService.updateUserInfo(userInfo);
+        if (u) {
+          window.alert("Thành công");
+        } else {
+          window.alert("Thất bại");
+        }
+      }
+    }
+  }
+
+  isShowEditCate: boolean = false;
+  // cate_name: string = "";
+  // cate_cost: string = "";
+  async loadInfo(userId: number) {
+    this.infoData = await this.userInfoService.getUserInfoByUserId(userId);
+    if (this.infoData == null) {
+      console.log('hu');
+    } else {
+      console.log('hui');
+      console.log(this.infoData);
+    }
+
+  }
+  showEditCate() {
+    this.isShowEditCate = !this.isShowEditCate;
+  }
+  closeEditCate() {
+    this.isShowEditCate = !this.isShowEditCate;
+  }
+  async editCate() {
+
+    if (this.infoData) {
+      if (!this.validTypeOfPhoto(this.infoData.typeOfPhoto)) {
+        window.alert("Nhập đủ tên và giá");
+      } else {
+        var u = await this.userInfoService.updateUserInfo(this.infoData);
+        if (u) {
+          window.alert("Thành công");
+        } else {
+          window.alert("Thất bại");
+        }
+      }
+    }
+
+  }
+
+  validTypeOfPhoto(typeOfPhoto: TypeOfPhoto[]) {
+    var isValid = true;
+    typeOfPhoto.forEach(t => {
+      if (t) {
+        if (t.name === "" || t.cost === "") {
+          isValid = false;
+        }
+      }
+    });
+    return isValid;
+  }
 
 }

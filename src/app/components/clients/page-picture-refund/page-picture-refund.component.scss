@@ -185,7 +185,8 @@
                             border: none;
                             outline: none;
                             resize: none;
-                            padding: .25rem 0;
+                            padding: .25rem .5rem;
+                            background-color: var(--color-secondary);
 
                             &::-webkit-scrollbar {
                                 width: 10px;

@@ -61,13 +61,26 @@
                     </p>
                     <div class="des-forMe-rate">
                         <div class="rate-star">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
+                            <ng-container *ngIf="countRate > 0 && countRate <= 1">
+                                <i *ngFor="let r of review1Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 1 && countRate <= 2">
+                                <i *ngFor="let r of review2Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 2 && countRate <= 3">
+                                <i *ngFor="let r of review3Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 3 && countRate <= 4">
+                                <i *ngFor="let r of review4Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 4 && countRate <= 5">
+                                <i *ngFor="let r of review5Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate === 0">
+                                <i *ngFor="let r of review5Star" [class]="r"></i>
+                            </ng-container>
                         </div>
-                        <span class="rate-text">5.0</span>
+                        <span class="rate-text">{{countRate}}</span>
                     </div>
                     <p class="des-forMe-exp">{{ expText }} năm kinh nghiệm</p>
                     <div class="forMe-edit" [ngClass]="isShowForMeEdit ? 'show' : '' ">
@@ -296,29 +309,61 @@
                     <h3>Đánh Giá</h3>
                     <div class="rate">
                         <div class="rate-star">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
+                            <ng-container *ngIf="countRate > 0 && countRate <= 1">
+                                <i *ngFor="let r of review1Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 1 && countRate <= 2">
+                                <i *ngFor="let r of review2Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 2 && countRate <= 3">
+                                <i *ngFor="let r of review3Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 3 && countRate <= 4">
+                                <i *ngFor="let r of review4Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 4 && countRate <= 5">
+                                <i *ngFor="let r of review5Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate === 0">
+                                <i *ngFor="let r of review5Star" [class]="r"></i>
+                            </ng-container>
                         </div>
-                        <span class="rate-text">5.0</span>
+                        <span class="rate-text">{{countRate}}</span>
                     </div>
                 </div>
                 <div class="appraise-content">
-
-                    <div class="appraise-item">
+                    <div class="appraise-item" *ngFor="let r of reviewData">
                         <div class="ai-header">
                             <div class="header-avatar">
-                                <img src="./assets/images/avatar/avatar1.jpeg" alt="">
+                                <img src="./assets/images/avatar_review.jpg" alt="">
+                                <span class="header-name">{{r.cus_name}}</span>
+                                <div class="header-rate">
+                                    <ng-container [ngSwitch]="r.rate">
+                                        <ng-container *ngSwitchCase="1">
+                                            <i *ngFor="let r of review1Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="2">
+                                            <i *ngFor="let r of review2Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="3">
+                                            <i *ngFor="let r of review3Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="4">
+                                            <i *ngFor="let r of review4Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="5">
+                                            <i *ngFor="let r of review5Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchDefault>
+                                            <i *ngFor="let r of review5Star" [class]="r"></i>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
                             </div>
-                            <span class="header-name">Lalisa Manoban </span>
+                            <div class="header-date">{{r.date}}</div>
                         </div>
                         <div class="ai-comment">
-                            <p>Không còn nghi ngờ gì nữa, đây là một trong những nhiếp ảnh gia tuyệt vời nhất và có kỹ
-                                năng chụp ảnh đa dạng! Tôi thường không đăng đánh giá nhưng công việc được thực hiện bởi
-                                nhiếp ảnh gia Phạm Việt Cường xứng đáng và hơn thế nữa! Tôi và YG sẽ tiếp tục làm nhiều
-                                việc hơn với anh ấy!!</p>
+                            <p>{{r.description}}</p>
                         </div>
                     </div>
                 </div>
@@ -386,9 +431,9 @@
         </div>
 
     </div>
-    <div class="order-wrapper" [ngClass]="isShowOrder ? 'show': '' ">
+    <!-- <div class="order-wrapper" [ngClass]="isShowOrder ? 'show': '' ">
         <div class="order-container">
-            <h4>Đặt lịch chụp tự động</h4>
+            <h4>Cập nhật lịch trình</h4>
             <div class="mess-valid" *ngIf="isError">
                 {{ errorMessage }}
             </div>
@@ -448,8 +493,29 @@
         <div class="btn-close-order" (click)="hideOrder()">
             <i class="bx bx-x"></i>
         </div>
+    </div> -->
+
+    <div class="order-wrapper" *ngIf="isShowOrder">
+        <div class="order-container">
+            <h4>Cập nhật lịch trình</h4>
+            <div class="order-content">
+                <div (click)="showAddCate()">
+                    <a href="javascript:void(0)">Thêm danh mục chụp ảnh</a>
+                </div>
+                <div (click)="showEditCate()">
+                    <a href="javascript:void(0)">Cập nhật danh mục chụp ảnh</a>
+                </div>
+                <!-- <div>
+                    <a href="javascript:void(0)">Cập nhật ảnh tường</a>
+                </div> -->
+            </div>
+        </div>
+        <a class="btn-close-order" (click)="hideOrder()" *ngIf="isShowBtnCloseOrder">
+            <i class="bx bx-x"></i>
+        </a>
     </div>
-    <div class="toggle-order-wrapper" [ngClass]="isShowOrder ? 'hide': '' " (click)="showOrder()">
+
+    <div class="toggle-order-wrapper" *ngIf="!isShowOrder" (click)="showOrder()">
         <i class='bx bx-plus-circle'></i>
     </div>
 
@@ -528,7 +594,7 @@
                     </div>
                     <div class="submit-portfo-wrapper">
                         <div class="btn-add-portfo" (click)="addNewPortfo()">
-                            <a class="" href="javascript:void(0);">Up</a>
+                            <a class="" href="javascript:void(0);">Thêm</a>
                         </div>
                     </div>
                 </div>
@@ -539,19 +605,104 @@
         </div>
     </div>
 
-    <div class="toggle-warehouse-wrapper" (click)="toggleWarehouse()">
+    <div class="toggle-warehouse-wrapper" (click)="toggleWarehouse()" *ngIf="!isShowWarehouse">
         <i class='bx bx-left-arrow-circle'></i>
-        <div class="warehouse-menu" *ngIf="isShowWarehouse">
+    </div>
+
+    <div class="warehouse-menu" *ngIf="isShowWarehouse">
+        <div class="warehouse-content">
             <div>
                 <a [routerLink]="['/ware-house-picture', partnerId]">Kho ảnh trả</a>
             </div>
             <div>
                 <a [routerLink]="['/ware-house-repair', partnerId]">Kho ảnh yêu cầu sửa</a>
             </div>
-            <a href="javascript:void(0);" class="close-warehouse" (click)="hideWarehouse()">
-                <i class="bx bx-x"></i>
-            </a>
         </div>
+        <a href="javascript:void(0);" class="close-warehouse" (click)="hideWarehouse()" *ngIf="isShowBtnCloseWarehouse">
+            <i class="bx bx-x"></i>
+        </a>
     </div>
 
+    <div class="add-new-cate" *ngIf="isShowAddCate">
+        <div class="new-portfo-container">
+            <div class="new-portfo-content">
+                <div class="new-portfo-title">
+                    <h2>Thêm mới</h2>
+                    <div class="deliver-line"></div>
+                </div>
+                <div class="new-portfo-cont">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    <label for="cate_name">Tên danh mục chụp</label>
+                                </td>
+                                <td>
+                                    <label for="cate_cost">Giá</label>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <input type="text" name="cate_name" id="cate_name" [(ngModel)]="cate_name">
+                                </td>
+                                <td>
+                                    <input type="number" name="cate_cost" id="cate_cost" [(ngModel)]="cate_cost">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="javascript:void(0)" (click)="addNewCate()" class="btn-add-newPortfo">
+                        Thêm
+                    </a>
+                </div>
+                <a href="javascript:void(0)" (click)="closeNewCate()" class="btn-close-newPortfo">
+                    <i class='bx bx-x'></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="edit-new-cate" *ngIf="isShowEditCate">
+        <div class="new-portfo-container">
+            <div class="new-portfo-content">
+                <div class="new-portfo-title">
+                    <h2>Cập nhập</h2>
+                    <div class="deliver-line"></div>
+                </div>
+                <div class="new-portfo-cont">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>
+                                    Tên danh mục chụp
+                                </td>
+                                <td>
+                                    Giá
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let t of infoData?.typeOfPhoto">
+                                <ng-container *ngIf="t">
+                                    <td>
+                                        <input type="text" [(ngModel)]="t.name">
+                                    </td>
+                                    <td>
+                                        <input type="number" [(ngModel)]="t.cost">
+                                    </td>
+                                </ng-container>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="javascript:void(0)" (click)="editCate()" class="btn-add-newPortfo">
+                        Cập nhật
+                    </a>
+                </div>
+                <a href="javascript:void(0)" (click)="closeEditCate()" class="btn-close-newPortfo">
+                    <i class='bx bx-x'></i>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>

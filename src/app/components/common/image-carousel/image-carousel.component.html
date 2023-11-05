@@ -1,0 +1,14 @@
+<div class="carousel-container">
+    <a *ngIf="currentSlide > 0" (click)="prevSlide()" class="prev-button">
+        <i class='bx bx-left-arrow-alt'></i>
+    </a>
+    <div class="image-slider">
+        <ng-container *ngFor="let image of images; let i = index">
+            <img [style.transform]="'translateX(' + transform + 'px)'" class="carousel-image" [src]="image"
+                [class.active]="i === currentSlide" alt="Image {{ i + 1 }}" />
+        </ng-container>
+    </div>
+    <a *ngIf="currentSlide < images.length - 1" (click)="nextSlide()" class="next-button">
+        <i class='bx bx-right-arrow-alt'></i>
+    </a>
+</div>

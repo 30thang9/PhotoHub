@@ -221,7 +221,7 @@ export class ProfileComponent implements OnInit {
 
       if (this.partnerId !== 0) {
         console.log("true");
-        const price = parseInt(this.selectedOptionTLVal, 10) * this.costPreview;
+        const price = this.costPreview;
         const selectedOptionTypeText = this.typeOfPhoto.find(t => t.id == parseInt(this.selectedOptionTLVal))?.name;
         const order: Order = {
           id: 0,
@@ -258,6 +258,24 @@ export class ProfileComponent implements OnInit {
 
   hideOrder() {
     this.isShowOrder = false;
+  }
+
+  isShowReview: boolean = false;
+  imagesForCarousel: string[] = [];
+
+  showReview(i: number) {
+    this.imagesForCarousel = [];
+    const images: string[] = this.decesData?.category[i]?.images || [];
+
+    if (images.length > 0) {
+      this.imagesForCarousel = this.imagesForCarousel.concat(images);
+    }
+
+    this.isShowReview = !this.isShowReview;
+  }
+
+  closeReview() {
+    this.isShowReview = false;
   }
 }
 

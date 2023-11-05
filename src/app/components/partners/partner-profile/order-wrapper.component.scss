@@ -1,7 +1,158 @@
+// .order-wrapper {
+//     background-color: var(--color-bg-body);
+//     position: fixed;
+//     top: 100px;
+//     right: 50px;
+//     border-radius: 0.3rem;
+//     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+//     z-index: 600;
+
+//     .order-container {
+//         width: 300px;
+//         min-height: 500px;
+//         max-height: calc(100vh - 100px);
+//         // margin: 0 auto;
+//         padding: 20px;
+//         overflow-y: auto;
+
+//         &::-webkit-scrollbar {
+//             width: 12px;
+//         }
+
+//         &::-webkit-scrollbar-track {
+//             background: var(--color-light);
+//         }
+
+//         &::-webkit-scrollbar-thumb {
+//             background-color: var(--color-secondary);
+//             border-radius: 4px;
+//             border: 2px solid var(--color-light);
+//         }
+
+//         /* Định dạng cho tiêu đề */
+//         h4 {
+//             text-align: center;
+//             color: #333;
+//             font-size: 20px;
+//         }
+
+//         .mess-valid {
+//             font-size: 14px;
+//             color: red;
+//         }
+
+//         .order-content {
+//             display: flex;
+//             flex-direction: column;
+
+//             .filter-date-picker {
+//                 z-index: 999;
+//                 // position: absolute;
+//             }
+
+//             /* Định dạng cho các label */
+//             label {
+//                 display: block;
+//                 margin-bottom: 5px;
+//                 font-weight: bold;
+//                 margin-top: .5rem;
+//             }
+
+//             /* Định dạng cho các input và select */
+//             input[type="date"],
+//             input[type="number"],
+//             input[type="time"],
+//             select {
+//                 width: 100%;
+//                 padding: 8px;
+//                 // margin-bottom: 10px;
+//                 border: 1px solid #ccc;
+//                 border-radius: 4px;
+//             }
+
+//             /* Định dạng cho nút Đặt lịch */
+//             a {
+//                 background-color: #007bff;
+//                 color: white;
+//                 padding: 10px 15px;
+//                 border: none;
+//                 border-radius: 4px;
+//                 text-decoration: none;
+//                 margin-top: 1rem;
+//                 text-align: center;
+//             }
+
+//             /* Định dạng khi hover vào nút Đặt lịch */
+//             a:hover {
+//                 background-color: #0056b3;
+//             }
+
+//             .deliver-line {
+//                 height: 2px;
+//                 width: 100%;
+//                 margin: 1rem 0;
+//                 background-color: var(--color-secondary);
+//             }
+
+//             .p-footer {
+//                 color: var(--color-warning);
+//                 font-weight: bold;
+//                 margin: 0;
+//                 padding-left: 0.5rem;
+//                 /* Đổi .5rem thành 0.5rem */
+
+//                 span {
+//                     color: var(--color-text-body);
+//                 }
+//             }
+
+//             .sug-foot {
+
+//                 font-size: 13px;
+
+//                 i {
+//                     color: var(--color-warning);
+//                     font-size: 18px;
+//                 }
+//             }
+//         }
+//     }
+
+//     .btn-close-order {
+//         position: absolute;
+//         top: -8px;
+//         right: -8px;
+//         font-size: 30px;
+//         color: black;
+//         cursor: pointer;
+//         height: 30px;
+//         width: 30px;
+//         border-radius: 50%;
+//         background-color: var(--color-secondary);
+//         display: none;
+//     }
+// }
+
+// .toggle-order-wrapper {
+//     position: fixed;
+//     bottom: 5rem;
+//     right: 1rem;
+//     width: 40px;
+//     height: 40px;
+//     background-color: var(--color-primary);
+//     z-index: 999;
+//     display: none;
+//     font-size: 30px;
+//     border-radius: 50%;
+//     padding-top: 3.5px;
+//     padding-left: 5px;
+//     color: var(--color-light);
+// }
+
 .order-wrapper {
     background-color: var(--color-bg-body);
     position: fixed;
-    top: 100px;
+    top: 150px;
     right: 50px;
     border-radius: 0.3rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -9,10 +160,9 @@
 
     .order-container {
         width: 300px;
-        min-height: 500px;
-        max-height: calc(100vh - 100px);
-        // margin: 0 auto;
-        padding: 20px;
+        min-height: calc(100vh - 400px);
+        max-height: calc(100vh - 150px);
+        // padding: 20px;
         overflow-y: auto;
 
         &::-webkit-scrollbar {
@@ -29,90 +179,32 @@
             border: 2px solid var(--color-light);
         }
 
-        /* Định dạng cho tiêu đề */
         h4 {
             text-align: center;
             color: #333;
             font-size: 20px;
         }
 
-        .mess-valid {
-            font-size: 14px;
-            color: red;
-        }
-
         .order-content {
+            padding: 1.5rem 1rem;
             display: flex;
             flex-direction: column;
+            row-gap: 1rem;
 
-            .filter-date-picker {
-                z-index: 999;
-                // position: absolute;
-            }
+            div {
+                background-color: var(--color-warning);
+                border-radius: .3rem;
+                display: flex;
+                justify-content: center;
 
-            /* Định dạng cho các label */
-            label {
-                display: block;
-                margin-bottom: 5px;
-                font-weight: bold;
-                margin-top: .5rem;
-            }
-
-            /* Định dạng cho các input và select */
-            input[type="date"],
-            input[type="number"],
-            input[type="time"],
-            select {
-                width: 100%;
-                padding: 8px;
-                // margin-bottom: 10px;
-                border: 1px solid #ccc;
-                border-radius: 4px;
-            }
-
-            /* Định dạng cho nút Đặt lịch */
-            a {
-                background-color: #007bff;
-                color: white;
-                padding: 10px 15px;
-                border: none;
-                border-radius: 4px;
-                text-decoration: none;
-                margin-top: 1rem;
-                text-align: center;
-            }
-
-            /* Định dạng khi hover vào nút Đặt lịch */
-            a:hover {
-                background-color: #0056b3;
-            }
-
-            .deliver-line {
-                height: 2px;
-                width: 100%;
-                margin: 1rem 0;
-                background-color: var(--color-secondary);
-            }
-
-            .p-footer {
-                color: var(--color-warning);
-                font-weight: bold;
-                margin: 0;
-                padding-left: 0.5rem;
-                /* Đổi .5rem thành 0.5rem */
-
-                span {
-                    color: var(--color-text-body);
-                }
-            }
-
-            .sug-foot {
-
-                font-size: 13px;
-
-                i {
-                    color: var(--color-warning);
-                    font-size: 18px;
+                a {
+                    width: 100%;
+                    font-size: 16px;
+                    text-decoration: none;
+                    color: var(--color-light);
+                    line-height: 2.5em;
+                    position: relative;
+                    text-align: center;
                 }
             }
         }
@@ -120,16 +212,19 @@
 
     .btn-close-order {
         position: absolute;
-        top: -8px;
-        right: -8px;
-        font-size: 30px;
-        color: black;
-        cursor: pointer;
-        height: 30px;
-        width: 30px;
+        top: -.4rem;
+        right: -.3rem;
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 50%;
         background-color: var(--color-secondary);
-        display: none;
+        text-decoration: none;
+        color: black;
+        padding-top: 1px;
     }
 }
 
@@ -141,7 +236,7 @@
     height: 40px;
     background-color: var(--color-primary);
     z-index: 999;
-    display: none;
+    // display: none;
     font-size: 30px;
     border-radius: 50%;
     padding-top: 3.5px;

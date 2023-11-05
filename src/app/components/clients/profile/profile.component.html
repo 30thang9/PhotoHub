@@ -151,7 +151,7 @@
                 <h3 class="portfolio-title">My Portfolio</h3>
                 <div class="portfolio-content">
                     <div class="portfolio-item" *ngFor="let d of decesData?.category; let i = index">
-                        <a href="javascript:void(0);">
+                        <a href="javascript:void(0);" (click)="showReview(i)">
                             <div class="it-header">
                                 <img src="{{d.images[0]}}" alt="">
                             </div>
@@ -369,5 +369,25 @@
     </div>
     <div class="toggle-order-wrapper" [ngClass]="isShowOrder ? 'hide': '' " (click)="showOrder()">
         <i class='bx bx-plus-circle'></i>
+    </div>
+
+    <div class="review-repair-wrapper" *ngIf="isShowReview">
+        <div class="ask-repair-container">
+            <div class="ask-repair-content">
+                <!-- <div class="repair-title">
+                    <h2></h2>
+                    <div class="deliver-line"></div>
+                </div> -->
+                <div class="repair-cont">
+                    <div>
+                        <app-image-carousel [images]="imagesForCarousel"></app-image-carousel>
+                    </div>
+
+                </div>
+                <a href="javascript:void(0)" (click)="closeReview()" class="btn-close-ask">
+                    <i class='bx bx-x'></i>
+                </a>
+            </div>
+        </div>
     </div>
 </div>

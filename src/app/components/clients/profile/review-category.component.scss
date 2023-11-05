@@ -1,0 +1,76 @@
+.review-repair-wrapper {
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+
+    .ask-repair-container {
+        width: 100%;
+        height: 100vh;
+        padding-top: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        .ask-repair-content {
+            height: 80%;
+            width: 90%;
+            // min-height: 400px;
+            // overflow-y: auto;
+            margin: auto;
+            background-color: var(--color-light);
+            position: absolute;
+            padding: 0 1rem;
+
+            .repair-title {
+                height: 100px;
+
+            }
+
+            .deliver-line {
+                height: 2px;
+                width: 100%;
+                margin: 1.5rem 0;
+                background-color: var(--color-primary);
+            }
+
+            .repair-cont {
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding-top: 1rem;
+
+            }
+
+            .btn-close-ask {
+                position: absolute;
+                top: .5rem;
+                right: .5rem;
+                // color: var(--color-light);
+                color: black;
+                font-weight: bold;
+                font-size: 28px;
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+            }
+
+            .btn-close-ask:hover {
+                background-color: var(--color-secondary);
+                color: black;
+                transform: rotate(35deg);
+            }
+        }
+
+    }
+}

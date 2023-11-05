@@ -131,23 +131,42 @@ export class PagePictureRefundComponent {
     if (this.countStars > 0 && this.comment !== "") {
       var order = await this.orderService.getOrderById(this.orderId);
       if (order) {
+        var re = await this.reviewService.getReviewByOrderId(order.id);
         var cus_name = this.isHideInfo ? "ẩn danh" : order.cust_name || "ẩn danh";
         const currentDate = new Date();
         const formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-        const review: Review = {
-          id: 0,
-          partner_id: order.partner_id,
-          cus_name: cus_name,
-          order_id: order.id,
-          description: this.comment,
-          rate: this.countStars,
-          date: formattedDate
-        }
-        var r = await this.reviewService.createReview(review);
-        if (r) {
-          window.alert("Đánh giá thành công");
+        if (re === null) {
+          const review: Review = {
+            id: 0,
+            partner_id: order.partner_id,
+            cus_name: cus_name,
+            order_id: order.id,
+            description: this.comment,
+            rate: this.countStars,
+            date: formattedDate
+          }
+          var r = await this.reviewService.createReview(review);
+          if (r) {
+            window.alert("Đánh giá thành công");
+          } else {
+            window.alert("Đánh giá không thành công");
+          }
         } else {
-          window.alert("Đánh giá không thành công");
+          const review: Review = {
+            id: re.id,
+            partner_id: order.partner_id,
+            cus_name: cus_name,
+            order_id: order.id,
+            description: this.comment,
+            rate: this.countStars,
+            date: formattedDate
+          }
+          var r = await this.reviewService.updateReview(review);
+          if (r) {
+            window.alert("Đánh giá thành công");
+          } else {
+            window.alert("Đánh giá không thành công");
+          }
         }
       }
     }

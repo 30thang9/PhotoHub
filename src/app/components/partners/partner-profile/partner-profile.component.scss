@@ -2,6 +2,8 @@
 @import 'order-wrapper.component.scss';
 @import 'ask-repair-wrapper.component.scss';
 @import 'add-new-portfo.component.scss';
+@import 'add-cate.component.scss';
+@import 'edit-cate.component.scss';
 
 .profile-content {
     position: relative;
@@ -100,65 +102,60 @@
     padding-left: 5px;
     color: var(--color-light);
 
-    .warehouse-menu {
-        position: absolute;
-        right: calc(100% + 1rem);
-        bottom: 50%;
-        // transform: translateY(50%);
+
+}
+
+.warehouse-menu {
+    position: fixed;
+    right: 50px;
+    bottom: 2rem;
+    background-color: var(--color-light);
+    // padding: .25rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 600;
+
+    .warehouse-content {
+        width: 300px;
+        padding: 1.5rem 1rem;
         display: flex;
         flex-direction: column;
-        // row-gap: .25rem;
-        min-width: 200px;
-        // background-color: var(--color-light);
-        background-color: var(--color-warning);
-        padding: .25rem 1rem;
-        border-radius: .35rem;
+        row-gap: 1rem;
 
         div {
+            background-color: var(--color-warning);
+            border-radius: .3rem;
+            display: flex;
+            justify-content: center;
+
             a {
+                width: 100%;
                 font-size: 16px;
                 text-decoration: none;
                 color: var(--color-light);
                 line-height: 2.5em;
                 position: relative;
+                text-align: center;
             }
-
-            a::after {
-                content: "";
-                position: absolute;
-                width: 100%;
-                height: 1.5px;
-                background-color: var(--color-light);
-                bottom: -1px;
-                left: 0;
-                transform: scaleX(0);
-                transform-origin: left;
-                transition: transform 0.3s ease;
-            }
-
-            a:hover::after {
-                transform: scaleX(1);
-            }
-        }
-
-        .close-warehouse {
-            position: absolute;
-            top: -.4rem;
-            right: -.3rem;
-            font-size: 22px;
-            width: 22px;
-            height: 22px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            background-color: var(--color-warning);
-            text-decoration: none;
-            color: var(--color-light);
-            padding-top: 1px;
         }
     }
 
+    .close-warehouse {
+        position: absolute;
+        top: -.4rem;
+        right: -.3rem;
+        font-size: 22px;
+        width: 22px;
+        height: 22px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: var(--color-warning);
+        text-decoration: none;
+        color: var(--color-light);
+        padding-top: 1px;
+    }
 }
 
 @media(max-width:1200px) {
@@ -169,25 +166,25 @@
 }
 
 @media(max-width:991.98px) {
-    .order-wrapper {
-        display: none;
-    }
+    // .order-wrapper {
+    //     display: none;
+    // }
 
-    .order-wrapper.show {
-        display: block;
-    }
+    // .order-wrapper.show {
+    //     display: block;
+    // }
 
-    .toggle-order-wrapper {
-        display: block !important;
-    }
+    // .toggle-order-wrapper {
+    //     display: block !important;
+    // }
 
-    .toggle-order-wrapper.hide {
-        display: none !important;
-    }
+    // .toggle-order-wrapper.hide {
+    //     display: none !important;
+    // }
 
-    .btn-close-order {
-        display: block !important;
-    }
+    // .btn-close-order {
+    //     display: block !important;
+    // }
 
     .profile-content {
         .content-wrapper {

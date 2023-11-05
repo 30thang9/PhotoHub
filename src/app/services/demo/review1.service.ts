@@ -85,6 +85,17 @@ export class Review1Service {
     }
   }
 
+  async getReviewByOrderId(id: number): Promise<Review | null> {
+    try {
+      const userInfos = await this.getReviews();
+      const userInfo = userInfos.find((user) => user.order_id === id);
+      return userInfo || null;
+    } catch (error) {
+      console.error('Error fetching user by ID:', error);
+      return null;
+    }
+  }
+
   async createReview(reviewData: Review): Promise<Review | null> {
     try {
 
@@ -118,7 +129,7 @@ export class Review1Service {
     }
   }
 
-  async updateUser(updatedUser: Review): Promise<Review | null> {
+  async updateReview(updatedUser: Review): Promise<Review | null> {
     try {
       const userInfos = await this.getReviewById(updatedUser.id);
 
@@ -129,12 +140,14 @@ export class Review1Service {
       const app = initializeApp(environment.firebaseConfig);
       const db = getDatabase(app);
 
-      const up = {
+      const up: Review = {
         id: updatedUser.id,
         partner_id: updatedUser.partner_id,
         rate: updatedUser.rate,
         description: updatedUser.description,
-        order_id: updatedUser.order_id
+        order_id: updatedUser.order_id,
+        cus_name: updatedUser.cus_name,
+        date: updatedUser.date
       };
 
       const userInfoRef = ref(db, `reviews/${updatedUser.id}`);
