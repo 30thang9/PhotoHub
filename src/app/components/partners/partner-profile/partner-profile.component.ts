@@ -71,6 +71,7 @@ export class PartnerProfileComponent implements OnInit {
   modalName: string = "";
   modalImagesRepair: string[] = [];
 
+  review0Star = ['bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
   review1Star = ['bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
   review2Star = ['bx bxs-star', 'bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
   review3Star = ['bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bx-star', 'bx bx-star'];
