@@ -45,6 +45,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { initializeApp } from 'firebase/app';
 import { WarehousePictureComponent } from './components/partners/warehouse-picture/warehouse-picture.component';
+import { WarehouseRepairComponent } from './components/partners/warehouse-repair/warehouse-repair.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { WarehousePictureComponent } from './components/partners/warehouse-pictu
     PartnerProfileComponent,
     Test1Component,
     WarehousePictureComponent,
+    WarehouseRepairComponent,
   ],
   imports: [
     BrowserModule,

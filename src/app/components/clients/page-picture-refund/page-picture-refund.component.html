@@ -15,7 +15,7 @@
             <a href="javascript:void(0)" class="btn-control active">23/09/2023</a>
             <a href="javascript:void(0)" class="btn-control">15/09/2023</a>
         </div> -->
-        <div class="picture-wrapper">
+        <!-- <div class="picture-wrapper">
             <div class="picture-content">
                 <div class="picture-item">
                     <img src="./assets/images/user/Hy vuông 2.jpg" alt="">
@@ -33,7 +33,7 @@
                     <img src="./assets/images/user/Hy vuông 2.jpg" alt="">
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="link-dow-wrapper">
             <div class="link-dow-content">
                 <ng-container *ngIf="order.link_down !== ''; else elseBlock">
@@ -65,64 +65,45 @@
                     <div class="rating">
                         <span>Chất lượng: </span>
                         <a href="javascript:void(0)" (click)="toggleDropdown()">
-                            <i class='bx bx-star'></i>
-                            <i class='bx bx-star'></i>
-                            <i class='bx bx-star'></i>
-                            <i class='bx bx-star'></i>
-                            <i class='bx bx-star'></i>
+                            <!-- Stars for toggling the dropdown -->
+                            <ng-container *ngFor="let star of selectedStars">
+                                <i [class]="star"></i>
+                            </ng-container>
                         </a>
+
                         <div *ngIf="isDropdownOpen" class="dropdownRate">
-                            <li>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bx-star'></i>
-                                <i class='bx bx-star'></i>
-                                <i class='bx bx-star'></i>
-                                <i class='bx bx-star'></i>
+                            <li (click)="chooseRate(1)">
+                                <i *ngFor="let star of selected1Stars" [class]="star"></i>
                             </li>
-                            <li>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bx-star'></i>
-                                <i class='bx bx-star'></i>
-                                <i class='bx bx-star'></i>
+                            <li (click)="chooseRate(2)">
+                                <i *ngFor="let star of selected2Stars" [class]="star"></i>
                             </li>
-                            <li>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bx-star'></i>
-                                <i class='bx bx-star'></i>
+                            <li (click)="chooseRate(3)">
+                                <i *ngFor="let star of selected3Stars" [class]="star"></i>
                             </li>
-                            <li>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bx-star'></i>
+                            <li (click)="chooseRate(4)">
+                                <i *ngFor="let star of selected4Stars" [class]="star"></i>
                             </li>
-                            <li>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
-                                <i class='bx bxs-star'></i>
+                            <li (click)="chooseRate(5)">
+                                <i *ngFor="let star of selected5Stars" [class]="star"></i>
                             </li>
                         </div>
                     </div>
                     <div class="comment">
                         <p>Viết đánh giá</p>
-                        <textarea name="comment" id="" cols="30" rows="5"></textarea>
+                        <textarea name="comment" id="" cols="30" rows="5" [(ngModel)]="comment"></textarea>
                     </div>
                     <div class="sub-t">
                         <span>Tối đa 450 chữ</span>
                     </div>
                 </div>
                 <div class="review-content-second">
-                    <a href="javascript:void(0)" class="btn btn-hide-inf">
+                    <a href="javascript:void(0)" class="btn btn-hide-inf" (click)="toggleHideInfo()">
                         Ẩn danh
-                        <i class='bx bx-toggle-left'></i>
+                        <i class='bx bx-toggle-left' *ngIf="isHideInfo"></i>
+                        <i class='bx bx-toggle-right' *ngIf="!isHideInfo"></i>
                     </a>
-                    <a href="javascript:void(0)" class="btn btn-submit">Đăng</a>
+                    <a href="javascript:void(0)" class="btn btn-submit" (click)="onReview()">Đăng</a>
                 </div>
             </div>
         </div>
@@ -136,14 +117,14 @@
                 <div class="repair-cont">
                     <div class="repair-content">
                         <div class="enter-code-picture">
-                            <div class="ecp-title">Nhập mã ảnh</div>
+                            <div class="ecp-title">Nhập yêu cầu sửa ảnh</div>
                             <div class="po-title">
                                 Chính sách yêu cầu sửa ảnh
                             </div>
                         </div>
                         <div class="repair-police">
                             <div class="ecp-content">
-                                <textarea name="" id="ecp-code" cols="30" rows="10"></textarea>
+                                <textarea name="" id="ecp-code" cols="30" rows="10" [(ngModel)]="des_refund"></textarea>
                             </div>
                             <div class="po-content-wr">
                                 <div class="po-content">
@@ -159,7 +140,7 @@
                     <div class="repair-submit">
                         <div class="rs-left"></div>
                         <div class="rs-right">
-                            <a href="javascript:void(0)" class="btn-submit-repair">Gửi yêu cầu</a>
+                            <a href="javascript:void(0)" class="btn-submit-repair" (click)="sendAsk()">Gửi yêu cầu</a>
                         </div>
                     </div>
                 </div>

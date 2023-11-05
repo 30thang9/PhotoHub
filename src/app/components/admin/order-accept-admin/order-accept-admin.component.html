@@ -8,47 +8,79 @@
                 </ol>
             </nav>
             <div class="list-booking-content">
-                <div class="table-wrapper">
-                    <table class="table">
-                        <thead>
-                            <tr class="col-header">
-                                <th class="row-header">#</th>
-                                <th class="row-header">Tên khách</th>
-                                <th class="row-header">SDT khách</th>
-                                <th class="row-header">Email khách</th>
-                                <th class="row-header">Ngày</th>
-                                <th class="row-header">Thời gian</th>
-                                <th class="row-header">Thời lượng</th>
-                                <th class="row-header">Loại chụp</th>
-                                <th class="row-header">Người chụp</th>
-                                <th class="row-header">Trạng thái</th>
-                                <th class="row-header">Tổng tiền</th>
-                                <th class="row-header">Mã</th>
-                                <th class="row-header .col-fixed">Chức năng</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="col-content" *ngFor="let o of orderData; let i = index">
-                                <td class="row-content">{{i + 1}}</td>
-                                <td class="row-content">{{o.order.cust_name}}</td>
-                                <td class="row-content">{{o.order.cust_phone}}</td>
-                                <td class="row-content">{{o.order.cust_email}}</td>
-                                <td class="row-content">{{o.order.order_date}}</td>
-                                <td class="row-content">{{o.order.appoi_time}}</td>
-                                <td class="row-content">{{o.order.time}}</td>
-                                <td class="row-content">{{o.order.shooting_type}}</td>
-                                <td [attr.data-id]="o.user.id" class="row-content">{{o.user.full_name}}</td>
-                                <td class="row-content">{{o.order.status==='cho_duyet'?'Chờ duyệt':''}}</td>
-                                <td class="row-content">{{o.order.price}}</td>
-                                <td class="row-content">{{o.order.code}}</td>
-                                <td class="row-content .col-fixed">
-                                    <a href="javascript:void(0)" class="btn btn-accept"
-                                        (click)="onAccept(o.order.id)">Duyệt</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <ng-container *ngIf="orderData.length > 0; else elseBlock">
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr class="col-header">
+                                    <th class="row-header">#</th>
+                                    <th class="row-header">Tên khách</th>
+                                    <th class="row-header">SDT khách</th>
+                                    <th class="row-header">Email khách</th>
+                                    <th class="row-header">Ngày</th>
+                                    <th class="row-header">Thời gian</th>
+                                    <th class="row-header">Thời lượng</th>
+                                    <th class="row-header">Loại chụp</th>
+                                    <th class="row-header">Người chụp</th>
+                                    <th class="row-header">Trạng thái</th>
+                                    <th class="row-header">Tổng tiền</th>
+                                    <th class="row-header">Mã</th>
+                                    <th class="row-header .col-fixed">Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="col-content" *ngFor="let o of orderData; let i = index">
+                                    <td class="row-content">{{i + 1}}</td>
+                                    <td class="row-content">{{o.order.cust_name}}</td>
+                                    <td class="row-content">{{o.order.cust_phone}}</td>
+                                    <td class="row-content">{{o.order.cust_email}}</td>
+                                    <td class="row-content">{{o.order.order_date}}</td>
+                                    <td class="row-content">{{o.order.appoi_time}}</td>
+                                    <td class="row-content">{{o.order.time}}</td>
+                                    <td class="row-content">{{o.order.shooting_type}}</td>
+                                    <td [attr.data-id]="o.user.id" class="row-content">{{o.user.full_name}}</td>
+                                    <td class="row-content">
+                                        <ng-container *ngIf="o.order.status === 'cho_duyet'; else notChoDuyet">
+                                            Chờ duyệt
+                                        </ng-container>
+                                        <ng-template #notChoDuyet></ng-template>
+
+                                        <ng-container *ngIf="o.order.status === 'da_duyet'; else notDaDuyet">
+                                            Đã duyệt
+                                        </ng-container>
+                                        <ng-template #notDaDuyet></ng-template>
+
+                                        <ng-container *ngIf="o.order.status === 'da_tra'; else notDaTra">
+                                            Đã trả
+                                        </ng-container>
+                                        <ng-template #notDaTra></ng-template>
+
+                                        <ng-container *ngIf="o.order.status === 'yc_sua'; else notYeuCauSua">
+                                            Yêu cầu sửa
+                                        </ng-container>
+                                        <ng-template #notYeuCauSua></ng-template>
+
+                                        <ng-container *ngIf="o.order.status === 'chua_dien_tt'; else notChuaDienTT">
+                                            Chưa điền thông tin
+                                        </ng-container>
+                                        <ng-template #notChuaDienTT></ng-template>
+                                    </td>
+                                    <td class="row-content">{{o.order.price}}</td>
+                                    <td class="row-content">{{o.order.code}}</td>
+                                    <td class="row-content .col-fixed">
+                                        <a href="javascript:void(0)" class="btn btn-accept"
+                                            (click)="onAccept(o.order.id)">Duyệt</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ng-container>
+                <ng-template #elseBlock>
+                    <div class="empty-row">
+                        <h4>Chưa có khách đặt lịch</h4>
+                    </div>
+                </ng-template>
             </div>
         </div>
     </div>

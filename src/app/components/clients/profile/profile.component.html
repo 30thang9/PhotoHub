@@ -56,13 +56,26 @@
                     </p>
                     <div class="des-forMe-rate">
                         <div class="rate-star">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
+                            <ng-container *ngIf="countRate > 0 && countRate <= 1">
+                                <i *ngFor="let r of review1Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 1 && countRate <= 2">
+                                <i *ngFor="let r of review2Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 2 && countRate <= 3">
+                                <i *ngFor="let r of review3Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 3 && countRate <= 4">
+                                <i *ngFor="let r of review4Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 4 && countRate <= 5">
+                                <i *ngFor="let r of review5Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate === 0">
+                                <i *ngFor="let r of review5Star" [class]="r"></i>
+                            </ng-container>
                         </div>
-                        <span class="rate-text">5.0</span>
+                        <span class="rate-text">{{countRate}}</span>
                     </div>
                     <p class="des-forMe-exp">{{userData?.user?.exp}} năm kinh nghiệm</p>
                 </div>
@@ -158,29 +171,61 @@
                     <h3>Đánh Giá</h3>
                     <div class="rate">
                         <div class="rate-star">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
-                            <img src="./assets/images/icons/star-fill.png" alt="">
+                            <ng-container *ngIf="countRate > 0 && countRate <= 1">
+                                <i *ngFor="let r of review1Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 1 && countRate <= 2">
+                                <i *ngFor="let r of review2Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 2 && countRate <= 3">
+                                <i *ngFor="let r of review3Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 3 && countRate <= 4">
+                                <i *ngFor="let r of review4Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate > 4 && countRate <= 5">
+                                <i *ngFor="let r of review5Star" [class]="r"></i>
+                            </ng-container>
+                            <ng-container *ngIf="countRate === 0">
+                                <i *ngFor="let r of review5Star" [class]="r"></i>
+                            </ng-container>
                         </div>
-                        <span class="rate-text">5.0</span>
+                        <span class="rate-text">{{countRate}}</span>
                     </div>
                 </div>
                 <div class="appraise-content">
-
-                    <div class="appraise-item">
+                    <div class="appraise-item" *ngFor="let r of reviewData">
                         <div class="ai-header">
                             <div class="header-avatar">
-                                <img src="./assets/images/avatar/avatar1.jpeg" alt="">
+                                <img src="./assets/images/avatar_review.jpg" alt="">
+                                <span class="header-name">{{r.cus_name}}</span>
+                                <div class="header-rate">
+                                    <ng-container [ngSwitch]="r.rate">
+                                        <ng-container *ngSwitchCase="1">
+                                            <i *ngFor="let r of review1Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="2">
+                                            <i *ngFor="let r of review2Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="3">
+                                            <i *ngFor="let r of review3Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="4">
+                                            <i *ngFor="let r of review4Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchCase="5">
+                                            <i *ngFor="let r of review5Star" [class]="r"></i>
+                                        </ng-container>
+                                        <ng-container *ngSwitchDefault>
+                                            <i *ngFor="let r of review5Star" [class]="r"></i>
+                                        </ng-container>
+                                    </ng-container>
+                                </div>
                             </div>
-                            <span class="header-name">Lalisa Manoban </span>
+                            <div class="header-date">{{r.date}}</div>
                         </div>
                         <div class="ai-comment">
-                            <p>Không còn nghi ngờ gì nữa, đây là một trong những nhiếp ảnh gia tuyệt vời nhất và có kỹ
-                                năng chụp ảnh đa dạng! Tôi thường không đăng đánh giá nhưng công việc được thực hiện bởi
-                                nhiếp ảnh gia Phạm Việt Cường xứng đáng và hơn thế nữa! Tôi và YG sẽ tiếp tục làm nhiều
-                                việc hơn với anh ấy!!</p>
+                            <p>{{r.description}}</p>
                         </div>
                     </div>
                 </div>
@@ -260,6 +305,12 @@
                     <app-date-picker (selectedDateChange)="onDateChange($event)" [(selectedDate)]="selectedDateU"
                         [textDefault]="'Ngày'"></app-date-picker>
                 </div>
+                <div class="set-time">
+                    <label for="gio-hen">Giờ hẹn:</label>
+                    <input [(ngModel)]="setTimeVal" type="time" id="gio-hen" name="gio-hen"
+                        pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" placeholder="hh:mm" (change)="onSetTimeChange()"
+                        required>
+                </div>
                 <div class="filter-tl">
                     <label for="thoi-luong">Thời lượng (giờ):</label>
                     <app-custom-select (selectedOptionChange)="onOptionTLChange($event)"
@@ -273,11 +324,6 @@
                         <option custom-option value="7">7 giờ</option>
                         <option custom-option value="8">8 giờ</option>
                     </app-custom-select>
-                </div>
-                <div class="set-time">
-                    <label for="gio-hen">Giờ hẹn:</label>
-                    <input [(ngModel)]="setTimeVal" type="time" id="gio-hen" name="gio-hen"
-                        pattern="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" placeholder="hh:mm" required>
                 </div>
 
                 <div class="filter-type">

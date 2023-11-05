@@ -40,8 +40,8 @@ export class RefundPictureComponent {
     if (this.validateEmail() && this.validatePhone() && this.validateCode()) {
       const order = await this.orderService.getOrderByCode(this.code);
       if (order) {
+        window.alert('Thành công');
         var route = '/refund-pc/' + order.id;
-        window.alert('true');
         this.router.navigate([route]);
       } else {
 

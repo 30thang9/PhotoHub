@@ -1,0 +1,66 @@
+<div class="page-pr-wrapper">
+    <div class="page-header">
+        <div class="header-content">
+            <div class="header-left">
+                <h2>
+                    <a [routerLink]="['/partner', partnerId]">
+                        <i class='bx bx-left-arrow-alt'></i>
+                    </a>
+                    Yêu cầu sửa ảnh của khách hàng
+                </h2>
+                <p>Nhiếp ảnh gia xác nhận đã sửa ảnh theo yêu cầu của khách hàng.</p>
+            </div>
+            <div class="header-right">
+                <a [routerLink]="['/partner', partnerId]"><i class='bx bx-chevron-left'></i>Quay lại</a>
+            </div>
+        </div>
+    </div>
+    <div class="page-content">
+        <div class="list-order-wrapper">
+            <ng-container *ngIf="orders.length > 0; else elseBlock">
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead>
+                            <tr class="col-header">
+                                <th class="row-header">#</th>
+                                <th class="row-header">Mã ảnh</th>
+                                <th class="row-header">Tên khách</th>
+                                <th class="row-header">Ngày chụp</th>
+                                <th class="row-header">Nội dung yêu cầu</th>
+                                <th class="row-header">Link tải ảnh</th>
+                                <th class="row-header">Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="col-content" *ngFor="let o of orders; let i = index">
+                                <td class="row-content">{{i + 1}}</td>
+                                <td class="row-content">{{o.code}}</td>
+                                <td class="row-content">{{o.cust_name}}</td>
+                                <td class="row-content">{{o.order_date}}</td>
+                                <td class="row-content">{{o.des_refund}}</td>
+                                <td class="row-content row-link-down">
+                                    <input type="text" name="link_down" id="" [(ngModel)]="o.link_down"
+                                        placeholder="Nhập link ảnh">
+                                    <!-- {{o.link_down}} -->
+                                    <p>{{linkText}}</p>
+                                </td>
+                                <td class="row-content">
+                                    <a *ngIf="o.status === 'yc_sua'" href="javascript:void(0)" class="btn btn-accept"
+                                        (click)="onConfirm(o.id)">
+                                        Xác nhận
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </ng-container>
+
+            <ng-template #elseBlock>
+                <div class="empty-row">
+                    <h4>Không có yêu cầu sửa nào.</h4>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

@@ -41,10 +41,8 @@
                 column-gap: .75rem;
 
                 .rate-star {
-                    img {
-                        height: 16px;
-                        width: 16px;
-                        object-fit: cover;
+                    i {
+                        color: var(--color-warning);
                     }
 
                 }

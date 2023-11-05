@@ -17,21 +17,43 @@
     </div>
     <div class="page-content">
         <div class="list-order-wrapper">
-            <div class="order-content">
-                <div class="order-item" *ngFor="let o of orders">
-                    <div class="item-info">
-
-                    </div>
-                    <div class="item-info">
-
-                    </div>
-                    <div class="item-info">
-
-                    </div>
-                    <div class="item-info">
-
-                    </div>
-                </div>
+            <div class="table-wrapper">
+                <table class="table">
+                    <thead>
+                        <tr class="col-header">
+                            <th class="row-header">#</th>
+                            <th class="row-header">Mã ảnh</th>
+                            <th class="row-header">Tên khách</th>
+                            <th class="row-header">Ngày chụp</th>
+                            <th class="row-header">Link tải ảnh</th>
+                            <th class="row-header">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="col-content" *ngFor="let o of orders; let i = index">
+                            <td class="row-content">{{i + 1}}</td>
+                            <td class="row-content">{{o.code}}</td>
+                            <td class="row-content">{{o.cust_name}}</td>
+                            <td class="row-content">{{o.order_date}}</td>
+                            <td class="row-content row-link-down">
+                                <input type="text" name="link_down" id="" [(ngModel)]="o.link_down"
+                                    placeholder="Nhập link ảnh">
+                                <!-- {{o.link_down}} -->
+                                <p>{{linkText}}</p>
+                            </td>
+                            <td class="row-content">
+                                <a *ngIf="o.status === 'da_duyet'" href="javascript:void(0)" class="btn btn-accept"
+                                    (click)="onAccept(o.id)">
+                                    Trả ảnh
+                                </a>
+                                <a *ngIf="o.status === 'da_tra' || o.status === 'yc_sua' " href="javascript:void(0)"
+                                    class="btn btn-accept" (click)="onRepair(o.id)">
+                                    Sửa link
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

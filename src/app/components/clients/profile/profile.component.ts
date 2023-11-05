@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Deces } from 'src/app/models/deces.model';
 import { Order } from 'src/app/models/order.model';
+import { Review } from 'src/app/models/review.model';
 import { TypeOfPhoto } from 'src/app/models/typeOfPhoto.model';
 import { UserInfoDTO } from 'src/app/models/userInfoDTO.model';
 import { Deces1Service } from 'src/app/services/demo/deces1.service';
 import { Order1Service } from 'src/app/services/demo/order1.service';
+import { Review1Service } from 'src/app/services/demo/review1.service';
 import { UserInfoDTO1Service } from 'src/app/services/demo/user-info-dto1.service';
 
 
@@ -18,6 +20,8 @@ export class ProfileComponent implements OnInit {
 
   userData: UserInfoDTO | null = null;
   decesData: Deces | null = null;
+  reviewData: Review[] = [];
+  orderData: Order[] = [];
 
   selectedDateU: string = '';
   selectedOptionTL: string = '';
@@ -32,15 +36,23 @@ export class ProfileComponent implements OnInit {
   partnerId: number = 0;
 
   isShowOrder: boolean = false;
+  isValidOrderTime: boolean = true;
 
   typeOfPhoto: TypeOfPhoto[] = [];
   costPreview: number = 300000;
 
+  review1Star = ['bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
+  review2Star = ['bx bxs-star', 'bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
+  review3Star = ['bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bx-star', 'bx bx-star'];
+  review4Star = ['bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bx-star'];
+  review5Star = ['bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bxs-star'];
+  countRate = 0;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private orderService: Order1Service,
     private userInfoDTOService: UserInfoDTO1Service,
+    private reviewService: Review1Service,
     private decesService: Deces1Service) {
     this.route.params.subscribe(params => {
       const id = params['id'];
@@ -59,6 +71,8 @@ export class ProfileComponent implements OnInit {
         const user_id = parseInt(id, 10);
         this.loadUserInfoData(user_id);
         this.loadDecesData(user_id);
+        this.loadReviewData(user_id);
+        this.loadOrderData(user_id);
       } else {
         console.error('ID not found in URL');
       }
@@ -82,9 +96,28 @@ export class ProfileComponent implements OnInit {
     this.decesData = await this.decesService.getDecesByPartnerId(user_id);
     console.log(this.decesData);
   }
+  async loadOrderData(user_id: number) {
+    this.orderData = await this.orderService.getOrderByPartnerId(user_id);
+  }
+
+  async loadReviewData(user_id: number) {
+    this.reviewData = await this.reviewService.getReviewByPartnerId(user_id);
+    var c = 0.0;
+    var i = 0;
+    this.reviewData.forEach(r => {
+      c += r.rate;
+      i++;
+    });
+    if (i > 0) {
+      this.countRate = parseFloat((c / i).toFixed(1));;
+    } else {
+      this.countRate = 0.0;
+    }
+  }
 
   onDateChange(date: string) {
     this.dateVal = date;
+    this.validBook();
   }
 
   onOptionTLChange(optionValue: string) {
@@ -99,6 +132,11 @@ export class ProfileComponent implements OnInit {
         this.costPreview = cost * tl;
       }
     }
+    this.validBook();
+  }
+
+  onSetTimeChange() {
+    this.validBook();
   }
 
   onOptionTypeChange(optionValue: string) {
@@ -116,11 +154,68 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  async onSubmit() {
-    this.isError = false;
+  validBook() {
+    if (this.dateVal !== "" && this.setTimeVal !== "" && this.selectedOptionTLVal !== "") {
+      const ors = this.orderData.filter(x => x.order_date === this.dateVal);
+      if (ors.length > 0) {
+        var v = this.setTimeVal.split(':');
+        console.log(v[0]);
+        console.log(v[1]);
+        const startTime = parseInt(v[0].trim()) * 3600 + parseInt(v[1].trim()) * 60;
+        const duration = parseInt(this.selectedOptionTLVal) * 3600;
+        const endTime = startTime + duration;
 
-    if (!this.selectedDateU || !this.selectedOptionTL || !this.selectedOptionType || !this.setTimeVal) {
-      this.errorMessage = "Vui lòng điền đầy đủ thông tin";
+        let isValid = true;
+
+        ors.forEach(o => {
+          var vo = o.appoi_time.split(':');
+          const startTimeOrder = parseInt(vo[0].trim()) * 3600 + parseInt(vo[1].trim()) * 60;
+          const durationOrder = parseInt(o.time) * 3600;
+          const endTimeOrder = startTimeOrder + durationOrder;
+
+          console.log(startTime);
+          console.log(endTime);
+          console.log(startTimeOrder);
+          console.log(endTimeOrder);
+
+          if ((startTime >= startTimeOrder && startTime <= endTimeOrder) || (endTime >= startTimeOrder && endTime <= endTimeOrder)) {
+            isValid = false;
+            this.errorMessage = `Tiếc quá đã có người đặt từ: ${this.formatTimeFromSeconds(startTimeOrder)} đến ${this.formatTimeFromSeconds(endTimeOrder)}`;
+            this.isError = true;
+            this.isValidOrderTime = false;
+            return;
+          } else if ((startTimeOrder >= startTime && startTimeOrder <= endTime) || (endTimeOrder >= startTime && endTimeOrder <= endTime)) {
+            isValid = false;
+            this.errorMessage = `Tiếc quá đã có người đặt từ: ${this.formatTimeFromSeconds(startTimeOrder)} đến ${this.formatTimeFromSeconds(endTimeOrder)}`;
+            this.isError = true;
+            this.isValidOrderTime = false;
+            return;
+          }
+        });
+
+        if (!isValid) {
+          console.log("Khoảng thời gian không hợp lệ với đơn đặt hàng hiện tại.");
+        } else {
+          console.log("Khoảng thời gian hợp lệ.");
+          this.isError = false;
+          this.isValidOrderTime = true;
+        }
+      }
+    }
+  }
+
+  formatTimeFromSeconds(seconds: number) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+  }
+
+
+  async onSubmit() {
+    // this.isError = false;
+
+    if (!this.selectedDateU || !this.selectedOptionTL || !this.selectedOptionType || !this.setTimeVal || !this.isValidOrderTime) {
+      if (this.isValidOrderTime) { this.errorMessage = "Vui lòng điền đầy đủ thông tin"; }
       this.isError = true;
     } else {
 

@@ -62,19 +62,23 @@ export class SendContactComponent {
             // Xử lý khi đơn hàng được cập nhật thành công
             this.isSuccess = true;
             this.messageText = "Thành công.";
+            window.alert(this.messageText);
           } else {
             // Xử lý khi có lỗi trong quá trình cập nhật đơn hàng
             this.messageText = "Thất bại."
             this.isSuccess = false;
+            window.alert(this.messageText);
           }
         } else {
           this.messageText = "Thất bại."
           this.isSuccess = false;
+          window.alert(this.messageText);
         }
         localStorage.removeItem('order_id');
       } else {
         this.messageText = "Thất bại."
         this.isSuccess = false;
+        window.alert(this.messageText);
       }
     } else {
       this.validateName();

@@ -9,7 +9,7 @@ import { environment } from 'src/app/environments/environment';
 })
 export class Review1Service {
 
-  
+
   getReviews(): Promise<Review[]> {
     return new Promise((resolve, reject) => {
       const app = initializeApp(environment.firebaseConfig);
@@ -27,7 +27,9 @@ export class Review1Service {
               partner_id: reviewData.partner_id,
               rate: reviewData.rate || '',
               description: reviewData.description || '',
-              order_id: reviewData.order_id
+              order_id: reviewData.order_id,
+              cus_name: reviewData.cus_name || '',
+              date: reviewData.date || '',
             };
 
             reviews.push(review);
@@ -39,15 +41,37 @@ export class Review1Service {
     });
   }
 
-  async getReviewByPartnerId(id: number): Promise<Review | null> {
-    try {
-      const userInfos = await this.getReviews();
-      const userInfo = userInfos.find((user) => user.partner_id === id);
-      return userInfo || null;
-    } catch (error) {
-      console.error('Error fetching user by ID:', error);
-      return null;
-    }
+  getReviewByPartnerId(id: number): Promise<Review[]> {
+    return new Promise((resolve, reject) => {
+      const app = initializeApp(environment.firebaseConfig);
+      const db = getDatabase(app);
+      const starCountRef = ref(db, 'reviews/');
+      onValue(starCountRef, (snapshot) => {
+        const data = snapshot.val();
+        const reviews = [];
+
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const reviewData = data[key];
+            if (reviewData.partner_id === id) {
+              const review: Review = {
+                id: reviewData.id,
+                partner_id: reviewData.partner_id,
+                rate: reviewData.rate || '',
+                description: reviewData.description || '',
+                order_id: reviewData.order_id,
+                cus_name: reviewData.cus_name || '',
+                date: reviewData.date || '',
+              };
+
+              reviews.push(review);
+            }
+          }
+        }
+
+        resolve(reviews);
+      });
+    });
   }
 
   async getReviewById(id: number): Promise<Review | null> {
@@ -76,12 +100,14 @@ export class Review1Service {
       const newUserId = await this.generateNewId();
       const newUserRef = ref(db, 'reviews/' + newUserId);
 
-      const newReview = {
+      const newReview: Review = {
         id: newUserId,
         partner_id: reviewData.partner_id,
         rate: reviewData.rate,
         description: reviewData.description,
-        order_id: reviewData.order_id
+        order_id: reviewData.order_id,
+        cus_name: reviewData.cus_name,
+        date: reviewData.date
       };
 
       await set(newUserRef, newReview);

@@ -12,6 +12,7 @@ import { PagePictureRefundComponent } from './components/clients/page-picture-re
 import { LayoutAdminComponent } from './components/admin/layout-admin/layout-admin.component';
 import { Test1Component } from './components/tests/test1/test1.component';
 import { WarehousePictureComponent } from './components/partners/warehouse-picture/warehouse-picture.component';
+import { WarehouseRepairComponent } from './components/partners/warehouse-repair/warehouse-repair.component';
 
 const routes: Routes = [
   {
@@ -59,8 +60,12 @@ const routes: Routes = [
     children: RoutePartner
   },
   {
-    path: 'ware-house/:id',
+    path: 'ware-house-picture/:id',
     component: WarehousePictureComponent,
+  },
+  {
+    path: 'ware-house-repair/:id',
+    component: WarehouseRepairComponent,
   },
   {
     path: 'admin',

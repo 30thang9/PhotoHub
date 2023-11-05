@@ -543,10 +543,10 @@
         <i class='bx bx-left-arrow-circle'></i>
         <div class="warehouse-menu" *ngIf="isShowWarehouse">
             <div>
-                <a [routerLink]="['/ware-house', partnerId]">Kho ảnh trả</a>
+                <a [routerLink]="['/ware-house-picture', partnerId]">Kho ảnh trả</a>
             </div>
             <div>
-                <a routerLink="">Kho ảnh yêu cầu sửa</a>
+                <a [routerLink]="['/ware-house-repair', partnerId]">Kho ảnh yêu cầu sửa</a>
             </div>
             <a href="javascript:void(0);" class="close-warehouse" (click)="hideWarehouse()">
                 <i class="bx bx-x"></i>

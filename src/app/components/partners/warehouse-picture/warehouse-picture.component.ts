@@ -11,6 +11,7 @@ import { Order1Service } from 'src/app/services/demo/order1.service';
 export class WarehousePictureComponent {
   partnerId!: number;
   orders: Order[] = [];
+  linkText: string = "";
   isShowAskRepair: boolean = false;
   isDropdownOpen: boolean = false;
 
@@ -33,12 +34,46 @@ export class WarehousePictureComponent {
       if (id) {
         const partner_id = parseInt(id, 10);
         this.orders = await this.orderService.getOrderByPartnerId(partner_id);
-        this.orders = this.orders.filter(order => order.status === "da_duyet");
+        this.orders = this.orders.filter(order => order.status === "da_duyet" || order.status === "da_tra" || order.status === "yc_sua");
       }
       else {
         console.error('ID not found in URL');
       }
     });
+  }
+
+  async onAccept(id: number) {
+    var order = this.orders.find(o => o.id === id);
+    if (order) {
+      if (order.link_down !== "") {
+        order.status = "da_tra";
+        var or = await this.orderService.updateOrder(order);
+        if (or) {
+          window.alert("Trả ảnh thành công");
+          this.orders = await this.orderService.getOrderByPartnerId(this.partnerId);
+        } else {
+          window.alert("Không thành công");
+        }
+      } else {
+        window.alert("Vui lòng điền link");
+      }
+    }
+  }
+  async onRepair(id: number) {
+    var order = this.orders.find(o => o.id === id);
+    if (order) {
+      if (order.link_down !== "") {
+        var or = await this.orderService.updateOrder(order);
+        if (or) {
+          window.alert("Trả ảnh thành công");
+          this.orders = await this.orderService.getOrderByPartnerId(this.partnerId);
+        } else {
+          window.alert("Không thành công");
+        }
+      } else {
+        window.alert("Vui lòng điền link");
+      }
+    }
   }
 
   toggleAsk() {
