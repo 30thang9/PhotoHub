@@ -1,4 +1,24 @@
 <div class="layout-filter">
+    <div class="cumb-wrapper">
+        <div class="cumb">
+            <h4>
+                <a routerLink="" class="text-muted">Trang chủ</a>
+                <ng-container *ngIf="subcategory === undefined else elseSub">
+                    <ng-container *ngIf="category !== undefined">
+                        <span> / </span>
+                        <span>{{category}}</span>
+                    </ng-container>
+                </ng-container>
+                <ng-template #elseSub>
+                    <span> / </span>
+                    <a [routerLink]="['/collection']" [queryParams]="{ category: categoryKey}" class="text-muted"
+                        (click)="goCategory()">{{category}}</a>
+                    <span> / </span>
+                    <span>{{subcategory}}</span>
+                </ng-template>
+            </h4>
+        </div>
+    </div>
     <div class="filter-container">
         <div class="filter-content">
             <div class="filter-left">

@@ -1,11 +1,101 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-filter-bar',
   templateUrl: './filter-bar.component.html',
   styleUrls: ['./filter-bar.component.scss']
 })
-export class FilterBarComponent implements AfterViewInit {
+export class FilterBarComponent implements OnInit, AfterViewInit {
+  constructor(private route: ActivatedRoute, private router: Router) { }
+
+  urls = [
+    {
+      key: 'du-lich',
+      value: 'Du lịch',
+      children: [
+        {
+          key: 'chan-dung',
+          value: 'Chân dung'
+        },
+        {
+          key: 'the-thao',
+          value: 'Thể thao'
+        },
+        {
+          key: 'duong-pho',
+          value: 'Đường phố'
+        },
+        {
+          key: 'phong-canh',
+          value: 'Phong cảnh'
+        },
+        {
+          key: 'ky-yếu',
+          value: 'Kỷ yếu'
+        },
+      ]
+    },
+    {
+      key: 'lookbook',
+      value: 'Lookbook',
+      children: [
+        {
+          key: 'thoi-trang',
+          value: 'Thời trang'
+        },
+        {
+          key: 'thoi-trang',
+          value: 'Phụ kiện'
+        },
+        {
+          key: 'thoi-trang',
+          value: 'Mỹ phẩm'
+        },
+        {
+          key: 'thoi-trang',
+          value: 'Thực phẩm'
+        }
+      ]
+    },
+    {
+      key: 'catalogue',
+      value: 'Catalogue'
+    },
+    {
+      key: 'khac',
+      value: 'Khác'
+    },
+  ];
+
+  category: string | undefined;
+  subcategory: string | undefined;
+  categoryKey: string | undefined;
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const categoryKey = params['category'];
+      const subcategoryKey = params['subcategory'];
+
+      if (this.route.snapshot.url.some(segment => segment.path === 'collection')) {
+        const categoryItem = this.urls.find(item => item.key === categoryKey);
+
+        if (categoryItem) {
+          this.category = categoryItem.value;
+        }
+
+        if (subcategoryKey) {
+          this.categoryKey = categoryKey;
+          this.subcategory = categoryItem?.children?.find(item => item.key === subcategoryKey)?.value;
+        }
+      }
+    });
+  }
+
+  goCategory() {
+    // this.router.navigate(['collection'], { queryParams: { category: this.categoryKey } });
+    this.subcategory = undefined;
+  }
+
   ngAfterViewInit(): void {
   }
 

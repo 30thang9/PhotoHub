@@ -1,31 +1,30 @@
 <div class="layout-menu">
     <div class="menu-container">
-        <li class="menu-item dropdown">
-            <a routerLink="/collection" class="menu-link">Du lịch
-                <i class='bx bx-collapse-vertical icon-collapse'></i>
-                <i class='bx bx-expand-vertical icon-expand'></i>
-            </a>
-            <ul class="dropdown-menu">
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Chân dung</a></li>
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Thể thao</a></li>
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Đường phố</a></li>
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Phong cảnh</a></li>
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Kỷ yếu</a></li>
-            </ul>
-        </li>
-        <li class="menu-item dropdown">
-            <a routerLink="/collection" class="menu-link">Lookbook
-                <i class='bx bx-collapse-vertical icon-collapse'></i>
-                <i class='bx bx-expand-vertical icon-expand'></i>
-            </a>
-            <ul class="dropdown-menu">
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Thời trang</a></li>
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Phụ kiện</a></li>
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Mỹ phẩm</a></li>
-                <li class="dropdown-item"><a routerLink="/collection" class="dropdown-link">Thực phẩm</a></li>
-            </ul>
-        </li>
-        <li class="menu-item"><a routerLink="/collection" class="menu-link">Catalogue</a></li>
-        <li class="menu-item"><a routerLink="/collection" class="menu-link">Khác</a></li>
+        <ng-container *ngFor="let url of urls">
+            <ng-container *ngIf="url.children else el">
+                <li class="menu-item dropdown">
+                    <a class="menu-link">{{ url.value }}
+                        <i class="bx bx-collapse-vertical icon-collapse"></i>
+                        <i class="bx bx-expand-vertical icon-expand"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <ng-container *ngFor="let child of url.children">
+                            <li class="dropdown-item">
+                                <a [routerLink]="['/collection']"
+                                    [queryParams]="{ category: url.key, subcategory: child.key }"
+                                    class="dropdown-link">{{ child.value }}</a>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </li>
+            </ng-container>
+            <ng-template #el>
+                <li class="menu-item">
+                    <a [routerLink]="['/collection']" [queryParams]="{ category: url.key}" class="menu-link">
+                        {{ url.value }}
+                    </a>
+                </li>
+            </ng-template>
+        </ng-container>
     </div>
 </div>

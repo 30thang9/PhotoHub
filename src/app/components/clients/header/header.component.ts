@@ -52,16 +52,16 @@ export class HeaderComponent implements OnInit {
   @ViewChild('inputSearchMobile')
   inputSearchMobile!: ElementRef;
   @ViewChild('menuDropdown')
-  menuDropdown!: ElementRef;
+  menuDropdown0!: ElementRef;
   @ViewChild('menuDropdown1')
   menuDropdown1!: ElementRef;
   @ViewChild('itemDropdown')
-  itemDropdown!: ElementRef;
+  itemDropdown0!: ElementRef;
   @ViewChild('itemDropdown1')
   itemDropdown1!: ElementRef;
   isMenuVisible = false;
   isSearchMobileVisible = false;
-  isDropdownVisible = false;
+  isDropdownVisible: boolean[] = [];
   isDropdown1Visible = false;
 
   inputSearchMobileValue: string = '';
@@ -91,11 +91,15 @@ export class HeaderComponent implements OnInit {
     this.inputSearchMobileValue = '';
   }
 
-  toggleDropdown() {
-    this.isDropdownVisible = !this.isDropdownVisible;
-  }
-  toggleDropdown1() {
-    this.isDropdown1Visible = !this.isDropdown1Visible;
+  toggleDropdown(i: number) {
+    this.isDropdownVisible[i] = !this.isDropdownVisible[i];
+    if (this.isDropdownVisible[i] == true) {
+      for (let index = 0; index < this.isDropdownVisible.length; index++) {
+        if (index !== i) {
+          this.isDropdownVisible[index] = false;
+        }
+      }
+    }
   }
 
   onChangeInputSearchMobile(event: Event) {
@@ -125,16 +129,16 @@ export class HeaderComponent implements OnInit {
       }
     }
 
-    if (!this.menuDropdown.nativeElement.contains(event.target) && !this.itemDropdown.nativeElement.contains(event.target)) {
-      if (this.isDropdownVisible) {
-        this.isDropdownVisible = false;
-      }
-    }
-    if (!this.menuDropdown1.nativeElement.contains(event.target) && !this.itemDropdown1.nativeElement.contains(event.target)) {
-      if (this.isDropdown1Visible) {
-        this.isDropdown1Visible = false;
-      }
-    }
+    // if (!this.menuDropdown0.nativeElement.contains(event.target) && !this.itemDropdown0.nativeElement.contains(event.target)) {
+    //   if (this.isDropdownVisible) {
+    //     this.isDropdownVisible = false;
+    //   }
+    // }
+    // if (!this.menuDropdown1.nativeElement.contains(event.target) && !this.itemDropdown1.nativeElement.contains(event.target)) {
+    //   if (this.isDropdown1Visible) {
+    //     this.isDropdown1Visible = false;
+    //   }
+    // }
 
   }
 
@@ -153,4 +157,64 @@ export class HeaderComponent implements OnInit {
     // Đồng thời, cập nhật biến loggedIn
     this.loggedIn = false;
   }
+
+
+  urls = [
+    {
+      key: 'du-lich',
+      value: 'Du lịch',
+      children: [
+        {
+          key: 'chan-dung',
+          value: 'Chân dung'
+        },
+        {
+          key: 'the-thao',
+          value: 'Thể thao'
+        },
+        {
+          key: 'duong-pho',
+          value: 'Đường phố'
+        },
+        {
+          key: 'phong-canh',
+          value: 'Phong cảnh'
+        },
+        {
+          key: 'ky-yếu',
+          value: 'Kỷ yếu'
+        },
+      ]
+    },
+    {
+      key: 'lookbook',
+      value: 'Lookbook',
+      children: [
+        {
+          key: 'thoi-trang',
+          value: 'Thời trang'
+        },
+        {
+          key: 'thoi-trang',
+          value: 'Phụ kiện'
+        },
+        {
+          key: 'thoi-trang',
+          value: 'Mỹ phẩm'
+        },
+        {
+          key: 'thoi-trang',
+          value: 'Thực phẩm'
+        }
+      ]
+    },
+    {
+      key: 'catalogue',
+      value: 'Catalogue'
+    },
+    {
+      key: 'khac',
+      value: 'Khác'
+    },
+  ];
 }

@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
   typeOfPhoto: TypeOfPhoto[] = [];
   costPreview: number = 300000;
 
-  review0Star = ['bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
+  review0Star = ['bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
   review1Star = ['bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
   review2Star = ['bx bxs-star', 'bx bxs-star', 'bx bx-star', 'bx bx-star', 'bx bx-star'];
   review3Star = ['bx bxs-star', 'bx bxs-star', 'bx bxs-star', 'bx bx-star', 'bx bx-star'];
