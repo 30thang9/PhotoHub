@@ -1,4 +1,7 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { User1Service } from 'src/app/services/demo/user1.service';
 import { EventService } from 'src/app/services/event.service';
 
 @Component({
@@ -6,8 +9,42 @@ import { EventService } from 'src/app/services/event.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-  constructor(private eventService: EventService) { }
+export class HeaderComponent implements OnInit {
+  userId!: number;
+  constructor(private eventService: EventService,
+    private router: Router, private route: ActivatedRoute,
+    private userService: User1Service) {
+    this.route.url.subscribe(segments => {
+      if (segments.length > 0) {
+        const firstSegment = segments[0].path;
+        if (firstSegment === 'partner') {
+          this.route.params.subscribe(params => {
+            const id = params['id'];
+            if (id) {
+              this.userId = parseInt(id, 10);
+              this.loadUser(parseInt(id, 10));
+            } else {
+              console.error('ID not found in URL');
+            }
+          });
+          this.loggedIn = true;
+          console.log('This route has a "/partner/" prefix.');
+        }
+      }
+    });
+  }
+  ngOnInit(): void {
+    this.eventService.registerEvent('avatarEdited').subscribe(() => {
+      this.loadUser(this.userId);
+    });
+  }
+
+  async loadUser(id: number) {
+    console.log(id);
+    this.user = await this.userService.getUserById(id);
+  }
+  user: User | null = null;
+
   @ViewChild('iconToggle')
   iconToggle!: ElementRef;
   @ViewChild('headerContentMobile')

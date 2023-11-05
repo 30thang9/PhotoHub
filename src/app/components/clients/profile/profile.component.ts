@@ -5,10 +5,12 @@ import { Order } from 'src/app/models/order.model';
 import { Review } from 'src/app/models/review.model';
 import { TypeOfPhoto } from 'src/app/models/typeOfPhoto.model';
 import { UserInfoDTO } from 'src/app/models/userInfoDTO.model';
+import { Wall } from 'src/app/models/wall.model';
 import { Deces1Service } from 'src/app/services/demo/deces1.service';
 import { Order1Service } from 'src/app/services/demo/order1.service';
 import { Review1Service } from 'src/app/services/demo/review1.service';
 import { UserInfoDTO1Service } from 'src/app/services/demo/user-info-dto1.service';
+import { Wall1Service } from 'src/app/services/demo/wall1.service';
 
 
 @Component({
@@ -22,6 +24,8 @@ export class ProfileComponent implements OnInit {
   decesData: Deces | null = null;
   reviewData: Review[] = [];
   orderData: Order[] = [];
+  wallData!: Wall | null;
+  wallImages: string[] = [];
 
   selectedDateU: string = '';
   selectedOptionTL: string = '';
@@ -53,6 +57,7 @@ export class ProfileComponent implements OnInit {
     private orderService: Order1Service,
     private userInfoDTOService: UserInfoDTO1Service,
     private reviewService: Review1Service,
+    private wallService: Wall1Service,
     private decesService: Deces1Service) {
     this.route.params.subscribe(params => {
       const id = params['id'];
@@ -77,6 +82,13 @@ export class ProfileComponent implements OnInit {
         console.error('ID not found in URL');
       }
     });
+  }
+
+  async loadWall(user_id: number) {
+    this.wallData = await this.wallService.getWallByUserId(user_id);
+    if (this.wallData) {
+      this.wallImages = this.wallData.images;
+    }
   }
 
   loadUserInfoData(user_id: number) {

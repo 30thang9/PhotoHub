@@ -16,6 +16,9 @@ import { Review } from 'src/app/models/review.model';
 import { UserInfo } from 'src/app/models/userInfo.model';
 import { TypeOfPhoto } from 'src/app/models/typeOfPhoto.model';
 import { User } from 'src/app/models/user.model';
+import { EventService } from 'src/app/services/event.service';
+import { Wall } from 'src/app/models/wall.model';
+import { Wall1Service } from 'src/app/services/demo/wall1.service';
 
 @Component({
   selector: 'app-partner-profile',
@@ -27,6 +30,8 @@ export class PartnerProfileComponent implements OnInit {
   decesData: Deces | null = null;
   reviewData: Review[] = [];
   infoData!: UserInfo | null;
+  wallData!: Wall | null;
+  wallImages: string[] = [];
 
   selectedDateU: string = '';
   selectedOptionTL: string = '';
@@ -89,12 +94,14 @@ export class PartnerProfileComponent implements OnInit {
   }
 
   constructor(private router: Router, private route: ActivatedRoute,
+    private eventService: EventService,
     private orderService: Order1Service,
     private userInfoDTOService: UserInfoDTO1Service,
     private userInfoService: UserInfo1Service,
     private userService: User1Service,
     private reviewService: Review1Service,
     private decesService: Deces1Service,
+    private walltService: Wall1Service,
     private fileStorage: AngularFireStorage) {
     this.checkScreenSize();
     this.route.params.subscribe(params => {
@@ -139,10 +146,18 @@ export class PartnerProfileComponent implements OnInit {
         this.loadDecesData(user_id);
         this.loadReviewData(user_id);
         this.loadInfo(user_id);
+        this.loadWall(user_id);
       } else {
         console.error('ID not found in URL');
       }
     });
+  }
+
+  async loadWall(user_id: number) {
+    this.wallData = await this.walltService.getWallByUserId(user_id);
+    if (this.wallData) {
+      this.wallImages = this.wallData?.images;
+    }
   }
 
   async loadReviewData(user_id: number) {
@@ -695,5 +710,153 @@ export class PartnerProfileComponent implements OnInit {
     });
     return isValid;
   }
+
+  isShowEditAvatar: boolean = false;
+
+  showEditAvatar() {
+    this.isShowEditAvatar = !this.isShowEditAvatar;
+  }
+  hideEditAvatar() {
+    this.isShowEditAvatar = false;
+  }
+
+  editAvatarFile!: File;
+  previewAvatarEdit: string = "";
+  onChooseAvatarEdit(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.editAvatarFile = file;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.previewAvatarEdit = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+  async onEditAvatar() {
+    if (this.editAvatarFile) {
+      const fileExtension = this.editAvatarFile.name.split('.').pop();
+      const newFileName = uuidv4() + '.' + fileExtension;
+
+      var renamedFiles: File;
+      renamedFiles = new File([this.editAvatarFile], newFileName, { type: this.editAvatarFile.type });
+      const path = `avatar/${renamedFiles.name}`;
+      const uploadTask = await this.fileStorage.upload(path, renamedFiles);
+      const url = await uploadTask.ref.getDownloadURL();
+      var usr = await this.userService.getUserById(this.partnerId);
+
+      if (usr) {
+        usr.avatar = url;
+        var u = await this.userService.updateUser(usr);
+        if (u) {
+          window.alert("Thành công");
+          this.eventService.emitEvent('avatarEdited', 'success');
+          this.loadUserInfoData(this.partnerId);
+          this.previewAvatarEdit = "";
+        } else {
+          window.alert("Thất bại");
+        }
+      } else {
+        window.alert("Thất bại");
+
+      }
+    }
+  }
+
+  isShowAddWall: boolean = false;
+
+  hideAddWall() {
+    this.isShowAddWall = false;
+  }
+  showAddWallImages() {
+    this.isShowAddWall = !this.isShowAddWall;
+  }
+
+  addWallUrl: string[] = [];
+  fileWall: File[] = [];
+
+  triggerAddFileWall() {
+    const fileInput = document.getElementById('hiddenFileInputWall') as HTMLInputElement;
+    fileInput.click();
+  }
+
+  onFileInputWallChange(event: any) {
+    const files = event.target.files;
+
+    if (files && files.length > 0) {
+      const remainingSlots = 8 - this.fileWall.length;
+
+      if (remainingSlots > 0) {
+        const filesToAdd = Array.from(files).slice(0, remainingSlots);
+        this.fileWall.push(...(filesToAdd as File[]));
+      }
+
+      for (let i = 0; i < this.fileWall.length; i++) {
+        const file = files[i];
+        const url = URL.createObjectURL(file);
+        this.addWallUrl.push(url);
+        // this.fileWall.push(file);
+      }
+    }
+  }
+
+  deleteImageFromWall(index: number) {
+    if (index >= 0 && index < this.addWallUrl.length) {
+      this.addWallUrl.splice(index, 1);
+    }
+  }
+
+  async submitAddWall() {
+    if (this.fileWall.length === 8) {
+      var urls: string[] = [];
+      var renamedFiles: File[] = [];
+
+      for (let i = 0; i < this.fileWall.length; i++) {
+        const file = this.fileWall[i];
+        const fileExtension = file.name.split('.').pop(); // Get the file extension
+        const newFileName = uuidv4() + '.' + fileExtension; // Generate a new unique filename
+
+        renamedFiles.push(new File([file], newFileName, { type: file.type }));
+      }
+
+      // Upload the renamed files
+      for (let i = 0; i < renamedFiles.length; i++) {
+        const file = renamedFiles[i];
+        const path = `wall/${file.name}`;
+        const uploadTask = await this.fileStorage.upload(path, file);
+        const url = await uploadTask.ref.getDownloadURL();
+        urls.push(url);
+      }
+
+      var wall = await this.walltService.getWallByUserId(this.partnerId);
+
+      if (wall) {
+        wall.images = urls;
+        var w = await this.walltService.updateWall(wall);
+        if (w) {
+          window.alert("Thành công");
+          this.loadWall(this.partnerId);
+        } else {
+          window.alert("Thất bại");
+        }
+      } else {
+        const wa: Wall = {
+          id: 0,
+          images: urls,
+          user_id: this.partnerId
+        }
+        var w = await this.walltService.createWall(wa);
+        if (w) {
+          window.alert("Thành công");
+          this.loadWall(this.partnerId);
+        } else {
+          window.alert("Thất bại");
+        }
+      }
+    } else {
+      window.alert("Hãy chọn đủ 8 bức ảnh");
+    }
+  }
+
 
 }

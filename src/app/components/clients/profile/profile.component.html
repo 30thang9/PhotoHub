@@ -1,43 +1,84 @@
 <div class="profile-content">
     <div class="wall-wrapper">
-        <div class="wall-content">
-            <div class="wall1">
-                <div class="wall1-1">
-                    <img src="./assets/images/profile/pf1.jpg" alt="">
+        <ng-container *ngIf="wallImages.length > 0; else elseEmptyWall">
+            <div class="wall-content">
+                <div class="wall1">
+                    <div class="wall1-1">
+                        <img src="{{wallImages[0] || ''}}" alt="">
+                    </div>
+                    <div class="wall1-2">
+                        <img src="{{wallImages[1] || ''}}" alt="">
+                    </div>
                 </div>
-                <div class="wall1-2">
-                    <img src="./assets/images/profile/pf2.jpg" alt="">
+                <div class="wall2">
+                    <img src="{{wallImages[2] || ''}}" alt="">
+                </div>
+                <div class="wall3">
+                    <div class="wall3-1">
+                        <img src="{{wallImages[3] || ''}}" alt="">
+
+                    </div>
+                    <div class="wall3-2">
+                        <img src="{{wallImages[4] || ''}}" alt="">
+
+                    </div>
+                </div>
+                <div class="wall4">
+                    <img src="{{wallImages[5] || ''}}" alt="">
+
+                </div>
+                <div class="wall5">
+                    <div class="wall5-1">
+                        <img src="{{wallImages[6] || ''}}" alt="">
+
+                    </div>
+                    <div class="wall5-2">
+                        <img src="{{wallImages[7] || ''}}" alt="">
+                    </div>
+
                 </div>
             </div>
-            <div class="wall2">
-                <img src="./assets/images/profile/pf3.jpg" alt="">
-            </div>
-            <div class="wall3">
-                <div class="wall3-1">
-                    <img src="./assets/images/profile/pf4.jpg" alt="">
+        </ng-container>
+        <ng-template #elseEmptyWall>
+            <div class="wall-content">
+                <div class="wall1">
+                    <div class="wall1-1">
+                        <img src="./assets/images/profile/pf1.jpg" alt="">
+                    </div>
+                    <div class="wall1-2">
+                        <img src="./assets/images/profile/pf2.jpg" alt="">
+                    </div>
+                </div>
+                <div class="wall2">
+                    <img src="./assets/images/profile/pf3.jpg" alt="">
+                </div>
+                <div class="wall3">
+                    <div class="wall3-1">
+                        <img src="./assets/images/profile/pf4.jpg" alt="">
+
+                    </div>
+                    <div class="wall3-2">
+                        <img src="./assets/images/profile/pf5.jpg" alt="">
+
+                    </div>
+                </div>
+                <div class="wall4">
+                    <img src="./assets/images/profile/pf6.jpg" alt="">
 
                 </div>
-                <div class="wall3-2">
-                    <img src="./assets/images/profile/pf5.jpg" alt="">
+                <div class="wall5">
+                    <div class="wall5-1">
+                        <img src="./assets/images/profile/pf7.jpg" alt="">
+
+                    </div>
+                    <div class="wall5-2">
+                        <img src="./assets/images/profile/pf8.jpg" alt="">
+
+                    </div>
 
                 </div>
             </div>
-            <div class="wall4">
-                <img src="./assets/images/profile/pf6.jpg" alt="">
-
-            </div>
-            <div class="wall5">
-                <div class="wall5-1">
-                    <img src="./assets/images/profile/pf7.jpg" alt="">
-
-                </div>
-                <div class="wall5-2">
-                    <img src="./assets/images/profile/pf8.jpg" alt="">
-
-                </div>
-
-            </div>
-        </div>
+        </ng-template>
     </div>
     <div class="content-wrapper">
         <div class="forMe-wrapper">

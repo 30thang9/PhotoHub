@@ -1,43 +1,84 @@
 <div class="profile-content">
     <div class="wall-wrapper">
-        <div class="wall-content">
-            <div class="wall1">
-                <div class="wall1-1">
-                    <img src="./assets/images/profile/pf1.jpg" alt="">
+        <ng-container *ngIf="wallImages.length > 0; else elseEmptyWall">
+            <div class="wall-content">
+                <div class="wall1">
+                    <div class="wall1-1">
+                        <img src="{{wallImages[0] || ''}}" alt="">
+                    </div>
+                    <div class="wall1-2">
+                        <img src="{{wallImages[1] || ''}}" alt="">
+                    </div>
                 </div>
-                <div class="wall1-2">
-                    <img src="./assets/images/profile/pf2.jpg" alt="">
+                <div class="wall2">
+                    <img src="{{wallImages[2] || ''}}" alt="">
+                </div>
+                <div class="wall3">
+                    <div class="wall3-1">
+                        <img src="{{wallImages[3] || ''}}" alt="">
+
+                    </div>
+                    <div class="wall3-2">
+                        <img src="{{wallImages[4] || ''}}" alt="">
+
+                    </div>
+                </div>
+                <div class="wall4">
+                    <img src="{{wallImages[5] || ''}}" alt="">
+
+                </div>
+                <div class="wall5">
+                    <div class="wall5-1">
+                        <img src="{{wallImages[6] || ''}}" alt="">
+
+                    </div>
+                    <div class="wall5-2">
+                        <img src="{{wallImages[7] || ''}}" alt="">
+                    </div>
+
                 </div>
             </div>
-            <div class="wall2">
-                <img src="./assets/images/profile/pf3.jpg" alt="">
-            </div>
-            <div class="wall3">
-                <div class="wall3-1">
-                    <img src="./assets/images/profile/pf4.jpg" alt="">
+        </ng-container>
+        <ng-template #elseEmptyWall>
+            <div class="wall-content">
+                <div class="wall1">
+                    <div class="wall1-1">
+                        <img src="./assets/images/profile/pf1.jpg" alt="">
+                    </div>
+                    <div class="wall1-2">
+                        <img src="./assets/images/profile/pf2.jpg" alt="">
+                    </div>
+                </div>
+                <div class="wall2">
+                    <img src="./assets/images/profile/pf3.jpg" alt="">
+                </div>
+                <div class="wall3">
+                    <div class="wall3-1">
+                        <img src="./assets/images/profile/pf4.jpg" alt="">
+
+                    </div>
+                    <div class="wall3-2">
+                        <img src="./assets/images/profile/pf5.jpg" alt="">
+
+                    </div>
+                </div>
+                <div class="wall4">
+                    <img src="./assets/images/profile/pf6.jpg" alt="">
 
                 </div>
-                <div class="wall3-2">
-                    <img src="./assets/images/profile/pf5.jpg" alt="">
+                <div class="wall5">
+                    <div class="wall5-1">
+                        <img src="./assets/images/profile/pf7.jpg" alt="">
+
+                    </div>
+                    <div class="wall5-2">
+                        <img src="./assets/images/profile/pf8.jpg" alt="">
+
+                    </div>
 
                 </div>
             </div>
-            <div class="wall4">
-                <img src="./assets/images/profile/pf6.jpg" alt="">
-
-            </div>
-            <div class="wall5">
-                <div class="wall5-1">
-                    <img src="./assets/images/profile/pf7.jpg" alt="">
-
-                </div>
-                <div class="wall5-2">
-                    <img src="./assets/images/profile/pf8.jpg" alt="">
-
-                </div>
-
-            </div>
-        </div>
+        </ng-template>
     </div>
     <div class="content-wrapper">
         <div class="forMe-wrapper">
@@ -256,48 +297,6 @@
                             </div>
                         </a>
                     </div>
-                    <!-- <div class="portfolio-item">
-                        <a href="javascript:void(0);">
-                            <div class="it-header">
-                                <img src="./assets/images/profile/op2.jpg" alt="">
-                            </div>
-                            <div class="it-footer">
-                                <h3 class="it-cate">Sản phẩm</h3>
-                                <span class="it-count-picture">30</span>
-                                <div class="btn-portfolio-edit" (click)="toggleAsk()">
-                                    <i class='bx bx-edit-alt'></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="portfolio-item">
-                        <a href="javascript:void(0);">
-                            <div class="it-header">
-                                <img src="./assets/images/profile/op3.jpg" alt="">
-                            </div>
-                            <div class="it-footer">
-                                <h3 class="it-cate">Du lịch</h3>
-                                <span class="it-count-picture">30</span>
-                                <div class="btn-portfolio-edit" (click)="toggleAsk()">
-                                    <i class='bx bx-edit-alt'></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="portfolio-item">
-                        <a href="javascript:void(0);">
-                            <div class="it-header">
-                                <img src="./assets/images/profile/op4.jpg" alt="">
-                            </div>
-                            <div class="it-footer">
-                                <h3 class="it-cate">Motor</h3>
-                                <span class="it-count-picture">30</span>
-                                <div class="btn-portfolio-edit" (click)="toggleAsk()">
-                                    <i class='bx bx-edit-alt'></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div> -->
 
                 </div>
             </div>
@@ -497,7 +496,7 @@
 
     <div class="order-wrapper" *ngIf="isShowOrder">
         <div class="order-container">
-            <h4>Cập nhật lịch trình</h4>
+            <h4>Cập nhật</h4>
             <div class="order-content">
                 <div (click)="showAddCate()">
                     <a href="javascript:void(0)">Thêm danh mục chụp ảnh</a>
@@ -505,9 +504,12 @@
                 <div (click)="showEditCate()">
                     <a href="javascript:void(0)">Cập nhật danh mục chụp ảnh</a>
                 </div>
-                <!-- <div>
-                    <a href="javascript:void(0)">Cập nhật ảnh tường</a>
-                </div> -->
+                <div>
+                    <a href="javascript:void(0)" (click)="showEditAvatar()">Cập nhật ảnh đại diện</a>
+                </div>
+                <div>
+                    <a href="javascript:void(0)" (click)="showAddWallImages()">Cập nhật ảnh của bạn</a>
+                </div>
             </div>
         </div>
         <a class="btn-close-order" (click)="hideOrder()" *ngIf="isShowBtnCloseOrder">
@@ -663,6 +665,7 @@
             </div>
         </div>
     </div>
+
     <div class="edit-new-cate" *ngIf="isShowEditCate">
         <div class="new-portfo-container">
             <div class="new-portfo-content">
@@ -705,4 +708,71 @@
             </div>
         </div>
     </div>
+
+    <div class="edit-avatar" *ngIf="isShowEditAvatar">
+        <div class="new-portfo-container">
+            <div class="new-portfo-content">
+                <div class="new-portfo-title">
+                    <h2>Sửa ảnh đại diện</h2>
+                    <div class="deliver-line"></div>
+                </div>
+                <div class="new-portfo-cont">
+                    <div>
+                        <input type="file" name="" id="avatarInput" [(ngModel)]="editAvatarFile"
+                            (change)="onChooseAvatarEdit($event)">
+                    </div>
+                    <div class="preview-edit-avatar">
+                        <img src="{{previewAvatarEdit}}" alt="">
+                    </div>
+                    <a href="javascript:void(0)" (click)="onEditAvatar()" class="btn-add-newPortfo">
+                        Thêm
+                    </a>
+                </div>
+                <a href="javascript:void(0)" (click)="hideEditAvatar()" class="btn-close-newPortfo">
+                    <i class='bx bx-x'></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="add-wall-wrapper" *ngIf="isShowAddWall">
+        <div class="ask-repair-container">
+            <div class="ask-repair-content">
+                <div class="repair-title">
+                    <h2>Cập nhật ảnh</h2>
+                    <span>(8/8 ảnh)</span>
+                    <div class="deliver-line"></div>
+                </div>
+                <div class="repair-cont">
+                    <div class="repair-picture">
+                        <div class="picture-wrapper">
+                            <div class="picture-item" *ngFor="let image of addWallUrl; let i = index">
+                                <img src="{{image}}" alt="" srcset="">
+                                <a href="javascript:void(0)" class="btn-del-image" (click)="deleteImageFromWall(i)">
+                                    <i class='bx bx-x'></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ask-repair-button">
+                    <div class="rs-left">
+                        <input type="file" id="hiddenFileInputWall" style="display: none"
+                            (change)="onFileInputWallChange($event)" accept="image/*" multiple>
+                        <a href="javascript:void(0)" class="btn-upload-repair" (click)="triggerAddFileWall()">Tải
+                            lên</a>
+                    </div>
+                    <div class="rs-right">
+                        <a href="javascript:void(0)" class="btn-submit-repair" (click)=submitAddWall()>Cập nhật</a>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" (click)="hideAddWall()" class="btn-close-ask">
+                    <i class='bx bx-x'></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
 </div>

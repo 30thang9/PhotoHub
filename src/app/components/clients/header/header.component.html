@@ -28,14 +28,38 @@
             <div class="header-content-right">
                 <ng-container *ngIf="loggedIn; else notLoggedInBlock">
                     <!-- Hiển thị biểu tượng avatar và dropdown menu khi đã đăng nhập -->
-                    <li class="cright-item" (click)="toggleDropdownLo()">
-                        <div class="avatar">
-                            <img src="link_to_user_image.jpg" alt="Avatar">
+                    <li class="cright-item cright-itemm" (click)="toggleDropdownLo()" style="position: relative;">
+                        <div class="avatar" style=" width: 40px;
+                        height: 40px;
+                        border-radius: 50%;">
+                            <img style="  width: 40px;height: 40px;object-fit: cover;border-radius: 50%;"
+                                src="{{user?.avatar}}" alt="Avatar">
                         </div>
-                        <div class="dropdown-menu" *ngIf="showDropdown">
-                            <a class="dropdown-item">Profile</a>
-                            <a class="dropdown-item" (click)="logout()">Đăng xuất</a>
+                        <div class="dropdown-menu" *ngIf="showDropdown"
+                            style="position: absolute; top:100%;right: 50%; padding: 1rem .5rem; background-color: white; min-width: 100px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); display: flex; justify-content: center;align-items: center;">
+                            <!-- <a class="dropdown-item">Profile</a> -->
+                            <a routerLink="/auth/login" class="dropdown-item"
+                                style="color: black; text-decoration: none;">Đăng xuất</a>
                         </div>
+                    </li>
+                    <li class="cright-item">
+                        <a href="javascript:void(0)" class="cright-link">{{user?.full_name}}</a>
+                    </li>
+                    <div class="content-deliver"
+                        style="width: 2px;height:30px !important;background-color: black;height: 100%;">
+                        <p style="width: 2px; background-color: black;"></p>
+                    </div>
+                    <li class="cright-item" style="padding-right: 5px;">
+                        <a href="javascript:void(0)" class=""
+                            style="font-size:24px;color: black; text-decoration: none;">
+                            <i class='bx bx-bell'></i>
+                        </a>
+                    </li>
+                    <li class="cright-item" style="padding-right: 5px;">
+                        <a href="javascript:void(0)" class=""
+                            style="font-size:24px;color: black; text-decoration: none;">
+                            <i class='bx bx-chevron-down-circle'></i>
+                        </a>
                     </li>
                 </ng-container>
                 <ng-template #notLoggedInBlock>
@@ -123,22 +147,62 @@
                     <li class="menu-item"><a routerLink="/collection" class="menu-link">Catalogue</a></li>
                     <li class="menu-item"><a routerLink="/collection" class="menu-link">Khác</a></li>
                 </div>
-                <div class="control-mobile">
-                    <li class="control-item item-col"><a class="control-link" routerLink="/refund-picture">Ảnh của
-                            tôi</a></li>
-                    <li class="control-item">
-                        <a class="control-link" routerLink="/auth/login">
-                            Đăng nhập
-                            <!-- <i class='bx bx-log-in-circle'></i> -->
-                        </a>
-                    </li>
-                    <li class="control-item">
-                        <a class="control-link" routerLink="/auth/register">
-                            Đăng ký
-                            <!-- <i class='bx bx-registered'></i> -->
-                        </a>
-                    </li>
-                </div>
+                <ng-container *ngIf="loggedIn; else nottLoggedInBlock">
+                    <div class="control-mobile" style="row-gap: 1rem;">
+                        <!-- <li class="">
+
+                        </li> -->
+                        <li class="control-ite" (click)="toggleDropdownLo()"
+                            style="position: relative; list-style: none;">
+                            <div class="avatar" style=" width: 40px;
+                            height: 40px;
+                            border-radius: 50%;">
+                                <img style="width: 40px;height: 40px;object-fit: cover;border-radius: 50%;"
+                                    [src]="user?.avatar" alt="Avatar">
+                            </div>
+                            <div class="dropdown-menu" *ngIf="showDropdown"
+                                style="position: absolute; bottom:100%;left: 50%; padding: 1rem .5rem; background-color: white; min-width: 100px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); display: flex; justify-content: center;align-items: center;">
+                                <!-- <a class="dropdown-item">Profile</a> -->
+                                <a routerLink="/auth/login" class="dropdown-item"
+                                    style="color: black; text-decoration: none;">Đăng xuất</a>
+                            </div>
+                        </li>
+                        <li class="control-ite" style="list-style: none; display: flex; align-items: center;">
+                            <a href="javascript:void(0)" class="cright-link"
+                                style="color: black; text-decoration: none;">{{user?.full_name}}</a>
+                        </li>
+                        <li class="control-ite" style="padding-right: 5px;list-style: none;">
+                            <a href="javascript:void(0)" class=""
+                                style="font-size:24px;color: black; text-decoration: none;">
+                                <i class='bx bx-bell'></i>
+                            </a>
+                        </li>
+                        <li class="control-ite" style="padding-right: 5px;list-style: none;">
+                            <a href="javascript:void(0)" class=""
+                                style="font-size:24px;color: black; text-decoration: none;">
+                                <i class='bx bx-chevron-down-circle'></i>
+                            </a>
+                        </li>
+                    </div>
+                </ng-container>
+                <ng-template #nottLoggedInBlock>
+                    <div class="control-mobile">
+                        <li class="control-item item-col"><a class="control-link" routerLink="/refund-picture">Ảnh của
+                                tôi</a></li>
+                        <li class="control-item">
+                            <a class="control-link" routerLink="/auth/login">
+                                Đăng nhập
+                                <!-- <i class='bx bx-log-in-circle'></i> -->
+                            </a>
+                        </li>
+                        <li class="control-item">
+                            <a class="control-link" routerLink="/auth/register">
+                                Đăng ký
+                                <!-- <i class='bx bx-registered'></i> -->
+                            </a>
+                        </li>
+                    </div>
+                </ng-template>
                 <div class="close-menu">
                     <a class="close-menu-icon" (click)="hideMenu()" href="javascript:void(0)"><i
                             class='bx bx-x'></i></a>
