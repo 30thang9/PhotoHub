@@ -181,7 +181,7 @@ export class HeaderComponent implements OnInit {
           value: 'Phong cảnh'
         },
         {
-          key: 'ky-yếu',
+          key: 'ky-yeu',
           value: 'Kỷ yếu'
         },
       ]
@@ -195,15 +195,15 @@ export class HeaderComponent implements OnInit {
           value: 'Thời trang'
         },
         {
-          key: 'thoi-trang',
+          key: 'phu-kien',
           value: 'Phụ kiện'
         },
         {
-          key: 'thoi-trang',
+          key: 'my-pham',
           value: 'Mỹ phẩm'
         },
         {
-          key: 'thoi-trang',
+          key: 'thuc-pham',
           value: 'Thực phẩm'
         }
       ]
@@ -217,4 +217,6 @@ export class HeaderComponent implements OnInit {
       value: 'Khác'
     },
   ];
+
+
 }

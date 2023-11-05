@@ -31,7 +31,7 @@ export class FilterBarComponent implements OnInit, AfterViewInit {
           value: 'Phong cảnh'
         },
         {
-          key: 'ky-yếu',
+          key: 'ky-yeu',
           value: 'Kỷ yếu'
         },
       ]
@@ -45,15 +45,15 @@ export class FilterBarComponent implements OnInit, AfterViewInit {
           value: 'Thời trang'
         },
         {
-          key: 'thoi-trang',
+          key: 'phu-kien',
           value: 'Phụ kiện'
         },
         {
-          key: 'thoi-trang',
+          key: 'my-pham',
           value: 'Mỹ phẩm'
         },
         {
-          key: 'thoi-trang',
+          key: 'thuc-pham',
           value: 'Thực phẩm'
         }
       ]
