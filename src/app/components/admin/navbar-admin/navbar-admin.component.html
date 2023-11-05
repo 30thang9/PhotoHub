@@ -1,127 +1,136 @@
 <div class="navbar-container">
-    <div class="toggle-menu">
-        <div class="toggle-icon">
-            <a #iconToggle class="toggle-link nav-link" href="javascript:void(0)" (click)="showMenu()">
-                <i class="bx bx-menu bx-sm"></i>
-            </a>
-        </div>
+  <div class="toggle-menu">
+    <div class="toggle-icon">
+      <a #iconToggle class="toggle-link nav-link" href="javascript:void(0)" (click)="showMenu()">
+        <i class="bx bx-menu bx-sm"></i>
+      </a>
     </div>
-    <div class="navbar-content">
-        <div class="nav-left">
-            <div class="nav-search-wrapper" #navSearch>
-                <div class="nav-search-icon">
-                    <a href="javascript:void(0)" class="search-link nav-link" (click)="toggleSearch()">
-                        <i class="bx bx-search bx-sm"></i>
-                        <span class="search-placeholder">Search (Ctrl+/)</span>
-                    </a>
+  </div>
+  <div class="navbar-content">
+    <div class="nav-left">
+      <div class="nav-search-wrapper" #navSearch>
+        <div class="nav-search-icon">
+          <a href="javascript:void(0)" class="search-link nav-link" (click)="toggleSearch()">
+            <i class="bx bx-search bx-sm"></i>
+            <span class="search-placeholder">Search (Ctrl+/)</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-right">
+      <li class="language language-dropdown nav-item">
+        <a href="javascript:void(0)" class="nav-link">
+          <i class="bx bx-globe bx-sm"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">
+          <i class="bx bx-grid-alt bx-sm"></i>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="nav-link">
+          <i class="bx bx-bell bx-sm"></i>
+          <span class="badge-notifications">5</span>
+        </a>
+      </li>
+      <li class="nav-item navbar-dropdown dropdown-user dropdown" style="position: relative;" (click)="toggleDrop()">
+        <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
+          aria-expanded="false">
+          <div class="avatar avatar-online">
+            <img src="./assets/images/avatar_review.jpg" alt="" class="w-px-40 h-auto rounded-circle">
+          </div>
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" *ngIf="isShowDrop"
+          style="position: absolute; top:100%;right: 10%;padding: 0;min-width: 150px; height: 50px;display: flex;justify-content: center; align-items: center; background-color: white; box-shadow: 0 0 0.375rem 0.25rem rgba(161, 172, 184, 0.15);">
+          <li style="list-style: none;">
+            <a class="dropdown-item" routerLink="/auth/login"
+              style="text-decoration: none; color: #697a8d; list-style: 60px;">
+              Đăng xuất
+            </a>
+          </li>
+        </ul>
+        <!-- <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            <a class="dropdown-item" href="pages-account-settings-account.html">
+              <div class="d-flex">
+                <div class="flex-shrink-0 me-3">
+                  <div class="avatar avatar-online">
+                    <img src="../../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle">
+                  </div>
                 </div>
-            </div>
-        </div>
-        <div class="nav-right">
-            <li class="language language-dropdown nav-item">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="bx bx-globe bx-sm"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="bx bx-grid-alt bx-sm"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">
-                    <i class="bx bx-bell bx-sm"></i>
-                    <span class="badge-notifications">5</span>
-                </a>
-            </li>
-            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <div class="avatar avatar-online">
-                        <img src="./assets/images/avatar.png" alt="" class="w-px-40 h-auto rounded-circle">
-                    </div>
-                </a>
-                <!-- <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a class="dropdown-item" href="pages-account-settings-account.html">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar avatar-online">
-                            <img src="../../assets/img/avatars/1.png" alt="" class="w-px-40 h-auto rounded-circle">
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <span class="fw-medium d-block">John Doe</span>
-                          <small class="text-muted">Admin</small>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-profile-user.html">
-                      <i class="bx bx-user me-2"></i>
-                      <span class="align-middle">My Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-account-settings-account.html">
-                      <i class="bx bx-cog me-2"></i>
-                      <span class="align-middle">Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-account-settings-billing.html">
-                      <span class="d-flex align-items-center align-middle">
-                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                        <span class="flex-grow-1 align-middle">Billing</span>
-                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-faq.html">
-                      <i class="bx bx-help-circle me-2"></i>
-                      <span class="align-middle">FAQ</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="pages-pricing.html">
-                      <i class="bx bx-dollar me-2"></i>
-                      <span class="align-middle">Pricing</span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
-                      <i class="bx bx-power-off me-2"></i>
-                      <span class="align-middle">Log Out</span>
-                    </a>
-                  </li>
-                </ul> -->
-            </li>
-        </div>
-    </div>
-    <div #searchBarToggle class="search-toggle" [ngClass]="{'search-bar-block': isShowSearchBar}">
-        <div class="search-toggle-content">
-            <input #searchInput type="text" id="ip" placeholder="Search..." [value]="inputValue"
-                (input)="onInputChange($event)">
-            <a href="javascript:void(0)" class="nav-link search-close" (click)="toggleSearch()">
-                <i class="bx bx-x bx-sm"></i>
+                <div class="flex-grow-1">
+                  <span class="fw-medium d-block">John Doe</span>
+                  <small class="text-muted">Admin</small>
+                </div>
+              </div>
             </a>
-            <div *ngIf="toggleSuggest" class="search-suggest">
-                <p>hk</p>
-                <p>hk</p>
-                <p>hk</p>
-                <p>hk</p>
-            </div>
-        </div>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="pages-profile-user.html">
+              <i class="bx bx-user me-2"></i>
+              <span class="align-middle">My Profile</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="pages-account-settings-account.html">
+              <i class="bx bx-cog me-2"></i>
+              <span class="align-middle">Settings</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="pages-account-settings-billing.html">
+              <span class="d-flex align-items-center align-middle">
+                <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                <span class="flex-grow-1 align-middle">Billing</span>
+                <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="pages-faq.html">
+              <i class="bx bx-help-circle me-2"></i>
+              <span class="align-middle">FAQ</span>
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="pages-pricing.html">
+              <i class="bx bx-dollar me-2"></i>
+              <span class="align-middle">Pricing</span>
+            </a>
+          </li>
+          <li>
+            <div class="dropdown-divider"></div>
+          </li>
+          <li>
+            <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
+              <i class="bx bx-power-off me-2"></i>
+              <span class="align-middle">Log Out</span>
+            </a>
+          </li>
+        </ul> -->
+      </li>
     </div>
+  </div>
+  <div #searchBarToggle class="search-toggle" [ngClass]="{'search-bar-block': isShowSearchBar}">
+    <div class="search-toggle-content">
+      <input #searchInput type="text" id="ip" placeholder="Search..." [value]="inputValue"
+        (input)="onInputChange($event)">
+      <a href="javascript:void(0)" class="nav-link search-close" (click)="toggleSearch()">
+        <i class="bx bx-x bx-sm"></i>
+      </a>
+      <div *ngIf="toggleSuggest" class="search-suggest">
+        <p>hk</p>
+        <p>hk</p>
+        <p>hk</p>
+        <p>hk</p>
+      </div>
+    </div>
+  </div>
 </div>
