@@ -79,6 +79,7 @@ export class ProfileComponent implements OnInit {
         this.loadDecesData(user_id);
         this.loadReviewData(user_id);
         this.loadOrderData(user_id);
+        this.loadWall(user_id);
       } else {
         console.error('ID not found in URL');
       }
@@ -89,6 +90,8 @@ export class ProfileComponent implements OnInit {
     this.wallData = await this.wallService.getWallByUserId(user_id);
     if (this.wallData) {
       this.wallImages = this.wallData.images;
+      console.log(this.wallImages);
+
     }
   }
 

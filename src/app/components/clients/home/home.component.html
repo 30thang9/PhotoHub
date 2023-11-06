@@ -59,47 +59,49 @@
         <div class="photo-popular-wrapper">
             <h2 class="ppopular-title">Nhiếp ảnh gia phổ biến</h2>
             <div class="ppopular-wrapper">
-                <div class="ppopular-item " *ngFor="let user of userInfoData; let i = index;">
-                    <a routerLink="/profile/{{user.user.id}}" class="ppopular-link">
-                        <div class="ppopular-content">
-                            <div class="pp-picture">
-                                <div class="picture-1">
-                                    <img src="{{user.userInfo.img1}}" alt="">
-                                </div>
-                                <div class="picture-right">
-                                    <div class="picture-2">
-                                        <img src="{{user.userInfo.img2}}" alt="">
+                <ng-container *ngFor="let user of userInfoData; let i = index;">
+                    <div *ngIf="i < 3" class="ppopular-item ">
+                        <a routerLink="/profile/{{user.user.id}}" class="ppopular-link">
+                            <div class="ppopular-content">
+                                <div class="pp-picture">
+                                    <div class="picture-1">
+                                        <img src="{{user.userInfo.img1}}" alt="">
                                     </div>
-                                    <div class="picture-3">
-                                        <img src="{{user.userInfo.img3}}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pp-info">
-                                <div class="info-left">
-                                    <h4 class="info-title">{{user.user.full_name}}</h4>
-                                    <span class="info-address">{{user.user.address}}</span>
-                                </div>
-                                <div class="info-right">
-                                    <p class="info-price">{{user.userInfo.cost}}/h</p>
-                                    <div class="info-rate">
-                                        <div class="rate-star">
-                                            <img src="./assets/images/icons/star-fill.png" alt="">
-                                            <img src="./assets/images/icons/star-fill.png" alt="">
-                                            <img src="./assets/images/icons/star-fill.png" alt="">
-                                            <img src="./assets/images/icons/star-fill.png" alt="">
-                                            <img src="./assets/images/icons/star-fill.png" alt="">
+                                    <div class="picture-right">
+                                        <div class="picture-2">
+                                            <img src="{{user.userInfo.img2}}" alt="">
                                         </div>
-                                        <span class="rate-text">5.0</span>
+                                        <div class="picture-3">
+                                            <img src="{{user.userInfo.img3}}" alt="">
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="pp-info">
+                                    <div class="info-left">
+                                        <h4 class="info-title">{{user.user.full_name}}</h4>
+                                        <span class="info-address">{{user.user.address}}</span>
+                                    </div>
+                                    <div class="info-right">
+                                        <p class="info-price">{{user.userInfo.cost}}/h</p>
+                                        <div class="info-rate">
+                                            <div class="rate-star">
+                                                <img src="./assets/images/icons/star-fill.png" alt="">
+                                                <img src="./assets/images/icons/star-fill.png" alt="">
+                                                <img src="./assets/images/icons/star-fill.png" alt="">
+                                                <img src="./assets/images/icons/star-fill.png" alt="">
+                                                <img src="./assets/images/icons/star-fill.png" alt="">
+                                            </div>
+                                            <span class="rate-text">5.0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pp-avatar">
+                                    <img src="{{user.user.avatar}}" alt="avatar">
+                                </div>
                             </div>
-                            <div class="pp-avatar">
-                                <img src="{{user.user.avatar}}" alt="avatar">
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                </ng-container>
             </div>
             <div class="ppopular-detail">
                 <a class="ppopular-detail-link" routerLink="/collection">Xem tất cả
