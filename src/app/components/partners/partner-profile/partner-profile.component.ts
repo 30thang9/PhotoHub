@@ -163,6 +163,11 @@ export class PartnerProfileComponent implements OnInit {
 
   async loadReviewData(user_id: number) {
     this.reviewData = await this.reviewService.getReviewByPartnerId(user_id);
+    this.reviewData.sort((a, b) => {
+      const timestampA = new Date(a.date).getTime();
+      const timestampB = new Date(b.date).getTime();
+      return timestampB - timestampA;
+    });
     var c = 0.0;
     var i = 0;
     this.reviewData.forEach(r => {
